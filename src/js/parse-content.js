@@ -4,15 +4,15 @@ module.exports = function(options) {
   var reduce = [].reduce;
 
   /**
-   * Select headings in content area, exclude any selector in options.excludeSelector
+   * Select headings in content area, exclude any selector in options.ignoreSelector
    * @param {String} contentSelector
    * @param {Array} headingsToSelect
    * @return {Array}
    */
   function selectHeadings(contentSelector, headingsToSelect) {
-    if (options.excludeSelector) {
+    if (options.ignoreSelector) {
       headingsToSelect = headingsToSelect.map(function(selector) {
-        return selector + ':not(' + options.excludeSelector + ')';
+        return selector + ':not(' + options.ignoreSelector + ')';
       });
     }
     return document.querySelector(contentSelector)

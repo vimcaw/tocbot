@@ -131,8 +131,8 @@ var defaultOptions = {
   ],
   // Class to add to active links (the link corresponding to the top most heading on the page).
   activeLinkClass: 'is-active-link',
-  // Headings that match the excludeSelector will be skipped.
-  excludeSelector: '.skip-toc',
+  // Headings that match the ignoreSelector will be skipped.
+  ignoreSelector: '.skip-toc',
   // Fixed position class to add to make sidebar fixed after scrolling down past the fixedSidebarOffset.
   positionFixedClass: 'is-position-fixed',
   // fixedSidebarOffset can be any number but by default is set to auto which sets the fixedSidebarOffset to the sidebar element's offsetTop from the top of the document on init.

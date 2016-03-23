@@ -6,7 +6,7 @@ module.exports = {
 
   // Reference to smoothScroll
   smoothScroll: undefined,
-  // smoothScroll Options
+  // smoothScroll Options, see docs at: https://github.com/cferdinandi/smooth-scroll
   smoothScrollOptions: {
     easing: 'easeInOutCubic',
     offset: 0,

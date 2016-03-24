@@ -50,14 +50,17 @@
     return target
   }
 
+  function updateTocListener() {
+    return buildHtml.updateToc(headingsArray);
+  }
 
   /**
 	 * Destroy tocbot.
 	 */
   tocbot.destroy = function() {
 		// Remove event listeners
-    document.removeEventListener('scroll');
-    document.removeEventListener('resize');
+    document.removeEventListener('scroll', updateTocListener);
+    document.removeEventListener('resize', updateTocListener);
     if (buildHtml) {
       document.removeEventListener('click', buildHtml.disableTocAnimation);
     }
@@ -107,12 +110,8 @@
 
     // Update Sidebar and bind listeners.
     buildHtml.updateToc(headingsArray);
-    document.addEventListener('scroll', function() {
-      buildHtml.updateToc(headingsArray);
-    });
-    document.addEventListener('resize', function() {
-      buildHtml.updateToc(headingsArray);
-    });
+    document.addEventListener('scroll', updateTocListener);
+    document.addEventListener('resize', updateTocListener);
 
     // Bind click listeners to disable animation.
     document.addEventListener('click', buildHtml.disableTocAnimation);

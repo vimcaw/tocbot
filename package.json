@@ -4,7 +4,8 @@
   "description": "Generate a table of contents based on the heading structure of a html document.",
   "main": "src/js/index.js",
   "scripts": {
-    "deploy": "gulp clean && gulp docs-build && gulp docs-deploy"
+    "start": "gulp clean && gulp docs-build",
+    "deploy": "npm run start && gulp docs-deploy"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,7 @@
     "browserify": "^12.0.1",
     "chai": "^3.4.1",
     "del": "^2.2.0",
-    "gulp": "^3.9.0",
+    "gulp": "^3.9.1",
     "gulp-changed": "^1.3.0",
     "gulp-electron-mocha": "^1.1.0",
     "gulp-gh-pages": "^0.5.4",
@@ -49,7 +50,7 @@
     "js-yaml": "^3.4.6",
     "mocha": "^2.3.4",
     "mochatron": "^1.0.7",
-    "optimizely-oui": "github:optimizely/oui",
+    "optimizely-oui": "^9.0.8",
     "require-dir": "^0.3.0",
     "swig": "^1.4.2",
     "swig-highlight": "^0.2.0",

@@ -1,8 +1,8 @@
 {
   "name": "tocbot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate a table of contents based on the heading structure of a html document.",
-  "main": "gulpfile.js",
+  "main": "src/js/index.js",
   "scripts": {
     "deploy": "gulp clean && gulp docs-build && gulp docs-deploy"
   },

@@ -34,6 +34,7 @@
   var doc = root.document;
   var body = document.body;
   var supports = !!root.document.querySelector && !!root.addEventListener; // Feature test
+  var headingsArray;
 
   // From: https://github.com/Raynos/xtend
   var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -50,8 +51,10 @@
     return target
   }
 
-  function updateTocListener() {
-    return buildHtml.updateToc(headingsArray);
+  function updateTocListener(headingsArray) {
+    return function updateToc() {
+      return buildHtml.updateToc(headingsArray);
+    }
   }
 
   /**
@@ -59,8 +62,8 @@
 	 */
   tocbot.destroy = function() {
 		// Remove event listeners
-    document.removeEventListener('scroll', updateTocListener);
-    document.removeEventListener('resize', updateTocListener);
+    document.removeEventListener('scroll', updateTocListener(headingsArray));
+    document.removeEventListener('resize', updateTocListener(headingsArray));
     if (buildHtml) {
       document.removeEventListener('click', buildHtml.disableTocAnimation);
     }
@@ -99,7 +102,7 @@
     tocbot.destroy();
 
     // Get headings array
-    var headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingsToSelect);
+    headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingsToSelect);
 
     // Build nested headings array.
     var nestedHeadingsObj = parseContent.nestHeadingsArray(headingsArray);
@@ -110,8 +113,8 @@
 
     // Update Sidebar and bind listeners.
     buildHtml.updateToc(headingsArray);
-    document.addEventListener('scroll', updateTocListener);
-    document.addEventListener('resize', updateTocListener);
+    document.addEventListener('scroll', updateTocListener(headingsArray));
+    document.addEventListener('resize', updateTocListener(headingsArray));
 
     // Bind click listeners to disable animation.
     document.addEventListener('click', buildHtml.disableTocAnimation);

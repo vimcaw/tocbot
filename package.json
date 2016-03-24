@@ -4,8 +4,9 @@
   "description": "Generate a table of contents based on the heading structure of a html document.",
   "main": "src/js/index.js",
   "scripts": {
-    "start": "gulp clean && gulp docs-build",
-    "deploy": "npm run start && gulp docs-deploy"
+    "build": "gulp clean && gulp docs-build",
+    "deploy": "npm run build && gulp docs-deploy",
+    "watch": "npm run build && gulp docs-watch"
   },
   "repository": {
     "type": "git",

@@ -11,12 +11,14 @@ module.exports = function(options) {
    */
   function selectHeadings(contentSelector, headingsToSelect) {
     if (options.ignoreSelector) {
-      headingsToSelect = headingsToSelect.map(function(selector) {
-        return selector + ':not(' + options.ignoreSelector + ')';
-      });
+      headingsToSelect = headingsToSelect
+        .split(',')
+        .map(function(selector) {
+          return selector.trim() + ':not(' + options.ignoreSelector + ')';
+        });
     }
     return document.querySelector(contentSelector)
-      .querySelectorAll(headingsToSelect.join(', '));
+      .querySelectorAll(headingsToSelect);
   }
 
   /**

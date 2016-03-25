@@ -6,19 +6,19 @@ module.exports = function(options) {
   /**
    * Select headings in content area, exclude any selector in options.ignoreSelector
    * @param {String} contentSelector
-   * @param {Array} headingsToSelect
+   * @param {Array} headingSelector
    * @return {Array}
    */
-  function selectHeadings(contentSelector, headingsToSelect) {
+  function selectHeadings(contentSelector, headingSelector) {
     if (options.ignoreSelector) {
-      headingsToSelect = headingsToSelect
+      headingSelector = headingSelector
         .split(',')
         .map(function(selector) {
           return selector.trim() + ':not(' + options.ignoreSelector + ')';
         });
     }
     return document.querySelector(contentSelector)
-      .querySelectorAll(headingsToSelect);
+      .querySelectorAll(headingSelector);
   }
 
   /**
@@ -30,10 +30,9 @@ module.exports = function(options) {
   function nestHeadingsArray(headingsArray, callback) {
     return reduce.call(headingsArray, function(prev, curr, index) {
       var currentHeading = getHeadingObject(curr);
-      var depth = getHeadingLevel(curr) - 1;
       prev.lastItem = curr;
 
-      appendNodeAtDepth(currentHeading, depth, prev.nest)
+      addNode(currentHeading, prev.nest)
       return prev;
     }, {
       lastItem: undefined,
@@ -42,23 +41,29 @@ module.exports = function(options) {
   }
 
   /**
-   * Append node at a specific depth in the nested array.
+   * Add a node to the nested array.
    * @param {Object} node
-   * @param {Number} depth
-   * @param {Array} array
+   * @param {Array} nest
    * @return {Array}
    */
-  function appendNodeAtDepth(node, depth, array) {
-    var counter = depth;
+  function addNode(node, nest) {
+    var level = getHeadingLevel(node);
+    var array = nest;
+    var lastItem = getLastItem(array);
+    var lastItemLevel = lastItem
+      ? lastItem.headingLevel
+      : 0;
+    var counter = level - lastItemLevel;
+
     while(counter > 0) {
-      var lastItem = getLastItem(array);
+      lastItem = getLastItem(array);
       if (lastItem && lastItem.children !== undefined) {
         array = lastItem.children;
       }
       counter--;
     }
 
-    if (depth >= options.collapseDepth) {
+    if (level >= options.collapseDepth) {
       node.isCollapsed = true;
     }
 
@@ -94,6 +99,7 @@ module.exports = function(options) {
       id: heading.id,
       children: [],
       nodeName: heading.nodeName,
+      headingLevel: getHeadingLevel(heading),
       textContent: heading.textContent.trim(),
     };
   }

@@ -3,6 +3,8 @@ module.exports = {
   tocSelector: '.js-toc',
   // Where to grab the headings to build the table of contents.
   contentSelector: '.js-content',
+  // Which headings to grab inside of the contentSelector element.
+  headingSelector: 'h1, h2, h3',
 
   // Reference to smoothScroll
   smoothScroll: undefined,
@@ -14,8 +16,6 @@ module.exports = {
     updateURL: true,
   },
 
-  // Which headings to grab inside of the contentSelector element.
-  headingsToSelect: 'h1, h2, h3',
   // Class to add to active links (the link corresponding to the top most heading on the page).
   activeLinkClass: 'is-active-link',
   // Headings that match the ignoreSelector will be skipped.

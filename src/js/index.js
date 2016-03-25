@@ -102,11 +102,12 @@
     tocbot.destroy();
 
     // Get headings array
-    headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingsToSelect);
+    headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingSelectors);
 
     // Build nested headings array.
     var nestedHeadingsObj = parseContent.nestHeadingsArray(headingsArray);
     var nestedHeadings = nestedHeadingsObj.nest;
+    console.log(nestedHeadings)
 
     // Render.
     buildHtml.render(options.tocSelector, nestedHeadings);

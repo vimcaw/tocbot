@@ -6,6 +6,8 @@
   "scripts": {
     "build": "gulp clean && gulp docs-build",
     "deploy": "npm run build && gulp docs-deploy",
+    "start": "gulp",
+    "test": "gulp test",
     "watch": "npm run build && gulp docs-watch"
   },
   "repository": {

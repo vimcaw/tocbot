@@ -6,6 +6,6 @@ gulp.task('test', function() {
   mochatron({
     url: 'http://localhost:4100/test/test.html',
     silent: true,
-    window: false
+    window: true
   });
 });

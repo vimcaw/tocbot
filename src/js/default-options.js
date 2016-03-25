@@ -20,9 +20,12 @@ module.exports = {
   activeLinkClass: 'is-active-link',
   // Headings that match the ignoreSelector will be skipped.
   ignoreSelector: '.skip-toc',
-  // Fixed position class to add to make sidebar fixed after scrolling down past the fixedSidebarOffset.
+  // Fixed position class to add to make sidebar fixed after scrolling
+  // down past the fixedSidebarOffset.
   positionFixedClass: 'is-position-fixed',
-  // fixedSidebarOffset can be any number but by default is set to auto which sets the fixedSidebarOffset to the sidebar element's offsetTop from the top of the document on init.
+  // fixedSidebarOffset can be any number but by default is set to auto which
+  // sets the fixedSidebarOffset to the sidebar element's offsetTop from the
+  // top of the document on init.
   fixedSidebarOffset: 'auto',
 
   // Main class to add to links.
@@ -33,13 +36,16 @@ module.exports = {
   listClass: 'toc-list',
   // Extra classes to add to lists.
   extraListClasses: '',
-  // Headings offset between the headings and the top of the document (helps with weird rounding bugs that pop up).
+  // Headings offset between the headings and the top of the document
+  // (helps with weird rounding bugs that pop up).
   headingsOffset: 0,
 
   // Class that gets added when a list should be collapsed.
   isCollapsedClass: 'is-collapsed',
-  // Class that gets added when a list should be able to be collapsed but isn't necessarily collpased.
+  // Class that gets added when a list should be able to be collapsed but
+  // isn't necessarily collpased.
   collapsibleClass: 'collapsible',
-  // How many heading levels should not be collpased. For example, number 6 will show everything since there are only 6 heading levels and number 0 will collpase them all.
+  // How many heading levels should not be collpased. For example, number 6
+  // will show everything since there are only 6 heading levels and number 0 will collpase them all.
   collapseDepth: 0,
 };

@@ -47,7 +47,7 @@ describe('Build HTML', function () {
 
   it('should properly serialize the data', function () {
     var parse = tocbot._parseContent;
-    var headings = parse.selectHeadings(tocbot.options.contentSelector, tocbot.options.headingSelectors);
+    var headings = parse.selectHeadings(tocbot.options.contentSelector, tocbot.options.headingSelector);
     expect(headings.length).to.equal(20);
 
     var nest = require('./test-data.js')();

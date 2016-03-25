@@ -102,7 +102,7 @@
     tocbot.destroy();
 
     // Get headings array
-    headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingSelectors);
+    headingsArray = parseContent.selectHeadings(options.contentSelector, options.headingSelector);
 
     // Build nested headings array.
     var nestedHeadingsObj = parseContent.nestHeadingsArray(headingsArray);

@@ -4,6 +4,7 @@ module.exports = function(options) {
   var forEach = [].forEach;
   var some = [].some;
   var body = document.body;
+  var currentlyHighlighting = true;
 
   /**
    * Render nested heading array data into a given selector.
@@ -118,7 +119,7 @@ module.exports = function(options) {
     var headings = headingsArray;
     var topHeader;
     // Using some instead of each so that we can escape early.
-    if (options._currentlyHighlighting
+    if (currentlyHighlighting
       && document.querySelector(options.tocSelector) !== null
       && headings.length > 0) {
       some.call(headings, function(heading, i) {
@@ -188,11 +189,13 @@ module.exports = function(options) {
     }
     // Bind to tocLink clicks to temporarily disable highlighting
     // while smoothScroll is animating.
-    options._currentlyHighlighting = false;
+    if (!!options.smoothScroll) {
+      currentlyHighlighting = false;
+    }
   }
 
   function enableTocAnimation() {
-    options._currentlyHighlighting = true;
+    currentlyHighlighting = true;
   }
 
   return {

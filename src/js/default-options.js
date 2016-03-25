@@ -42,7 +42,4 @@ module.exports = {
   collapsibleClass: 'collapsible',
   // How many heading levels should not be collpased. For example, number 6 will show everything since there are only 6 heading levels and number 0 will collpase them all.
   collapseDepth: 0,
-  // This is storing current state and not really a setting...
-  // TODO: Handle this better, maybe bring back a state object??
-  _currentlyHighlighting: true,
 };

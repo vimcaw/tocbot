@@ -13,7 +13,7 @@ module.exports = {
     easing: 'easeInOutCubic',
     offset: 0,
     speed: 300, // animation duration.
-    updateURL: true,
+    updateURL: true
   },
 
   // Class to add to active links (the link corresponding to the top most heading on the page).
@@ -47,5 +47,5 @@ module.exports = {
   collapsibleClass: 'collapsible',
   // How many heading levels should not be collpased. For example, number 6
   // will show everything since there are only 6 heading levels and number 0 will collpase them all.
-  collapseDepth: 0,
+  collapseDepth: 0
 };

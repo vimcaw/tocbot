@@ -6,6 +6,8 @@
  * @author Tim Scanlin
  */
 
+/* globals define */
+
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     define([], factory(root));
@@ -39,22 +41,22 @@
   // From: https://github.com/Raynos/xtend
   var hasOwnProperty = Object.prototype.hasOwnProperty;
   function extend() {
-    var target = {}
+    var target = {};
     for (var i = 0; i < arguments.length; i++) {
-      var source = arguments[i]
+      var source = arguments[i];
       for (var key in source) {
         if (hasOwnProperty.call(source, key)) {
-          target[key] = source[key]
+          target[key] = source[key];
         }
       }
     }
-    return target
+    return target;
   }
 
-  function updateTocListener(headingsArray) {
+  function updateTocListener(headings) {
     return function updateToc() {
-      return buildHtml.updateToc(headingsArray);
-    }
+      return buildHtml.updateToc(headings);
+    };
   }
 
   /**
@@ -107,7 +109,6 @@
     // Build nested headings array.
     var nestedHeadingsObj = parseContent.nestHeadingsArray(headingsArray);
     var nestedHeadings = nestedHeadingsObj.nest;
-    console.log(nestedHeadings)
 
     // Render.
     buildHtml.render(options.tocSelector, nestedHeadings);

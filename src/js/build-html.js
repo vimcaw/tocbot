@@ -7,6 +7,23 @@ module.exports = function(options) {
   var currentlyHighlighting = true;
 
   /**
+   * Create link and list elements.
+   * @param {Object} d
+   * @param {HTMLElement} container
+   * @return {HTMLElement}
+   */
+  function createEl(d, container) {
+    var link = container.appendChild(createLink(d));
+    if (d.children.length) {
+      var list = createList(d.isCollapsed);
+      d.children.forEach(function(child) {
+        createEl(child, list);
+      });
+      link.appendChild(list);
+    }
+  }
+
+  /**
    * Render nested heading array data into a given selector.
    * @param {String} selector
    * @param {Array} data
@@ -17,25 +34,8 @@ module.exports = function(options) {
     var collapsed = false;
     var container = createList(collapsed);
 
-    /**
-     * Create link and list elements.
-     * @param {Object} d
-     * @param {HTMLElement} container
-     * @return {HTMLElement}
-     */
-    function createEl(d, container) {
-      var link = container.appendChild(createLink(d));
-      if (d.children.length) {
-        var list = createList(d.isCollapsed);
-        d.children.forEach(function(d) {
-          createEl(d, list);
-        });
-        link.appendChild(list);
-      }
-    }
-
     data.forEach(function(d) {
-      createEl(d, container)
+      createEl(d, container);
     });
 
     var parent = document.querySelector(selector);
@@ -172,7 +172,7 @@ module.exports = function(options) {
    */
   function removeCollapsedFromParents(element) {
     if (element.classList.contains(options.collapsibleClass)) {
-      element.classList.remove(options.isCollapsedClass)
+      element.classList.remove(options.isCollapsedClass);
       return removeCollapsedFromParents(element.parentNode.parentNode);
     }
     return element;
@@ -204,4 +204,4 @@ module.exports = function(options) {
     render: render,
     updateToc: updateToc
   };
-}
+};

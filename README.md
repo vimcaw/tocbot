@@ -5,7 +5,7 @@ title: Tocbot
 
 <h1 class="display--none"><a href="http://tscanlin.github.io/tocbot">Tocbot</a></h1>
 
-<h2 id="introduction"  class="hard flush">Introduction</h2>
+<h2 id="introduction" class="hard flush">Introduction</h2>
 
 tocbot is a small script to build a table of contents (TOC) from headings in an HTML document. tocbot works well with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) and together they provide an experience very similar to [Tocify](http://gregfranko.com/jquery.tocify.js/).
 

@@ -9,17 +9,19 @@
     "mkdirs": "npm run mkdir:build & npm run mkdir:dist",
     "mkdir:build": "mkdir build && cd build && mkdir assets && cd assets && mkdir js && mkdir css",
     "mkdir:dist": "mkdir dist",
-    "build:css": "node-sass --output-style compressed -o build/assets/css src/scss",
+    "build:css": "node-sass --source-map-embed --include-path ./node_modules --output-style compressed -o build/assets/css src/scss",
     "build:js": "browserify src/js/index.js -o build/assets/js/tocbot.js",
     "build:uglify:js": "npm run lint && browserify src/js/index.js | uglifyjs -mc > build/assets/js/tocbot.js",
     "copy:static": "cp -r src/files/* build/",
     "lint": "eslint src/js",
     "dev": "npm run serve & npm run watch:css & npm run watch:js",
+    "render": "node ./script/parse.js --src **/*.md",
     "serve": "browser-sync start --server ./ --files 'build/assets/css/*.css, build/assets/js/*.js'",
     "watch:css": "onchange 'src/scss/*.scss' -- npm run build:css",
     "watch:js": "onchange 'src/js/*.js' -- npm run build:js",
     "start": "npm run build && npm run dev",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build",
+    "test": "node ./node_modules/mochatron/bin/mochatron.js --window http://localhost:4100"
   },
   "repository": {
     "type": "git",
@@ -49,7 +51,11 @@
     "browserify": "^13.0.0",
     "chai": "^3.4.1",
     "eslint": "^2.4.0",
-    "js-yaml": "^3.4.6",
+    "gh-pages": "^0.11.0",
+    "glob": "^7.0.3",
+    "highlight.js": "^9.0.0",
+    "js-yaml": "^3.5.5",
+    "marked": "^0.3.5",
     "mocha": "^2.3.4",
     "mochatron": "^1.0.7",
     "node-sass": "^3.4.2",
@@ -59,7 +65,6 @@
     "uglify-js": "^2.6.2"
   },
   "dependencies": {
-    "highlight.js": "^9.0.0",
     "smooth-scroll": "cferdinandi/smooth-scroll"
   }
 }

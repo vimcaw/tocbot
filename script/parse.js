@@ -2,15 +2,23 @@ var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
 
+var mkdirp = require('mkdirp');
 var marked = require('marked');
 var yaml = require('js-yaml');
+
+var MD_SEPERATOR = '---';
 
 var options = {
   src: '**/*.md',
   dest: 'build',
   includeFilename: true,
   bodyProperty: 'body',
-  compileMarkdown: true
+  compileMarkdown: true,
+  exportName: 'content',
+  exportExt: '.json',
+  singleFile: true,
+  writeFiles: true,
+  writeStdout: false
 };
 
 marked.setOptions({
@@ -27,11 +35,10 @@ marked.setOptions({
   }
 });
 
-var SEPERATOR = '---';
 
 function parseFile(input) {
   var output = {};
-  var splitData = input.data.split(SEPERATOR);
+  var splitData = input.data.split(MD_SEPERATOR);
   var rawBody = splitData[2];
 
   try {
@@ -47,13 +54,23 @@ function parseFile(input) {
   output[options.bodyProperty] = rawBody;
   if (options.compileMarkdown) {
     var htmlBody = marked(rawBody);
-    console.log(htmlBody)
     output[options.bodyProperty] = htmlBody;
   }
 
-  console.log(output);
   return output;
   // TODO: template stuff.
+}
+
+function writeFile(filename, data, cb) {
+  fs.writeFile(filename, data, function(err) {
+    if (err) {
+      return console.log(err);
+    }
+    // console.log('The file was saved!');
+    if (cb) {
+      cb();
+    }
+  });
 }
 
 function parseArguments(argv) {
@@ -75,27 +92,53 @@ function parseArguments(argv) {
   };
 
   glob(options.src, globOptions, function(error, files) {
-    files.forEach(function(filename) {
+    var fileMap = {};
+    files.forEach(function(filename, i) {
       fs.readFile(filename, 'utf8', function(err, data) {
-        console.log(filename);
         var json = parseFile({
           data: data,
           filename: filename
         });
-
         var newFilename = filename.replace(/\.[^/.]+$/, '');
-        newFilename = path.join(options.dest, newFilename + '.json');
-        // json.newFilename = newFilename;
-        // console.log(newFilename)
+        var newFileWithDest = path.join(options.dest, newFilename + '.json');
 
-        // THIS ONLY WORKS IF THE DIR EXISTS.
-        fs.writeFile(newFilename, JSON.stringify(json), function(err) {
-          if(err) {
-            return console.log(err);
+        // Keep separate files.
+        if (!options.singleFile) {
+          var stringified = JSON.stringify(json);
+          if (options.writeStdout) {
+            process.stdout.write(stringified);
           }
-          console.log('The file was saved!');
-        });
 
+          if (options.writeFiles) {
+            if (newFilename.split(path.sep).length > 1) {
+              var paths = newFilename.split(path.sep);
+              paths.pop();
+              var dir = paths.join(path.sep);
+              mkdirp(dir, function(err2) {
+                if (err2) {
+                  console.error(err2);
+                }
+                writeFile(newFileWithDest, stringified);
+              });
+            } else {
+              writeFile(newFileWithDest, stringified);
+            }
+          }
+        // If nested file
+        } else {
+          fileMap[filename] = json;
+
+          if (i === files.length - 1) {
+            var name = path.join(options.dest, options.exportName + options.exportExt);
+            var stringified = JSON.stringify(fileMap);
+            if (options.writeStdout) {
+              process.stdout.write(stringified);
+            }
+            if (options.writeFiles) {
+              writeFile(name, stringified);
+            }
+          }
+        }
       });
     });
   });

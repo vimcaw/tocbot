@@ -12,13 +12,13 @@ var options = {
   src: '**/*.md',
   dest: 'build',
   includeFilename: true,
-  bodyProperty: 'body',
   compileMarkdown: true,
-  exportName: 'content',
-  exportExt: '.json',
-  singleFile: true,
+  bodyProperty: 'body',
+
+  exportName: 'content.json',
+  singleFile: false,
   writeFiles: true,
-  writeStdout: false
+  writeStdout: true
 };
 
 marked.setOptions({
@@ -129,7 +129,7 @@ function parseArguments(argv) {
           fileMap[filename] = json;
 
           if (i === files.length - 1) {
-            var name = path.join(options.dest, options.exportName + options.exportExt);
+            var name = path.join(options.dest, options.exportName);
             var stringified = JSON.stringify(fileMap);
             if (options.writeStdout) {
               process.stdout.write(stringified);

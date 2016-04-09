@@ -2,9 +2,10 @@ var path = require('path');
 var fs = require('fs');
 var glob = require('glob');
 
-var mkdirp = require('mkdirp');
 var marked = require('marked');
 var yaml = require('js-yaml');
+
+var util = require('./util.js');
 
 var MD_SEPERATOR = '---';
 
@@ -61,17 +62,6 @@ function parseFile(input) {
   // TODO: template stuff.
 }
 
-function writeFile(filename, data, cb) {
-  fs.writeFile(filename, data, function(err) {
-    if (err) {
-      return console.log(err);
-    }
-    if (cb) {
-      cb();
-    }
-  });
-}
-
 function parseArguments(argv) {
   var args = argv.slice(2);
   var indexes = {};
@@ -109,19 +99,7 @@ function parseArguments(argv) {
           }
 
           if (options.writeFiles) {
-            if (newFilename.split(path.sep).length > 1) {
-              var paths = newFilename.split(path.sep);
-              paths.pop();
-              var dir = paths.join(path.sep);
-              mkdirp(dir, function(err2) {
-                if (err2) {
-                  console.error(err2);
-                }
-                writeFile(newFileWithDest, stringified);
-              });
-            } else {
-              writeFile(newFileWithDest, stringified);
-            }
+            util.writeFile(newFileWithDest, stringified);
           }
         // If nested file
         } else {
@@ -134,7 +112,7 @@ function parseArguments(argv) {
               process.stdout.write(stringified);
             }
             if (options.writeFiles) {
-              writeFile(name, stringified);
+              util.writeFile(name, stringified);
             }
           }
         }

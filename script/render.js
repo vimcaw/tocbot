@@ -1,13 +1,16 @@
 var fs = require('fs');
 var glob = require('glob');
 var path = require('path');
-require('babel-register');
+var mkdirp = require('mkdirp');
+require('babel-register'); // Is this still needed?
 
 var marked = require('marked');
 var yaml = require('js-yaml');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var ReactDOMServer = require('react-dom/server');
+
+var util = require('./util.js');
 
 var options = {
   src: 'build/content.json',
@@ -23,9 +26,7 @@ var config = require('./config.js');
 // Get wrapper if config.useWrapper is true.
 var wrapper = '';
 if (config.useWrapper) {
-  fs.readFile(config.wrapperLocation, function(d) {
-    console.log(d)
-  })
+  wrapper = fs.readFileSync(config.wrapperLocation).toString();
 }
 
 // marked.setOptions({
@@ -73,17 +74,17 @@ if (config.useWrapper) {
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function extend() {
-  var target = {}
+  var target = {};
 
   for (var i = 0; i < arguments.length; i++) {
-    var source = arguments[i]
+    var source = arguments[i];
     for (var key in source) {
       if (hasOwnProperty.call(source, key)) {
-        target[key] = source[key]
+        target[key] = source[key];
       }
     }
   }
-  return target
+  return target;
 }
 
 function processJSON(string) {
@@ -92,27 +93,22 @@ function processJSON(string) {
   if (config.pathMap) {
     json = extend(json, config.pathMap[json.filename]);
   }
-  console.log(json.component)
+  // console.log(json.component)
   if (json.component) {
+    // Get the Component and render the HTML to wrap it.
     var file = path.resolve(path.join('./', options.templatesDir, json.component + '.jsx'));
     var Component = require(file);
     var componentHTML = ReactDOMServer.renderToString(React.createElement(Component, json));
-    console.log(componentHTML);
+    var html = wrapper.split(config.wrapperInsertionPoint).join(componentHTML);
+
+    // console.log(html)
+    // Write Files
+    var filePath = path.join(config.renderPath, json.path);
+    util.writeFile(filePath, html);
   } else {
     return new Error ('No "component" property passed in for: ' + json.filename);
   }
-
-  // console.log(json);
-  // for (var key in json) {
-  //   if (pathMap) {
-  //     json[key] = extend(json[key], pathMap[key]);
-  //   }
-  //
-  //   console.log(key, json[key])
-  // }
-
 }
-
 
 function parseArguments(argv) {
   var args = argv.slice(2);

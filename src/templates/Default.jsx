@@ -19,7 +19,7 @@ module.exports = React.createClass({
     // console.log(this.props)
     return (
       <div data-test={this.props.title}>
-        <div dangerouslySetInnerHTML={wrapMarkup(this.props.body.slice(0, 100))}></div>
+        <div dangerouslySetInnerHTML={wrapMarkup(this.props.body)}></div>
       </div>
     );
   }

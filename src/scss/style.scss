@@ -1,32 +1,16 @@
-// Third Party
-@import 'oui/oui';
-@import 'highlight.js/styles/github-gist'; // atelier-dune-light
+/* Styles */
 
-// tocbot
+// Third Party
+@import 'highlight.js/styles/github-gist'; // atelier-dune-light
+// Page
+@import 'page-styles';
+// Tocbot
 @import 'tocbot-core';
-@import 'tocbot-container';
-@import 'tocbot-garnish';
+@import 'tocbot-default-theme';
 @import 'tocbot-responsive';
 
 body {
   font-size: 1.2rem;
-}
-
-.hero {
-  background-color: #54BC4B;
-  min-height: 300px;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  z-index: 1;
-
-  h1 {
-    font-size: 4.2rem;
-  }
-
-  .hero-inner {
-    padding: 60px 0;
-  }
 }
 
 h1,
@@ -52,19 +36,4 @@ code {
   display: block;
   font-size: .8em;
   max-width: 100%;
-}
-
-.content {
-  margin-bottom: 95vh;
-
-  > h1:first-child {
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  ul,
-  ol {
-    list-style: inherit;
-    margin-left: 20px;
-  }
 }

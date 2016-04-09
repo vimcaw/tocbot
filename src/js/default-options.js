@@ -1,3 +1,9 @@
+/**
+ * Tocbot default options should all live in this file.
+ *
+ * @author Tim Scanlin
+ */
+
 module.exports = {
   // Where to render the table of contents.
   tocSelector: '.js-toc',

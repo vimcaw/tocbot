@@ -1,4 +1,8 @@
-// HTML
+/**
+ * This file is responsible for building the DOM and updating DOM state.
+ *
+ * @author Tim Scanlin
+ */
 
 module.exports = function(options) {
   var forEach = [].forEach;

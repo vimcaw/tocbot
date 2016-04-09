@@ -1,7 +1,9 @@
 /**
- * tocbot
- * tocbot is similar to tocify (http://gregfranko.com/jquery.tocify.js/) (except its native w/ no need for jquery)
- * This creates a toble of contents based on HTML headings which allows users to easily jump to different sections.
+ * Tocbot
+ * Tocbot is similar to tocify (http://gregfranko.com/jquery.tocify.js/).
+ * The main differences are that it works natively without a need for jquery or jquery UI).
+ * Tocbot creates a toble of contents based on HTML headings on a page,
+ * this allows users to easily jump to different sections of the document.
  *
  * @author Tim Scanlin
  */

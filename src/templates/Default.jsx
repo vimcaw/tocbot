@@ -1,6 +1,11 @@
+/**
+ * The default template component for documentation in this repository.
+ *
+ * @author Tim Scanlin
+ */
+
 var React = require('react');
 var ReactDOM = require('react-dom');
-
 
 module.exports = React.createClass({
   propTypes: {
@@ -13,8 +18,8 @@ module.exports = React.createClass({
     }
     // console.log(this.props)
     return (
-      <div data-test={this.props.t}>
-        <div dangerouslySetInnerHTML={wrapMarkup(this.props.body)}></div>
+      <div data-test={this.props.title}>
+        <div dangerouslySetInnerHTML={wrapMarkup(this.props.body.slice(0, 100))}></div>
       </div>
     );
   }

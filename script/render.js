@@ -17,8 +17,16 @@ var options = {
   templatesDir: 'src/templates'
 };
 
-// Require pathMap Object.
-var pathMap = require('./pathMap.js');
+// Require config.
+var config = require('./config.js');
+
+// Get wrapper if config.useWrapper is true.
+var wrapper = '';
+if (config.useWrapper) {
+  fs.readFile(config.wrapperLocation, function(d) {
+    console.log(d)
+  })
+}
 
 // marked.setOptions({
 //   renderer: new marked.Renderer(),
@@ -81,15 +89,15 @@ function extend() {
 function processJSON(string) {
   var json = JSON.parse(string);
 
-  if (pathMap) {
-    json = extend(json, pathMap[json.filename]);
+  if (config.pathMap) {
+    json = extend(json, config.pathMap[json.filename]);
   }
   console.log(json.component)
   if (json.component) {
     var file = path.resolve(path.join('./', options.templatesDir, json.component + '.jsx'));
     var Component = require(file);
-    var html = ReactDOMServer.renderToString(React.createElement(Component, json));
-    console.log(html);
+    var componentHTML = ReactDOMServer.renderToString(React.createElement(Component, json));
+    console.log(componentHTML);
   } else {
     return new Error ('No "component" property passed in for: ' + json.filename);
   }

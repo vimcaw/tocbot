@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>tocbot</title>
+    <title>Tocbot</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
@@ -28,12 +28,10 @@
 
       <div class="max-width--large anchor--middle ">
         <input id="toc" type="checkbox" class="display--none">
-        <label class="toc-icon cursor--pointer button push"
-        for="toc">Menu</label>
-        <nav class="toc js-toc soft-double transition--300 position--absolute">
-        </nav>
+        <label class="toc-icon cursor--pointer button push" for="toc">Menu</label>
+        <nav class="toc js-toc soft-double transition--300 position--absolute"></nav>
         <div class="content js-content soft-double">
-          {{ body | safe }}
+          <!-- APP_CONTENT_HERE -->
         </div>
       </div>
     </main>

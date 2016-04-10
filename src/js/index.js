@@ -22,6 +22,9 @@
 
   'use strict';
 
+  // Require smooth-scroll by default.
+  var smoothScroll = require('smooth-scroll');
+
   // Default options.
   var defaultOptions = require('./default-options.js');
   // Object to store current options.
@@ -73,8 +76,8 @@
     }
 
     // Destroy smoothScroll if it exists.
-    if (options.smoothScroll) {
-      options.smoothScroll.destroy();
+    if (smoothScroll) {
+      smoothScroll.destroy();
     }
   };
 
@@ -124,8 +127,8 @@
     document.addEventListener('click', buildHtml.disableTocAnimation);
 
     // Initialize smoothscroll if it exists.
-    if (options.smoothScroll) {
-      this.smoothScroll = options.smoothScroll.init(extend(options.smoothScrollOptions, {
+    if (smoothScroll) {
+      this.smoothScroll = smoothScroll.init(extend(options.smoothScrollOptions, {
         callback: buildHtml.enableTocAnimation
       }));
     }

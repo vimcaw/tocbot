@@ -62,9 +62,8 @@ module.exports = function(options) {
     var item = document.createElement('li');
     var a = document.createElement('a');
     a.textContent = data.textContent;
-    if (options.smoothScroll !== undefined) {
-      a.setAttribute('data-scroll', '');
-    }
+    // Property for smooth-scroll.
+    a.setAttribute('data-scroll', '');
     a.setAttribute('href', '#' + data.id);
     a.setAttribute('class', options.linkClass
       + ' ' + 'node-name--' + data.nodeName
@@ -193,9 +192,7 @@ module.exports = function(options) {
     }
     // Bind to tocLink clicks to temporarily disable highlighting
     // while smoothScroll is animating.
-    if (!!options.smoothScroll) {
-      currentlyHighlighting = false;
-    }
+    currentlyHighlighting = false;
   }
 
   function enableTocAnimation() {

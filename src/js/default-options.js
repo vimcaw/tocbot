@@ -12,8 +12,6 @@ module.exports = {
   // Which headings to grab inside of the contentSelector element.
   headingSelector: 'h1, h2, h3',
 
-  // Reference to smoothScroll
-  smoothScroll: undefined,
   // smoothScroll Options, see docs at: https://github.com/cferdinandi/smooth-scroll
   smoothScrollOptions: {
     easing: 'easeInOutCubic',

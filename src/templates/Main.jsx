@@ -1,0 +1,46 @@
+/**
+ * The main template component for documentation in this repository.
+ *
+ * @author Tim Scanlin
+ */
+
+var React = require('react');
+var ReactDOM = require('react-dom');
+
+module.exports = React.createClass({
+  // propTypes: {
+  //   children: React.PropTypes.element.isRequired
+  // },
+
+  render: function() {
+    var json = this.props.json;
+    var TemplateComponent = require('./' + json.template + '.jsx');
+
+    return (
+      <main>
+        <div className="hero">
+          <div className="hero-inner reverse">
+            <h1 className="flush hard">
+              Tocbot
+            </h1>
+            <h3 className="max-width--large anchor--middle line--tight skip-toc soft flush--top">
+              Generate a table of contents based on the heading structure for an html document.
+            </h3>
+            <div className="soft-triple--left push-triple--left">
+              <iframe src="https://ghbtns.com/github-btn.html?user=tscanlin&repo=tocbot&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-width--large anchor--middle">
+          <input id="toc" type="checkbox" className="display--none" />
+          <label className="toc-icon cursor--pointer button push" htmlFor="toc">Menu</label>
+          <nav className="toc js-toc soft-double transition--300 position--absolute"></nav>
+          <div className="content js-content soft-double">
+              <TemplateComponent {...this.props.json} />
+          </div>
+        </div>
+      </main>
+    );
+  }
+});

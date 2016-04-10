@@ -11,14 +11,14 @@ var MD_SEPERATOR = '---';
 
 var options = {
   src: '**/*.md',
-  dest: 'build',
+  dest: 'build/data',
   includeFilename: true,
   compileMarkdown: true,
   bodyProperty: 'body',
 
   exportName: 'content.json',
   singleFile: false,
-  writeFiles: true,
+  writeFiles: false,
   writeStdout: true
 };
 

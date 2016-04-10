@@ -4,12 +4,11 @@ var mkdirp = require('mkdirp');
 
 function writeFile(filename, data, cb) {
   var splitFileName = filename.split(path.sep);
-  // console.log(filename, path.sep)
   if (splitFileName.length > 1) {
     splitFileName.pop();
     mkdirp(splitFileName.join(path.sep), function(err) {
       if (err) {
-        console.log(err);
+        console.log(err); // eslint-disable-line
       }
       write(filename, data);
     });

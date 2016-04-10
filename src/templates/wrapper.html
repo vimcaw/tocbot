@@ -7,43 +7,30 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico in the root directory -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/tocbot.css">
+
+    <!-- <link rel="stylesheet" href="/test/mocha.css">
+    <script src="/test/mocha.js"></script> -->
   </head>
   <body>
-    <!-- Add your site or application content here -->
-    <main>
-      <div class="hero">
-        <div class="hero-inner reverse">
-          <h1 class="flush hard">
-            {{ title }}
-          </h1>
-          <h3 class="max-width--large anchor--middle line--tight skip-toc soft flush--top">
-            Generate a table of contents based on the heading structure for an html document.
-          </h3>
-          <div class="soft-triple--left push-triple--left">
-            <iframe src="https://ghbtns.com/github-btn.html?user=tscanlin&repo=tocbot&type=star&count=true&size=large" frameborder="0" scrolling="0" width="160px" height="30px"></iframe>
-          </div>
-        </div>
-      </div>
+    <!-- APP_CONTENT_HERE -->
 
-      <div class="max-width--large anchor--middle ">
-        <input id="toc" type="checkbox" class="display--none">
-        <label class="toc-icon cursor--pointer button push" for="toc">Menu</label>
-        <nav class="toc js-toc soft-double transition--300 position--absolute"></nav>
-        <div class="content js-content soft-double">
-          <!-- APP_CONTENT_HERE -->
-        </div>
-      </div>
-    </main>
-
-    <script src="js/tocbot.js"></script>
-    <script src="js/smooth-scroll.js"></script>
+    <script src="/assets/js/tocbot.js"></script>
+    <script src="/assets/js/smooth-scroll.js"></script>
     <script>
       tocbot.init({
         headingSelector: 'h1, h2, h3, h4',
         smoothScroll: window.smoothScroll
       });
     </script>
+
+    <!-- <div id="mocha" style="z-index: 5; position: relative;"></div>
+    <script src="/test/chai.js"></script>
+    <script src="/test/test.js"></script>
+    <script>
+      mocha.run();
+    </script> -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <script>

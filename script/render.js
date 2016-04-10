@@ -14,19 +14,24 @@ var util = require('./util.js');
 
 var options = {
   src: 'build/content.json',
+  dest: 'build/',
   includeFilename: true,
   bodyProperty: 'body',
   compileMarkdown: true,
-  templatesDir: 'src/templates'
+  templatesDir: 'src/templates',
+  mainComponent: 'Main.jsx',
+  wrapperFile: 'wrapper.html',
+  wrapperInsertionPoint: '<!-- APP_CONTENT_HERE -->',
+  useWrapper: true,
 };
 
 // Require config.
-var config = require('./config.js');
+var pathMap = require('./config.js').pathMap;
 
 // Get wrapper if config.useWrapper is true.
 var wrapper = '';
-if (config.useWrapper) {
-  wrapper = fs.readFileSync(config.wrapperLocation).toString();
+if (options.useWrapper) {
+  wrapper = fs.readFileSync(path.join(options.templatesDir, options.wrapperFile)).toString();
 }
 
 // marked.setOptions({
@@ -43,34 +48,6 @@ if (config.useWrapper) {
 //   }
 // });
 //
-// var SEPERATOR = '---';
-//
-// function parseFile(input) {
-//   var output = {};
-//   var splitData = input.data.split(SEPERATOR);
-//   var rawBody = splitData[2];
-//
-//   try {
-//     output = yaml.safeLoad(splitData[1]);
-//   } catch (e) {
-//     console.log(e); // eslint-disable-line
-//   }
-//
-//   if (options.includeFilename) {
-//     output.filename = input.filename;
-//   }
-//
-//   output[options.bodyProperty] = rawBody;
-//   if (options.compileMarkdown) {
-//     var htmlBody = marked(rawBody);
-//     output[options.bodyProperty] = htmlBody;
-//   }
-//
-//   console.log(output);
-//   return output;
-//   // TODO: template stuff.
-// }
-
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 
 function extend() {
@@ -90,20 +67,21 @@ function extend() {
 function processJSON(string) {
   var json = JSON.parse(string);
 
-  if (config.pathMap) {
-    json = extend(json, config.pathMap[json.filename]);
+  if (pathMap) {
+    json = extend(json, pathMap[json.filename]);
   }
   // console.log(json.component)
   if (json.component) {
     // Get the Component and render the HTML to wrap it.
-    var file = path.resolve(path.join('./', options.templatesDir, json.component + '.jsx'));
-    var Component = require(file);
-    var componentHTML = ReactDOMServer.renderToString(React.createElement(Component, json));
-    var html = wrapper.split(config.wrapperInsertionPoint).join(componentHTML);
-
-    // console.log(html)
+    var mainFile = path.resolve(path.join(options.templatesDir, options.mainComponent));
+    var MainComponent = require(mainFile);
+    var componentHTML = ReactDOMServer.renderToString(React.createElement(MainComponent, extend({}, {
+      json: json
+    })));
+    var html = wrapper.split(options.wrapperInsertionPoint).join(componentHTML);
+    console.log('Building: ', json.title);
     // Write Files
-    var filePath = path.join(config.renderPath, json.path);
+    var filePath = path.join(options.dest, json.path);
     util.writeFile(filePath, html);
   } else {
     return new Error ('No "component" property passed in for: ' + json.filename);

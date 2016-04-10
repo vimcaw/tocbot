@@ -1,5 +1,5 @@
 ---
-template: default
+template: Default
 title: Tocbot
 ---
 
@@ -145,7 +145,7 @@ tocbot.refresh()
 ## Changelog
 
 ### v1.0
-- Publicly launched
+- First published
 
 
 ## Contributing

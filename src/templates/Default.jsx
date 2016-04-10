@@ -16,9 +16,9 @@ module.exports = React.createClass({
     function wrapMarkup(html) {
       return { __html: html };
     }
-    // console.log(this.props)
+
     return (
-      <div data-test={this.props.title}>
+      <div data-title={this.props.title}>
         <div dangerouslySetInnerHTML={wrapMarkup(this.props.body)}></div>
       </div>
     );

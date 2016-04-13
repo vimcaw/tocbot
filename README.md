@@ -5,28 +5,18 @@ title: Tocbot
 
 <h1 class="display--none"><a href="http://tscanlin.github.io/tocbot">Tocbot</a></h1>
 
-<h2 id="introduction" class="hard flush">Introduction</h2>
 
-tocbot is a small script to build a table of contents (TOC) from headings in an HTML document. tocbot works well with [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) and together they provide an experience very similar to [Tocify](http://gregfranko.com/jquery.tocify.js/).
+## Introduction
 
-This script is particularly useful for documentation websites or long markdown pages.
+Tocbot builds a table of contents (TOC) from headings in an HTML document. This is particularly useful for documentation websites or long markdown pages because it makes them easier to navigate. This library was inspired by [Tocify](http://gregfranko.com/jquery.tocify.js/), the main difference is that this uses native DOM methods and avoids the jQuery & jQuery UI dependencies.
 
 
 ## Get Started
 
-You can include the script on the page with HTML or use npm to install it.
+You can use npm to install it or include the script on the page with HTML.
 
 
 ### Include JS
-
-Include the script at the bottom of the page before the closing body tag.
-
-```html
-<script src="/js/tocbot.js"></script>
-<script src="/js/smooth-scroll.js"></script>
-```
-
-OR
 
 Install it with npm.
 
@@ -34,26 +24,21 @@ Install it with npm.
 npm install --save tocbot
 ```
 
-And optionally.
+OR
 
-```sh
-npm install --save cferdinandi/smooth-scroll
-```
+Include the script at the bottom of the page before the closing body tag.
 
-Then require them.
-
-```javascript
-var tocbot = require('tocbot');
-var smoothScroll = require('smooth-scroll');
+```html
+<script src="assets/js/tocbot.js"></script>
 ```
 
 
 ### Include CSS
 
-CSS is used for expanding & collapsing groupings and some basic styling. The core of what's required is only 24 lines unminified.
+CSS is used for expanding & collapsing groupings and some basic styling.
 
 ```html
-<link rel="stylesheet" href="http://tscanlin.github.io/tocbot/css/style.css">
+<link rel="stylesheet" href="http://tscanlin.github.io/tocbot/assets/css/tocbot.css">
 ```
 
 OR
@@ -61,7 +46,7 @@ OR
 If you installed it with npm and use sass / postcss you might try importing the styles from the folder in 'node_modules', [see the includePath docs for more info](https://github.com/sass/node-sass#includepaths)
 
 ```scss
-@import 'tocbot/src/scss/style';
+@import 'tocbot/src/scss/tocbot';
 ```
 
 
@@ -75,8 +60,6 @@ tocbot.init({
   tocSelector: '.js-toc',
   // Where to grab the headings to build the table of contents.
   contentSelector: '.js-content',
-  // Optionally include reference to smoothScroll.
-  smoothScroll: smoothScroll || window.smoothScroll
 });
 ```
 
@@ -89,13 +72,9 @@ tocbot.refresh();
 
 ## Requirements
 
-There is no need for jQuery as this library uses **vanilla javascript** and is only about 500 lines unminified.
+This library uses **vanilla javascript** and is only about 500 lines unminified. The only external dependency this script has is [**Smooth Scroll**](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies). This script works in **all modern browsers and IE > 9**. To get support for older versions of IE use polyfills.
 
-There are no external dependencies for this script, besides [**Smooth Scroll**](https://github.com/cferdinandi/smooth-scroll) (which also has no dependencies) should you choose to include it.
-
-This script works in **all modern browsers and IE > 9**. To get support for older versions of IE please use polyfills.
-
-Make sure rendered headings have id attributes, github pages and many markdown renderers (like [marked](https://github.com/chjj/marked)) already do this.
+Make sure rendered headings have id attributes, some markdown libraries (like [marked](https://github.com/chjj/marked)) already do this.
 
 
 ## API
@@ -103,8 +82,54 @@ Make sure rendered headings have id attributes, github pages and many markdown r
 ### Options
 
 ```javascript
+// Where to render the table of contents.
+tocSelector: '.js-toc',
+// Where to grab the headings to build the table of contents.
+contentSelector: '.js-content',
+// Which headings to grab inside of the contentSelector element.
+headingSelector: 'h1, h2, h3',
 
+// smoothScroll Options, see docs at: https://github.com/cferdinandi/smooth-scroll
+smoothScrollOptions: {
+  easing: 'easeInOutCubic',
+  offset: 0,
+  speed: 300, // animation duration.
+  updateURL: true
+},
+
+// Class to add to active links (the link corresponding to the top most heading on the page).
+activeLinkClass: 'is-active-link',
+// Headings that match the ignoreSelector will be skipped.
+ignoreSelector: '.skip-toc',
+// Fixed position class to add to make sidebar fixed after scrolling
+// down past the fixedSidebarOffset.
+positionFixedClass: 'is-position-fixed',
+// fixedSidebarOffset can be any number but by default is set to auto which
+// sets the fixedSidebarOffset to the sidebar element's offsetTop from the
+// top of the document on init.
+fixedSidebarOffset: 'auto',
+
+// Main class to add to links.
+linkClass: 'toc-link',
+// Extra classes to add to links.
+extraLinkClasses: '',
+// Main class to add to lists.
+listClass: 'toc-list',
+// Extra classes to add to lists.
+extraListClasses: '',
+// Headings offset between the headings and the top of the document.
+headingsOffset: 0,
+
+// Class that gets added when a list should be collapsed.
+isCollapsedClass: 'is-collapsed',
+// Class that gets added when a list should be able to be collapsed but
+// isn't necessarily collpased.
+collapsibleClass: 'collapsible',
+// How many heading levels should not be collpased. For example, number 6
+// will show everything since there are only 6 heading levels and number 0 will collpase them all.
+collapseDepth: 0
 ```
+
 
 ### Methods
 
@@ -118,7 +143,7 @@ tocbot.init(options)
 
 #### .destroy
 
-Destroy tocbot.
+Destroy tocbot and remove event listeners.
 
 ```javascript
 tocbot.destroy()
@@ -126,7 +151,7 @@ tocbot.destroy()
 
 #### .refresh
 
-Refresh tocbot.
+Refresh tocbot if the document changes and it needs to be rebuilt.
 
 ```javascript
 tocbot.refresh()
@@ -145,7 +170,7 @@ tocbot.refresh()
 ## Changelog
 
 ### v1.0
-- First published
+- First published source code
 
 
 ## Contributing

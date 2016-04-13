@@ -40,8 +40,7 @@ module.exports = {
   listClass: 'toc-list',
   // Extra classes to add to lists.
   extraListClasses: '',
-  // Headings offset between the headings and the top of the document
-  // (helps with weird rounding bugs that pop up).
+  // Headings offset between the headings and the top of the document.
   headingsOffset: 0,
 
   // Class that gets added when a list should be collapsed.

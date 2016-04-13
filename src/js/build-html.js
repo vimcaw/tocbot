@@ -195,6 +195,9 @@ module.exports = function(options) {
     currentlyHighlighting = false;
   }
 
+  /**
+   * Enable TOC Animation.
+   */
   function enableTocAnimation() {
     currentlyHighlighting = true;
   }

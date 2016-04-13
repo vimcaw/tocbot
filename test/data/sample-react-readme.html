@@ -1,0 +1,112 @@
+<nav class="js-toc"></nav>
+
+<article class="markdown-body entry-content js-content" itemprop="text"><h1>React</h1>
+
+<p>React is a JavaScript library for building user interfaces.</p>
+
+<ul>
+<li><strong>Just the UI:</strong> Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature in an existing project.</li>
+<li><strong>Virtual DOM:</strong> React abstracts away the DOM from you, giving a simpler programming model and better performance. React can also render on the server using Node, and it can power native apps using <a href="https://facebook.github.io/react-native/">React Native</a>.</li>
+<li><strong>Data flow:</strong> React implements one-way reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.</li>
+</ul>
+
+<p><strong>NEW</strong>! Check out our newest project <a href="https://github.com/facebook/react-native">React Native</a>, which uses React and JavaScript to create native mobile apps.</p>
+
+<p><a href="https://facebook.github.io/react/docs/getting-started.html">Learn how to use React in your own project</a>.</p>
+
+<h2><a id="user-content-examples" class="anchor" href="#examples" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Examples</h2>
+
+<p>We have several examples <a href="https://facebook.github.io/react/">on the website</a>. Here is the first one to get you started:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> HelloMessage <span class="pl-k">=</span> <span class="pl-smi">React</span>.<span class="pl-en">createClass</span>({
+  <span class="pl-en">render</span><span class="pl-k">:</span> <span class="pl-k">function</span>() {
+    <span class="pl-k">return</span> <span class="pl-k">&lt;</span>div<span class="pl-k">&gt;</span>Hello {<span class="pl-v">this</span>.<span class="pl-smi">props</span>.<span class="pl-c1">name</span>}<span class="pl-k">&lt;</span><span class="pl-k">/</span>div<span class="pl-k">&gt;</span>;
+  }
+});
+
+<span class="pl-smi">ReactDOM</span>.<span class="pl-en">render</span>(
+  <span class="pl-k">&lt;</span>HelloMessage name<span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>John<span class="pl-pds">"</span></span> <span class="pl-k">/</span><span class="pl-k">&gt;</span>,
+  <span class="pl-c1">document</span>.<span class="pl-c1">getElementById</span>(<span class="pl-s"><span class="pl-pds">'</span>container<span class="pl-pds">'</span></span>)
+);</pre></div>
+
+<p>This example will render "Hello John" into a container on the page.</p>
+
+<p>You'll notice that we used an HTML-like syntax; <a href="https://facebook.github.io/react/docs/jsx-in-depth.html">we call it JSX</a>. JSX is not required to use React, but it makes code more readable, and writing it feels like writing HTML. A simple transform is included with React that allows converting JSX into native JavaScript for browsers to digest.</p>
+
+<h2><a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Installation</h2>
+
+<p>The fastest way to get started is to serve JavaScript from the CDN (also available on <a href="https://cdnjs.com/libraries/react">cdnjs</a> and <a href="https://www.jsdelivr.com/projects/react">jsdelivr</a>):</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-c">&lt;!-- The core React library --&gt;</span>
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://fb.me/react-15.0.1.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;
+<span class="pl-c">&lt;!-- The ReactDOM Library --&gt;</span>
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>https://fb.me/react-dom-15.0.1.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<p>We've also built a <a href="https://facebook.github.io/react/downloads/react-15.0.1.zip">starter kit</a> which might be useful if this is your first time using React. It includes a webpage with an example of using React with live code.</p>
+
+<p>If you'd like to use <a href="http://bower.io">bower</a>, it's as easy as:</p>
+
+<div class="highlight highlight-source-shell"><pre>bower install --save react</pre></div>
+
+<p>And it's just as easy with <a href="http://npmjs.com">npm</a>:</p>
+
+<div class="highlight highlight-source-shell"><pre>npm i --save react</pre></div>
+
+<h2><a id="user-content-contribute" class="anchor" href="#contribute" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Contribute</h2>
+
+<p>The main purpose of this repository is to continue to evolve React core, making it faster and easier to use. If you're interested in helping with that, then keep reading. If you're not interested in helping right now that's ok too. :) Any feedback you have about using React would be greatly appreciated.</p>
+
+<h3><a id="user-content-building-your-copy-of-react" class="anchor" href="#building-your-copy-of-react" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Building Your Copy of React</h3>
+
+<p>The process to build <code>react.js</code> is built entirely on top of node.js, using many libraries you may already be familiar with.</p>
+
+<h4><a id="user-content-prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Prerequisites</h4>
+
+<ul>
+<li>You have <code>node</code> installed at v4.0.0+ and <code>npm</code> at v2.0.0+.</li>
+<li>You are familiar with <code>npm</code> and know whether or not you need to use <code>sudo</code> when installing packages globally.</li>
+<li>You are familiar with <code>git</code>.</li>
+</ul>
+
+<h4><a id="user-content-build" class="anchor" href="#build" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Build</h4>
+
+<p>Once you have the repository cloned, building a copy of <code>react.js</code> is really easy.</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"># grunt-cli is needed by grunt; you might have this installed already</span>
+npm install -g grunt-cli
+npm install
+grunt build</pre></div>
+
+<p>At this point, you should now have a <code>build/</code> directory populated with everything you need to use React. The examples should all work.</p>
+
+<h3><a id="user-content-grunt" class="anchor" href="#grunt" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Grunt</h3>
+
+<p>We use grunt to automate many tasks. Run <code>grunt -h</code> to see a mostly complete listing. The important ones to know:</p>
+
+<div class="highlight highlight-source-shell"><pre><span class="pl-c"># Build and run tests with PhantomJS</span>
+grunt <span class="pl-c1">test</span>
+<span class="pl-c"># Lint the code with ESLint</span>
+grunt lint
+<span class="pl-c"># Wipe out build directory</span>
+grunt clean</pre></div>
+
+<h3><a id="user-content-good-first-bug" class="anchor" href="#good-first-bug" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Good First Bug</h3>
+
+<p>To help you get your feet wet and get you familiar with our contribution process, we have a list of <a href="https://github.com/facebook/react/labels/good%20first%20bug">good first bugs</a> that contain bugs which are fairly easy to fix.  This is a great place to get started.</p>
+
+<h3><a id="user-content-license" class="anchor" href="#license" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>License</h3>
+
+<p>React is <a href="/facebook/react/blob/master/LICENSE">BSD licensed</a>. We also provide an additional <a href="/facebook/react/blob/master/PATENTS">patent grant</a>.</p>
+
+<p>React documentation is <a href="/facebook/react/blob/master/LICENSE-docs">Creative Commons licensed</a>.</p>
+
+<p>Examples provided in this repository and in the documentation are <a href="/facebook/react/blob/master/LICENSE-examples">separately licensed</a>.</p>
+
+<h3><a id="user-content-more" class="anchor" href="#more" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>More…</h3>
+
+<p>There's only so much we can cram in here. To read more about the community and guidelines for submitting pull requests, please read the <a href="/facebook/react/blob/master/CONTRIBUTING.md">Contributing document</a>.</p>
+
+<h2><a id="user-content-troubleshooting" class="anchor" href="#troubleshooting" aria-hidden="true"><svg aria-hidden="true" class="octicon octicon-link" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path d="M4 9h1v1h-1c-1.5 0-3-1.69-3-3.5s1.55-3.5 3-3.5h4c1.45 0 3 1.69 3 3.5 0 1.41-0.91 2.72-2 3.25v-1.16c0.58-0.45 1-1.27 1-2.09 0-1.28-1.02-2.5-2-2.5H4c-0.98 0-2 1.22-2 2.5s1 2.5 2 2.5z m9-3h-1v1h1c1 0 2 1.22 2 2.5s-1.02 2.5-2 2.5H9c-0.98 0-2-1.22-2-2.5 0-0.83 0.42-1.64 1-2.09v-1.16c-1.09 0.53-2 1.84-2 3.25 0 1.81 1.55 3.5 3 3.5h4c1.45 0 3-1.69 3-3.5s-1.5-3.5-3-3.5z"></path></svg></a>Troubleshooting</h2>
+
+<p>See the <a href="https://github.com/facebook/react/wiki/Troubleshooting">Troubleshooting Guide</a></p>
+</article>

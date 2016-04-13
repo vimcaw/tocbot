@@ -1,9 +1,9 @@
 /**
  * Tocbot
- * Tocbot is similar to tocify (http://gregfranko.com/jquery.tocify.js/).
- * The main differences are that it works natively without a need for jquery or jquery UI).
  * Tocbot creates a toble of contents based on HTML headings on a page,
  * this allows users to easily jump to different sections of the document.
+ * Tocbot was inspired by tocify (http://gregfranko.com/jquery.tocify.js/).
+ * The main differences are that it works natively without any need for jquery or jquery UI).
  *
  * @author Tim Scanlin
  */
@@ -68,11 +68,14 @@
 	 * Destroy tocbot.
 	 */
   tocbot.destroy = function() {
-		// Remove event listeners
-    document.removeEventListener('scroll', updateTocListener(headingsArray));
-    document.removeEventListener('resize', updateTocListener(headingsArray));
+    // Clear HTML.
+    document.querySelector(options.tocSelector).innerHTML = '';
+
+		// Remove event listeners.
+    document.removeEventListener('scroll', this._updateTocListener, false);
+    document.removeEventListener('resize', this._updateTocListener, false);
     if (buildHtml) {
-      document.removeEventListener('click', buildHtml.disableTocAnimation);
+      document.removeEventListener('click', this._disableTocAnimation, false);
     }
 
     // Destroy smoothScroll if it exists.
@@ -120,11 +123,13 @@
 
     // Update Sidebar and bind listeners.
     buildHtml.updateToc(headingsArray);
-    document.addEventListener('scroll', updateTocListener(headingsArray));
-    document.addEventListener('resize', updateTocListener(headingsArray));
+    this._updateTocListener = updateTocListener(headingsArray);
+    document.addEventListener('scroll', this._updateTocListener, false);
+    document.addEventListener('resize', this._updateTocListener, false);
 
     // Bind click listeners to disable animation.
-    document.addEventListener('click', buildHtml.disableTocAnimation);
+    this._disableTocAnimation = buildHtml.disableTocAnimation; // Save reference so event is created / removed properly.
+    document.addEventListener('click', this._disableTocAnimation, false);
 
     // Initialize smoothscroll if it exists.
     if (smoothScroll) {

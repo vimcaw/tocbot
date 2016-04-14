@@ -3,6 +3,8 @@ var chai = require('chai');
 var expect = chai.expect;
 // Count all of the links from the io.js build page
 var jsdom = require('jsdom');
+var TEST_DATA = require('./data/json-data.js')();
+var TEST_HTML = fs.readFileSync('./test/data/rendered.html').toString();
 
 var GLOBAL = {
   window: {}
@@ -18,7 +20,7 @@ function spy(fn) {
   return fun;
 }
 
-var content = fs.readFileSync('./test/data/sample-react-readme.html').toString();
+var content = fs.readFileSync('./test/data/sample-meat.html').toString();
 var markup = '<html><head></head><body>'
   + content
   + '</body></html>';
@@ -31,11 +33,6 @@ before(function(done) {
     ],
     function (err, window) {
       GLOBAL.window = window;
-
-      // Init.
-      // window.tocbot.init();
-      // console.log(window.tocbot)
-
       done();
     }
   );
@@ -50,7 +47,7 @@ afterEach(function() {
 });
 
 describe('Tocbot', function () {
-  describe('Initialize', function () {
+  describe('#init', function () {
     it('should expose a global object', function () {
       expect(GLOBAL.window.tocbot).to.not.equal(undefined);
     });
@@ -84,7 +81,7 @@ describe('Tocbot', function () {
     });
   });
 
-  describe('Destroy', function () {
+  describe('#destroy', function () {
     it('should remove event listeners when destroyed', function () {
       var count = 0;
       var args = [];
@@ -108,52 +105,79 @@ describe('Tocbot', function () {
   });
 });
 
-xdescribe('Build HTML', function () {
-  xit('should render TOC properly with default options', function () {
-    var window = GLOBAL.window;
-    var doc = window.document;
-    // console.log(doc.body.clientWidth)
-    // var tocEl = doc.querySelector(window.tocbot.options);
+// Parse content
+describe('Parse content', function () {
+  it('#selectHeadings with default options', function () {
+    var tocbot = GLOBAL.window.tocbot;
+    var selectHeadings = tocbot._parseContent.selectHeadings;
+    var defaultHeadings = selectHeadings(tocbot.options.contentSelector, tocbot.options.headingSelector);
+    defaultHeadings = [].map.call(defaultHeadings, function(node) {
+      return node.textContent;
+    });
 
-    console.log(window.tocbot)
-    // console.log(tocEl.className)
-
-//     var html = '<ul class="toc-list ">\
-// <li><a data-scroll="" href="#bacon" class="toc-link node-name--H1 is-active-link">Bacon</a>\
-// <ul class="toc-list  collapsible"><li><a data-scroll="" href="#brisket" class="toc-link node-name--H2 ">Brisket</a></li><li><a data-scroll="" href="#flank" class="toc-link node-name--H2 ">Flank</a>\
-// <ul class="toc-list  collapsible is-collapsed"><li><a data-scroll="" href="#pork" class="toc-link node-name--H3 ">Pork</a></li></ul></li><li><a data-scroll="" href="#capicola" class="toc-link node-name--H2 ">Capicola</a>\
-// <ul class="toc-list  collapsible is-collapsed"><li><a data-scroll="" href="#drumstick" class="toc-link node-name--H3 ">Drumstick</a></li><li><a data-scroll="" href="#pastrami" class="toc-link node-name--H3 ">Pastrami</a></li><li><a data-scroll="" href="#meatloaf" class="toc-link node-name--H3 ">Meatloaf</a></li></ul></li></ul></li><li><a data-scroll="" href="#sirloin" class="toc-link node-name--H1 ">Sirloin</a>\
-// <ul class="toc-list  collapsible is-collapsed"><li><a data-scroll="" href="#pork-belly" class="toc-link node-name--H2 ">Pork belly</a></li><li><a data-scroll="" href="#bresaola-shankle" class="toc-link node-name--H2 ">Bresaola shankle</a></li><li><a data-scroll="" href="#cow-pancetta" class="toc-link node-name--H2 ">Cow pancetta</a>\
-// <ul class="toc-list  collapsible is-collapsed"><li><a data-scroll="" href="#turducken" class="toc-link node-name--H3 ">Turducken</a></li><li><a data-scroll="" href="#alcatra" class="toc-link node-name--H3 ">Alcatra</a></li><li><a data-scroll="" href="#chuck" class="toc-link node-name--H3 ">Chuck</a></li><li><a data-scroll="" href="#spare-ribs" class="toc-link node-name--H3 ">Spare ribs</a>\
-// <ul class="toc-list  collapsible is-collapsed"><li><a data-scroll="" href="#chuck-venison" class="toc-link node-name--H5 ">Chuck venison</a></li></ul></li></ul></li><li><a data-scroll="" href="#swine-venison-chicken" class="toc-link node-name--H2 ">Swine venison chicken</a></li></ul></li><li><a data-scroll="" href="#landjaeger" class="toc-link node-name--H1 ">Landjaeger</a>\
-// <ul class="toc-list  collapsible is-collapsed"><li><a data-scroll="" href="#kevin-capicola-shank" class="toc-link node-name--H3 ">Kevin capicola shank</a></li></ul></li></ul>';
-    // console.log(tocEl.innerHTML)
-    // expect(tocEl.innerHTML).to.contain(html);
+    expect(defaultHeadings).to.eql([
+      'Bacon',
+      'Brisket',
+      'Flank',
+      'Pork',
+      'Capicola',
+      'Drumstick',
+      'Pastrami',
+      'Meatloaf',
+      'Sirloin',
+      'Pork belly',
+      'Bresaola shankle',
+      'Cow pancetta',
+      'Turducken',
+      'Alcatra',
+      'Chuck',
+      'Spare ribs',
+      'Swine venison chicken',
+      'Landjaeger',
+      'Kevin capicola shank'
+    ]);
   });
 
-  xit('should add the active class and show its children when a link is clicked', function (done) {
-    var e = new window.Event('click');
-    var target = window.document.querySelector('[href="#capicola"]');
-    target.dispatchEvent(e);
+  it('#selectHeadings with custom headingSelector option', function () {
+    var tocbot = GLOBAL.window.tocbot;
+    var selectHeadings = tocbot._parseContent.selectHeadings;
+    var defaultHeadings = selectHeadings(tocbot.options.contentSelector, 'h1, h2');
+    defaultHeadings = [].map.call(defaultHeadings, function(node) {
+      return node.textContent;
+    });
 
-    expect(window.document.body.scrollTop).to.equal(1427);
-    expect(window.location.hash).to.equal('#capicola');
-    setTimeout(function() { // give event handler time to respond since its async.
-      expect(target.classList.contains(window.tocbot.options.activeLinkClass)).to.equal(true);
-      expect(target.nextSibling.classList.contains(window.tocbot.options.isCollapsedClass)).to.equal(false);
-      done();
-    }, 10);
+    expect(defaultHeadings).to.eql([
+      'Bacon',
+      'Brisket',
+      'Flank',
+      'Capicola',
+      'Sirloin',
+      'Pork belly',
+      'Bresaola shankle',
+      'Cow pancetta',
+      'Swine venison chicken',
+      'Landjaeger'
+    ]);
   });
 
-  xit('should properly serialize the data', function () {
-    var window = GLOBAL.window;
-    var parse = window.tocbot._parseContent;
-    var headings = parse.selectHeadings(window.tocbot.options.contentSelector, window.tocbot.options.headingSelector);
-    expect(headings.length).to.equal(20);
+  it('#nestHeadingsArray', function () {
+    var tocbot = GLOBAL.window.tocbot;
+    var selectHeadings = tocbot._parseContent.selectHeadings;
+    var defaultHeadings = selectHeadings(tocbot.options.contentSelector, tocbot.options.headingSelector);
+    var nestHeadingsData = tocbot._parseContent.nestHeadingsArray(defaultHeadings);
 
-    var nest = require('./test-data.js')();
+    expect(nestHeadingsData.nest).to.eql(TEST_DATA);
+  });
+});
 
-    var nestObj = parse.nestHeadingsArray(headings);
-    expect(nestObj.nest).to.eql(nest);
+// Build HTML
+describe('Build HTML', function () {
+  it('#render', function () {
+    var tocbot = GLOBAL.window.tocbot;
+    var render = tocbot._buildHtml.render;
+    var tocEl = render(tocbot.options.tocSelector, TEST_DATA);
+    var html = TEST_HTML.split('\n').join('')
+      .replace(/\>\s+\</g,'><'); // Remove spaces between all elements.
+    expect(tocEl.innerHTML).to.eql(html);
   });
 });

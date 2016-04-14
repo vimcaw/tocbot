@@ -8,7 +8,7 @@ module.exports = {
   // Where to render the table of contents.
   tocSelector: '.js-toc',
   // Where to grab the headings to build the table of contents.
-  contentSelector: '.js-content',
+  contentSelector: '.js-toc-content',
   // Which headings to grab inside of the contentSelector element.
   headingSelector: 'h1, h2, h3',
 
@@ -23,7 +23,7 @@ module.exports = {
   // Class to add to active links (the link corresponding to the top most heading on the page).
   activeLinkClass: 'is-active-link',
   // Headings that match the ignoreSelector will be skipped.
-  ignoreSelector: '.skip-toc',
+  ignoreSelector: '.js-toc-ignore',
   // Fixed position class to add to make sidebar fixed after scrolling
   // down past the fixedSidebarOffset.
   positionFixedClass: 'is-position-fixed',
@@ -47,7 +47,7 @@ module.exports = {
   isCollapsedClass: 'is-collapsed',
   // Class that gets added when a list should be able to be collapsed but
   // isn't necessarily collpased.
-  collapsibleClass: 'collapsible',
+  collapsibleClass: 'is-collapsible',
   // How many heading levels should not be collpased. For example, number 6
   // will show everything since there are only 6 heading levels and number 0 will collpase them all.
   collapseDepth: 0

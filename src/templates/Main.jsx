@@ -36,7 +36,7 @@ module.exports = React.createClass({
           <input id="toc" type="checkbox" className="display--none" />
           <label className="toc-icon cursor--pointer button push" htmlFor="toc">Menu</label>
           <nav className="toc js-toc soft-double transition--300 position--absolute"></nav>
-          <div className="content js-content soft-double">
+          <div className="content js-toc-content soft-double">
               <TemplateComponent {...this.props.json} />
           </div>
         </div>

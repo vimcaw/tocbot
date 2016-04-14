@@ -87,8 +87,12 @@ module.exports = function parseContent(options) {
           return selector.trim() + ':not(' + options.ignoreSelector + ')';
         });
     }
-    return document.querySelector(contentSelector)
-      .querySelectorAll(selectors);
+    try {
+      return document.querySelector(contentSelector)
+        .querySelectorAll(selectors);
+    } catch (e) {
+      throw new Error('Element not found: ' + contentSelector);
+    }
   }
 
   /**

@@ -69,7 +69,11 @@
 	 */
   tocbot.destroy = function() {
     // Clear HTML.
-    document.querySelector(options.tocSelector).innerHTML = '';
+    try {
+      document.querySelector(options.tocSelector).innerHTML = '';
+    } catch (e) {
+      throw new Error('Element not found: ' + options.tocSelector);
+    }
 
 		// Remove event listeners.
     document.removeEventListener('scroll', this._updateTocListener, false);

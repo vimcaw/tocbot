@@ -178,6 +178,7 @@ describe('Build HTML', function () {
     var tocEl = render(tocbot.options.tocSelector, TEST_DATA);
     var html = TEST_HTML.split('\n').join('')
       .replace(/\>\s+\</g,'><'); // Remove spaces between all elements.
+
     expect(tocEl.innerHTML).to.eql(html);
   });
 });

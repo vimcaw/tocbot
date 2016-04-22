@@ -45,6 +45,8 @@ module.exports = {
   // Timeout between events firing to make sure its not too rapid (for performance reasons).
   throttleTimeout: 80,
 
+  // Class that adds transitions.
+  tansitionClass: 'transition--300',
   // Class that gets added when a list should be collapsed.
   isCollapsedClass: 'is-collapsed',
   // Class that gets added when a list should be able to be collapsed but

@@ -155,8 +155,7 @@ tocbot.refresh()
 
 - More tests
 - Blog post to announce it
-- Eventually, a place to drop in markdown to preview it
-- Debounce option
+- Option for changing the url hash on scroll
 - React.js support
 
 

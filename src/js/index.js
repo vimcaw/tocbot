@@ -58,6 +58,29 @@
     return target;
   }
 
+  // From: https://remysharp.com/2010/07/21/throttling-function-calls
+  function throttle(fn, threshhold, scope) {
+    threshhold || (threshhold = 250);
+    var last;
+    var deferTimer;
+    return function() {
+      var context = scope || this;
+      var now = +new Date;
+      var args = arguments;
+      if (last && now < last + threshhold) {
+        // hold on to it
+        clearTimeout(deferTimer);
+        deferTimer = setTimeout(function() {
+          last = now;
+          fn.apply(context, args);
+        }, threshhold);
+      } else {
+        last = now;
+        fn.apply(context, args);
+      }
+    };
+  }
+
   function updateTocListener(headings) {
     return function updateToc() {
       return buildHtml.updateToc(headings);
@@ -76,10 +99,10 @@
     }
 
 		// Remove event listeners.
-    document.removeEventListener('scroll', this._updateTocListener, false);
-    document.removeEventListener('resize', this._updateTocListener, false);
+    document.removeEventListener('scroll', this._scrollListener, false);
+    document.removeEventListener('resize', this._scrollListener, false);
     if (buildHtml) {
-      document.removeEventListener('click', this._disableTocAnimation, false);
+      document.removeEventListener('click', this._clickListener, false);
     }
 
     // Destroy smoothScroll if it exists.
@@ -126,14 +149,20 @@
     buildHtml.render(options.tocSelector, nestedHeadings);
 
     // Update Sidebar and bind listeners.
-    buildHtml.updateToc(headingsArray);
-    this._updateTocListener = updateTocListener(headingsArray);
-    document.addEventListener('scroll', this._updateTocListener, false);
-    document.addEventListener('resize', this._updateTocListener, false);
+    // buildHtml.updateToc(headingsArray);
+    this._scrollListener = throttle(function() {
+      buildHtml.updateToc(headingsArray);
+    }, options.throttleTimeout);
+    this._scrollListener();
+    document.addEventListener('scroll', this._scrollListener, false);
+    document.addEventListener('resize', this._scrollListener, false);
 
     // Bind click listeners to disable animation.
-    this._disableTocAnimation = buildHtml.disableTocAnimation; // Save reference so event is created / removed properly.
-    document.addEventListener('click', this._disableTocAnimation, false);
+    this._clickListener = throttle(function(event) {
+      buildHtml.disableTocAnimation(event); // Save reference so event is created / removed properly.
+      buildHtml.updateToc(headingsArray);
+    }, options.throttleTimeout);
+    document.addEventListener('click', this._clickListener, false);
 
     // Initialize smoothscroll if it exists.
     if (smoothScroll) {

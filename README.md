@@ -6,8 +6,6 @@ title: Tocbot
 <h1 class="display--none"><a href="http://tscanlin.github.io/tocbot">Tocbot</a></h1>
 
 
-## Introduction
-
 Tocbot builds a table of contents (TOC) from headings in an HTML document. This is particularly useful for documentation websites or long markdown pages because it makes them easier to navigate. This library was inspired by [Tocify](http://gregfranko.com/jquery.tocify.js/), the main difference is that Tocbot uses native DOM methods and avoids the jQuery & jQuery UI dependencies.
 
 

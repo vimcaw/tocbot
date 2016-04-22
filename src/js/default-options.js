@@ -42,6 +42,8 @@ module.exports = {
   extraListClasses: '',
   // Headings offset between the headings and the top of the document.
   headingsOffset: 0,
+  // Timeout between events firing to make sure its not too rapid (for performance reasons).
+  throttleTimeout: 80,
 
   // Class that gets added when a list should be collapsed.
   isCollapsedClass: 'is-collapsed',

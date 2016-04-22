@@ -15,7 +15,7 @@
     "build:js:watch": "webpack src/js/index.js build/assets/js/tocbot.js -d --watch",
     "build:js:uglify": "npm run lint && webpack src/js/index.js | uglifyjs -mc > build/assets/js/tocbot.js",
     "build:docs": "node ./script/parse.js --src **/*.md | babel-node ./script/render.js",
-    "build:docs:watch": "onchange \"**/*.js\" \"**/*.jsx\" \"**/*.md\" \"**/*.html\" -- npm run build:docs",
+    "build:docs:watch": "onchange \"**/*.js\" \"**/*.jsx\" \"**/*.md\" \"src/**/*.html\" -- npm run build:docs",
     "build:static": "cp -r src/files/* build/",
     "lint": "eslint *.js",
     "dev": "parallelshell \"npm run serve\" \"npm run build:js:watch\" \"npm run build:css:watch\" \"npm run build:docs:watch\"",

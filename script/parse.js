@@ -39,13 +39,18 @@ marked.setOptions({
 
 function parseFile(input) {
   var output = {};
-  var splitData = input.data.split(MD_SEPERATOR);
-  var rawBody = splitData[2];
-
-  try {
-    output = yaml.safeLoad(splitData[1]);
-  } catch (e) {
-    console.log(e); // eslint-disable-line
+  var hasFrontmatter = input.data.slice(0, 3) === MD_SEPERATOR;
+  var rawBody = '';
+  if (hasFrontmatter) {
+    var splitData = input.data.split(MD_SEPERATOR);
+    rawBody = splitData[2];
+    try {
+      output = yaml.safeLoad(splitData[1]);
+    } catch (e) {
+      console.log(e); // eslint-disable-line
+    }
+  } else {
+    rawBody = input.data;
   }
 
   if (options.includeFilename) {

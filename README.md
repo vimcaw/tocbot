@@ -1,8 +1,3 @@
----
-template: Default
-title: Tocbot
----
-
 <h1 class="display--none"><a href="http://tscanlin.github.io/tocbot">Tocbot</a></h1>
 
 

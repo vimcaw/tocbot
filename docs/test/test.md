@@ -1,6 +1,5 @@
 ---
 title: Test
-template: Default
 testFile: true
 ---
 

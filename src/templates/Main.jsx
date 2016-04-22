@@ -14,7 +14,7 @@ module.exports = React.createClass({
 
   render: function() {
     var json = this.props.json;
-    var TemplateComponent = require('./' + json.template + '.jsx');
+    var TemplateComponent = require('./' + json.component);
 
     return (
       <main>

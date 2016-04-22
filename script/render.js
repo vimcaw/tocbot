@@ -70,7 +70,7 @@ function processJSON(string) {
   if (pathMap) {
     json = extend(json, pathMap[json.filename]);
   }
-  // console.log(json.component)
+
   if (json.component) {
     // Get the Component and render the HTML to wrap it.
     var mainFile = path.resolve(path.join(options.templatesDir, options.mainComponent));
@@ -79,7 +79,7 @@ function processJSON(string) {
       json: json
     })));
     var html = wrapper.split(options.wrapperInsertionPoint).join(componentHTML);
-    console.log('Building: ', json.title);
+    console.log('Building: ', json.title || json.filename);
     // Write Files
     var filePath = path.join(options.dest, json.path);
     util.writeFile(filePath, html);

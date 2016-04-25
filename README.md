@@ -65,7 +65,7 @@ tocbot.refresh();
 
 ## Requirements
 
-This library uses **vanilla javascript** and is only about 500 lines unminified. The only external dependency this script has is [**Smooth Scroll**](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies). This script works in **all modern browsers and IE > 9**. To get support for older versions of IE use polyfills.
+This library uses **vanilla javascript** and is only about 500 lines unminified. The only dependency this script has is [**Smooth Scroll**](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies). This script works in **all modern browsers and IE 8+**. To get support for older versions of IE use polyfills.
 
 Make sure rendered headings have id attributes, some markdown libraries (like [marked](https://github.com/chjj/marked)) already do this.
 

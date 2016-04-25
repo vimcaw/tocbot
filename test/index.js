@@ -21,9 +21,7 @@ function spy(fn) {
 }
 
 var content = fs.readFileSync('./test/data/sample-meat.html').toString();
-var markup = '<html><head></head><body>'
-  + content
-  + '</body></html>';
+var markup = '<html><head></head><body>' + content + '</body></html>';
 
 before(function(done) {
   jsdom.env(

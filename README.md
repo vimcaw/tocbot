@@ -169,7 +169,7 @@ tocbot.refresh()
 
 Contributions and suggestions are welcome! Please feel free to open an issue if you run into a problem or have a feature request. I'll do my best to respond in a timely fashion.
 
-If you want to open a pull request just fork the repo but please make sure all tests and lint pass first.
+If you want to open a pull request just fork the repo but please make sure all tests and lint pass.
 
 
 ### Running Tests

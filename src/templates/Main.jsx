@@ -8,9 +8,9 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 module.exports = React.createClass({
-  // propTypes: {
-  //   children: React.PropTypes.element.isRequired
-  // },
+  propTypes: {
+    json: React.PropTypes.object.isRequired
+  },
 
   render: function() {
     var json = this.props.json;

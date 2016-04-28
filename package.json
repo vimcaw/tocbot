@@ -22,7 +22,7 @@
     "serve": "webpack-dev-server --content-base build/ --port 4001",
     "start": "npm run clean && npm run mkdirs && npm run build:css && npm run build:docs && npm run dev",
     "deploy": "npm run build && gh-pages -d build",
-    "test": "node ./node_modules/mochatron/bin/mochatron.js --window http://localhost:4100"
+    "test": "mocha test/index.js"
   },
   "repository": {
     "type": "git",
@@ -63,7 +63,6 @@
     "marked": "^0.3.5",
     "mkdirp": "^0.5.1",
     "mocha": "^2.3.4",
-    "mochatron": "^1.0.7",
     "node-sass": "^3.4.2",
     "nunjucks": "^2.4.1",
     "onchange": "^2.2.0",

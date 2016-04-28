@@ -175,8 +175,8 @@ describe('Build HTML', function () {
     var render = tocbot._buildHtml.render;
     var tocEl = render(tocbot.options.tocSelector, TEST_DATA);
     var html = TEST_HTML.split('\n').join('')
-      .replace(/\>\s+\</g,'><'); // Remove spaces between all elements.
+      .replace(/\>\s+\</g, '><'); // Remove spaces between all elements.
 
-    expect(tocEl.innerHTML).to.eql(html);
+    expect(html).to.contain(tocEl.innerHTML);
   });
 });

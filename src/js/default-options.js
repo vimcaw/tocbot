@@ -11,48 +11,49 @@ module.exports = {
   contentSelector: '.js-toc-content',
   // Which headings to grab inside of the contentSelector element.
   headingSelector: 'h1, h2, h3',
+  // Headings that match the ignoreSelector will be skipped.
+  ignoreSelector: '.js-toc-ignore',
 
-  // smoothScroll Options, see docs at: https://github.com/cferdinandi/smooth-scroll
+  // Main class to add to links.
+  linkClass: 'toc-link',
+  // Extra classes to add to links.
+  extraLinkClasses: '',
+  // Class to add to active links,
+  // the link corresponding to the top most heading on the page.
+  activeLinkClass: 'is-active-link',
+  // Main class to add to lists.
+  listClass: 'toc-list',
+  // Extra classes to add to lists.
+  extraListClasses: '',
+  // Class that gets added when a list should be collapsed.
+  isCollapsedClass: 'is-collapsed',
+  // Class that gets added when a list should be able
+  // to be collapsed but isn't necessarily collpased.
+  collapsibleClass: 'is-collapsible',
+  // How many heading levels should not be collpased.
+  // For example, number 6 will show everything since
+  // there are only 6 heading levels and number 0 will collpase them all.
+  // The sections that are hidden will open
+  // and close as you scroll to headings within them.
+  collapseDepth: 0,
+  // smooth-scroll options object, see docs at:
+  // https://github.com/cferdinandi/smooth-scroll
   smoothScrollOptions: {
     easing: 'easeInOutCubic',
     offset: 0,
     speed: 300, // animation duration.
     updateURL: true
   },
-
-  // Class to add to active links (the link corresponding to the top most heading on the page).
-  activeLinkClass: 'is-active-link',
-  // Headings that match the ignoreSelector will be skipped.
-  ignoreSelector: '.js-toc-ignore',
+  // Headings offset between the headings and the top of the document.
+  headingsOffset: 0,
+  // Timeout between events firing to make sure it's
+  // not too rapid (for performance reasons).
+  throttleTimeout: 50,
   // Fixed position class to add to make sidebar fixed after scrolling
   // down past the fixedSidebarOffset.
   positionFixedClass: 'is-position-fixed',
-  // fixedSidebarOffset can be any number but by default is set to auto which
-  // sets the fixedSidebarOffset to the sidebar element's offsetTop from the
-  // top of the document on init.
-  fixedSidebarOffset: 'auto',
-
-  // Main class to add to links.
-  linkClass: 'toc-link',
-  // Extra classes to add to links.
-  extraLinkClasses: '',
-  // Main class to add to lists.
-  listClass: 'toc-list',
-  // Extra classes to add to lists.
-  extraListClasses: '',
-  // Headings offset between the headings and the top of the document.
-  headingsOffset: 0,
-  // Timeout between events firing to make sure its not too rapid (for performance reasons).
-  throttleTimeout: 80,
-
-  // Class that adds transitions.
-  tansitionClass: 'transition--300',
-  // Class that gets added when a list should be collapsed.
-  isCollapsedClass: 'is-collapsed',
-  // Class that gets added when a list should be able to be collapsed but
-  // isn't necessarily collpased.
-  collapsibleClass: 'is-collapsible',
-  // How many heading levels should not be collpased. For example, number 6
-  // will show everything since there are only 6 heading levels and number 0 will collpase them all.
-  collapseDepth: 0
+  // fixedSidebarOffset can be any number but by default is set
+  // to auto which sets the fixedSidebarOffset to the sidebar
+  // element's offsetTop from the top of the document on init.
+  fixedSidebarOffset: 'auto'
 };

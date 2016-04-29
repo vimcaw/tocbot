@@ -1,7 +1,7 @@
 <h1 class="display--none"><a href="http://tscanlin.github.io/tocbot">Tocbot</a></h1>
 
 
-Tocbot builds a table of contents (TOC) from headings in an HTML document. This is particularly useful for documentation websites or long markdown pages because it makes them easier to navigate. This library was inspired by [Tocify](http://gregfranko.com/jquery.tocify.js/), the main difference is that Tocbot uses native DOM methods and avoids the jQuery & jQuery UI dependencies.
+Tocbot builds a table of contents (TOC) from headings in an HTML document. This is useful for documentation websites or long markdown pages because it makes them easier to navigate. This library was inspired by [Tocify](http://gregfranko.com/jquery.tocify.js/), the main difference is that Tocbot uses native DOM methods and avoids the jQuery & jQuery UI dependencies.
 
 
 ## Get Started
@@ -81,46 +81,51 @@ tocSelector: '.js-toc',
 contentSelector: '.js-toc-content',
 // Which headings to grab inside of the contentSelector element.
 headingSelector: 'h1, h2, h3',
+// Headings that match the ignoreSelector will be skipped.
+ignoreSelector: '.js-toc-ignore',
 
-// smoothScroll Options, see docs at: https://github.com/cferdinandi/smooth-scroll
+// Main class to add to links.
+linkClass: 'toc-link',
+// Extra classes to add to links.
+extraLinkClasses: '',
+// Class to add to active links,
+// the link corresponding to the top most heading on the page.
+activeLinkClass: 'is-active-link',
+// Main class to add to lists.
+listClass: 'toc-list',
+// Extra classes to add to lists.
+extraListClasses: '',
+// Class that gets added when a list should be collapsed.
+isCollapsedClass: 'is-collapsed',
+// Class that gets added when a list should be able
+// to be collapsed but isn't necessarily collpased.
+collapsibleClass: 'is-collapsible',
+// How many heading levels should not be collpased.
+// For example, number 6 will show everything since
+// there are only 6 heading levels and number 0 will collpase them all.
+// The sections that are hidden will open
+// and close as you scroll to headings within them.
+collapseDepth: 0,
+// smooth-scroll options object, see docs at:
+// https://github.com/cferdinandi/smooth-scroll
 smoothScrollOptions: {
   easing: 'easeInOutCubic',
   offset: 0,
   speed: 300, // animation duration.
   updateURL: true
 },
-
-// Class to add to active links (the link corresponding to the top most heading on the page).
-activeLinkClass: 'is-active-link',
-// Headings that match the ignoreSelector will be skipped.
-ignoreSelector: '.js-toc-ignore',
+// Headings offset between the headings and the top of the document.
+headingsOffset: 0,
+// Timeout between events firing to make sure it's
+// not too rapid (for performance reasons).
+throttleTimeout: 50,
 // Fixed position class to add to make sidebar fixed after scrolling
 // down past the fixedSidebarOffset.
 positionFixedClass: 'is-position-fixed',
-// fixedSidebarOffset can be any number but by default is set to auto which
-// sets the fixedSidebarOffset to the sidebar element's offsetTop from the
-// top of the document on init.
-fixedSidebarOffset: 'auto',
-
-// Main class to add to links.
-linkClass: 'toc-link',
-// Extra classes to add to links.
-extraLinkClasses: '',
-// Main class to add to lists.
-listClass: 'toc-list',
-// Extra classes to add to lists.
-extraListClasses: '',
-// Headings offset between the headings and the top of the document.
-headingsOffset: 0,
-
-// Class that gets added when a list should be collapsed.
-isCollapsedClass: 'is-collapsed',
-// Class that gets added when a list should be able to be collapsed but
-// isn't necessarily collpased.
-collapsibleClass: 'is-collapsible',
-// How many heading levels should not be collpased. For example, number 6
-// will show everything since there are only 6 heading levels and number 0 will collpase them all.
-collapseDepth: 0
+// fixedSidebarOffset can be any number but by default is set
+// to auto which sets the fixedSidebarOffset to the sidebar
+// element's offsetTop from the top of the document on init.
+fixedSidebarOffset: 'auto'
 ```
 
 
@@ -160,6 +165,33 @@ tocbot.refresh()
 
 
 ## Changelog
+
+### Unreleased
+...
+
+### v2.0
+
+#### Added
+- [major] smooth-scroll is included by default now
+- [patch] throttling support to improve performance, also the `throttleTimeout` option
+- [patch] new "try it now" option on documentation site
+
+#### Changed
+- [minor] broke up scss files and separate tocbot styles better
+- [minor] default option for `contentSelector` to be `.js-toc-content`
+- [minor] default option for `ignoreSelector` to be `.js-toc-ignore`
+- [minor] default option for `collapsibleClass` to be `.is-collapsible`
+- [patch] reorder `default-options.js`
+- [patch] update documentation
+
+#### Removed
+- [patch] dependency on classList to improve browser support
+
+#### Fixed
+- [minor] new and improved tests using jsdom
+- [dev] switched from gulp to npm scripts
+- [dev] switched from browserify to webpack
+- [dev] switched from swig to react for building the documentation
 
 ### v1.0
 - First published source code

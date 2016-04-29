@@ -22,15 +22,16 @@ h6 {
 }
 
 pre {
+  @extend .code;
   display: block;
+  line-height: 1.2;
   margin-bottom: 10px;
   overflow: auto;
   white-space: pre-wrap;
 }
 
 code {
-  @extend .code;
-  display: block;
+  display: inline;
   font-size: .8em;
   max-width: 100%;
 }

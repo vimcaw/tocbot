@@ -64,7 +64,6 @@
     "mkdirp": "^0.5.1",
     "mocha": "^2.3.4",
     "node-sass": "^3.4.2",
-    "nunjucks": "^2.4.1",
     "onchange": "^2.2.0",
     "optimizely-oui": "^9.0.8",
     "parallelshell": "^2.0.0",

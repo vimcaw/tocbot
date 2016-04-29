@@ -11,9 +11,9 @@ var paths = {
   scss: 'scss/',
   css: 'css/',
   js: 'js/',
-  templates: 'templates/',
+  templates: 'templates/'
 };
 
 module.exports = {
-  paths: paths,
+  paths: paths
 };

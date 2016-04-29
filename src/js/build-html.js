@@ -1,9 +1,32 @@
-// HTML
+/**
+ * This file is responsible for building the DOM and updating DOM state.
+ *
+ * @author Tim Scanlin
+ */
 
 module.exports = function(options) {
   var forEach = [].forEach;
   var some = [].some;
   var body = document.body;
+  var currentlyHighlighting = true;
+  var SPACE_CHAR = ' ';
+
+  /**
+   * Create link and list elements.
+   * @param {Object} d
+   * @param {HTMLElement} container
+   * @return {HTMLElement}
+   */
+  function createEl(d, container) {
+    var link = container.appendChild(createLink(d));
+    if (d.children.length) {
+      var list = createList(d.isCollapsed);
+      d.children.forEach(function(child) {
+        createEl(child, list);
+      });
+      link.appendChild(list);
+    }
+  }
 
   /**
    * Render nested heading array data into a given selector.
@@ -16,25 +39,8 @@ module.exports = function(options) {
     var collapsed = false;
     var container = createList(collapsed);
 
-    /**
-     * Create link and list elements.
-     * @param {Object} d
-     * @param {HTMLElement} container
-     * @return {HTMLElement}
-     */
-    function createEl(d, container) {
-      var link = container.appendChild(createLink(d));
-      if (d.children.length) {
-        var list = createList(d.isCollapsed);
-        d.children.forEach(function(d) {
-          createEl(d, list);
-        });
-        link.appendChild(list);
-      }
-    }
-
     data.forEach(function(d) {
-      createEl(d, container)
+      createEl(d, container);
     });
 
     var parent = document.querySelector(selector);
@@ -57,13 +63,12 @@ module.exports = function(options) {
     var item = document.createElement('li');
     var a = document.createElement('a');
     a.textContent = data.textContent;
-    if (options.smoothScroll !== undefined) {
-      a.setAttribute('data-scroll', '');
-    }
+    // Property for smooth-scroll.
+    a.setAttribute('data-scroll', '');
     a.setAttribute('href', '#' + data.id);
     a.setAttribute('class', options.linkClass
-      + ' ' + 'node-name--' + data.nodeName
-      + ' ' + options.extraLinkClasses);
+      + SPACE_CHAR + 'node-name--' + data.nodeName
+      + SPACE_CHAR + options.extraLinkClasses);
     item.appendChild(a);
     return item;
   }
@@ -76,10 +81,10 @@ module.exports = function(options) {
   function createList(isCollapsed) {
     var list = document.createElement('ul');
     var classes =  options.listClass
-      + ' ' + options.extraListClasses;
+      + SPACE_CHAR + options.extraListClasses;
     if (isCollapsed) {
-      classes += ' ' + options.collapsibleClass;
-      classes += ' ' + options.isCollapsedClass;
+      classes += SPACE_CHAR + options.collapsibleClass;
+      classes += SPACE_CHAR + options.isCollapsedClass;
     }
     list.setAttribute('class', classes);
     return list;
@@ -98,9 +103,11 @@ module.exports = function(options) {
     }
 
     if (top > options.fixedSidebarOffset) {
-      tocEl.classList.add(options.positionFixedClass);
+      if (tocEl.className.indexOf(options.positionFixedClass) === -1) {
+        tocEl.className += SPACE_CHAR + options.positionFixedClass;
+      }
     } else {
-      tocEl.classList.remove(options.positionFixedClass);
+      tocEl.className = tocEl.className.split(SPACE_CHAR + options.positionFixedClass).join('');
     }
     return tocEl;
   }
@@ -118,7 +125,7 @@ module.exports = function(options) {
     var headings = headingsArray;
     var topHeader;
     // Using some instead of each so that we can escape early.
-    if (options._currentlyHighlighting
+    if (currentlyHighlighting
       && document.querySelector(options.tocSelector) !== null
       && headings.length > 0) {
       some.call(headings, function(heading, i) {
@@ -138,7 +145,7 @@ module.exports = function(options) {
       var tocLinks = document.querySelector(options.tocSelector)
         .querySelectorAll('.' + options.linkClass);
       forEach.call(tocLinks, function(tocLink) {
-        tocLink.classList.remove(options.activeLinkClass);
+        tocLink.className = tocLink.className.split(SPACE_CHAR + options.activeLinkClass).join('');
       });
 
       // Add the active class to the active tocLink.
@@ -146,19 +153,19 @@ module.exports = function(options) {
         .querySelector('.' + options.linkClass
           + '.node-name--' + topHeader.nodeName
           + '[href="#' + topHeader.id + '"]');
-      activeTocLink.classList.add(options.activeLinkClass);
+      activeTocLink.className += SPACE_CHAR + options.activeLinkClass;
 
       var tocLists = document.querySelector(options.tocSelector)
         .querySelectorAll('.' + options.listClass + '.' + options.collapsibleClass);
 
       // Collapse the other collapsible lists.
       forEach.call(tocLists, function(list) {
-        list.classList.add(options.isCollapsedClass);
+        list.className += SPACE_CHAR + options.isCollapsedClass;
       });
 
       // Expand the active link's collapsible list and its sibling if applicable.
       if (activeTocLink.nextSibling) {
-        activeTocLink.nextSibling.classList.remove(options.isCollapsedClass);
+        activeTocLink.nextSibling.className = activeTocLink.nextSibling.className.split(SPACE_CHAR + options.isCollapsedClass).join('');
       }
       removeCollapsedFromParents(activeTocLink.parentNode.parentNode);
     }
@@ -170,8 +177,8 @@ module.exports = function(options) {
    * @return {HTMLElement}
    */
   function removeCollapsedFromParents(element) {
-    if (element.classList.contains(options.collapsibleClass)) {
-      element.classList.remove(options.isCollapsedClass)
+    if (element.className.indexOf(options.collapsibleClass) !== -1) {
+      element.className = element.className.split(SPACE_CHAR + options.isCollapsedClass).join('');
       return removeCollapsedFromParents(element.parentNode.parentNode);
     }
     return element;
@@ -183,16 +190,19 @@ module.exports = function(options) {
    */
   function disableTocAnimation(event) {
     var target = event.target || event.srcElement;
-    if (!target.classList.contains(options.linkClass)) {
+    if (target.className.indexOf(options.linkClass) === -1) {
       return;
     }
     // Bind to tocLink clicks to temporarily disable highlighting
     // while smoothScroll is animating.
-    options._currentlyHighlighting = false;
+    currentlyHighlighting = false;
   }
 
+  /**
+   * Enable TOC Animation.
+   */
   function enableTocAnimation() {
-    options._currentlyHighlighting = true;
+    currentlyHighlighting = true;
   }
 
   return {
@@ -201,4 +211,4 @@ module.exports = function(options) {
     render: render,
     updateToc: updateToc
   };
-}
+};

@@ -1,6 +1,6 @@
 ---
 title: Test
-template: test
+testFile: true
 ---
 
 # Bacon

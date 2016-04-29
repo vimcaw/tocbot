@@ -1,10 +1,14 @@
 /**
- * tocbot
- * tocbot is similar to tocify (http://gregfranko.com/jquery.tocify.js/) (except its native w/ no need for jquery)
- * This creates a toble of contents based on HTML headings which allows users to easily jump to different sections.
+ * Tocbot
+ * Tocbot creates a toble of contents based on HTML headings on a page,
+ * this allows users to easily jump to different sections of the document.
+ * Tocbot was inspired by tocify (http://gregfranko.com/jquery.tocify.js/).
+ * The main differences are that it works natively without any need for jquery or jquery UI).
  *
  * @author Tim Scanlin
  */
+
+/* globals define */
 
 (function(root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -17,6 +21,9 @@
 })(typeof global !== 'undefined' ? global : this.window || this.global, function(root) {
 
   'use strict';
+
+  // Require smooth-scroll by default.
+  var smoothScroll = require('smooth-scroll');
 
   // Default options.
   var defaultOptions = require('./default-options.js');
@@ -39,38 +46,68 @@
   // From: https://github.com/Raynos/xtend
   var hasOwnProperty = Object.prototype.hasOwnProperty;
   function extend() {
-    var target = {}
+    var target = {};
     for (var i = 0; i < arguments.length; i++) {
-      var source = arguments[i]
+      var source = arguments[i];
       for (var key in source) {
         if (hasOwnProperty.call(source, key)) {
-          target[key] = source[key]
+          target[key] = source[key];
         }
       }
     }
-    return target
+    return target;
   }
 
-  function updateTocListener(headingsArray) {
+  // From: https://remysharp.com/2010/07/21/throttling-function-calls
+  function throttle(fn, threshhold, scope) {
+    threshhold || (threshhold = 250);
+    var last;
+    var deferTimer;
+    return function() {
+      var context = scope || this;
+      var now = +new Date;
+      var args = arguments;
+      if (last && now < last + threshhold) {
+        // hold on to it
+        clearTimeout(deferTimer);
+        deferTimer = setTimeout(function() {
+          last = now;
+          fn.apply(context, args);
+        }, threshhold);
+      } else {
+        last = now;
+        fn.apply(context, args);
+      }
+    };
+  }
+
+  function updateTocListener(headings) {
     return function updateToc() {
-      return buildHtml.updateToc(headingsArray);
-    }
+      return buildHtml.updateToc(headings);
+    };
   }
 
   /**
 	 * Destroy tocbot.
 	 */
   tocbot.destroy = function() {
-		// Remove event listeners
-    document.removeEventListener('scroll', updateTocListener(headingsArray));
-    document.removeEventListener('resize', updateTocListener(headingsArray));
+    // Clear HTML.
+    try {
+      document.querySelector(options.tocSelector).innerHTML = '';
+    } catch (e) {
+      throw new Error('Element not found: ' + options.tocSelector);
+    }
+
+		// Remove event listeners.
+    document.removeEventListener('scroll', this._scrollListener, false);
+    document.removeEventListener('resize', this._scrollListener, false);
     if (buildHtml) {
-      document.removeEventListener('click', buildHtml.disableTocAnimation);
+      document.removeEventListener('click', this._clickListener, false);
     }
 
     // Destroy smoothScroll if it exists.
-    if (options.smoothScroll) {
-      options.smoothScroll.destroy();
+    if (smoothScroll) {
+      smoothScroll.destroy();
     }
   };
 
@@ -107,22 +144,29 @@
     // Build nested headings array.
     var nestedHeadingsObj = parseContent.nestHeadingsArray(headingsArray);
     var nestedHeadings = nestedHeadingsObj.nest;
-    console.log(nestedHeadings)
 
     // Render.
     buildHtml.render(options.tocSelector, nestedHeadings);
 
     // Update Sidebar and bind listeners.
-    buildHtml.updateToc(headingsArray);
-    document.addEventListener('scroll', updateTocListener(headingsArray));
-    document.addEventListener('resize', updateTocListener(headingsArray));
+    // buildHtml.updateToc(headingsArray);
+    this._scrollListener = throttle(function() {
+      buildHtml.updateToc(headingsArray);
+    }, options.throttleTimeout);
+    this._scrollListener();
+    document.addEventListener('scroll', this._scrollListener, false);
+    document.addEventListener('resize', this._scrollListener, false);
 
     // Bind click listeners to disable animation.
-    document.addEventListener('click', buildHtml.disableTocAnimation);
+    this._clickListener = throttle(function(event) {
+      buildHtml.disableTocAnimation(event); // Save reference so event is created / removed properly.
+      buildHtml.updateToc(headingsArray);
+    }, options.throttleTimeout);
+    document.addEventListener('click', this._clickListener, false);
 
     // Initialize smoothscroll if it exists.
-    if (options.smoothScroll) {
-      this.smoothScroll = options.smoothScroll.init(extend(options.smoothScrollOptions, {
+    if (smoothScroll) {
+      this.smoothScroll = smoothScroll.init(extend(options.smoothScrollOptions, {
         callback: buildHtml.enableTocAnimation
       }));
     }

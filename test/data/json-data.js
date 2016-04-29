@@ -5,8 +5,11 @@ module.exports = function() {
       "children": [
         {
           "id": "brisket",
-          "children": [],
+          "children": [
+
+          ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Brisket",
           "isCollapsed": true
         },
@@ -19,11 +22,13 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Pork",
               "isCollapsed": true
             }
           ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Flank",
           "isCollapsed": true
         },
@@ -36,6 +41,7 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Drumstick",
               "isCollapsed": true
             },
@@ -45,6 +51,7 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Pastrami",
               "isCollapsed": true
             },
@@ -54,16 +61,19 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Meatloaf",
               "isCollapsed": true
             }
           ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Capicola",
           "isCollapsed": true
         }
       ],
       "nodeName": "H1",
+      "headingLevel": 1,
       "textContent": "Bacon",
       "isCollapsed": true
     },
@@ -72,15 +82,21 @@ module.exports = function() {
       "children": [
         {
           "id": "pork-belly",
-          "children": [],
+          "children": [
+
+          ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Pork belly",
           "isCollapsed": true
         },
         {
           "id": "bresaola-shankle",
-          "children": [],
+          "children": [
+
+          ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Bresaola shankle",
           "isCollapsed": true
         },
@@ -93,6 +109,7 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Turducken",
               "isCollapsed": true
             },
@@ -102,6 +119,7 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Alcatra",
               "isCollapsed": true
             },
@@ -111,40 +129,39 @@ module.exports = function() {
 
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Chuck",
               "isCollapsed": true
             },
             {
               "id": "spare-ribs",
               "children": [
-                {
-                  "id": "chuck-venison",
-                  "children": [
 
-                  ],
-                  "nodeName": "H5",
-                  "textContent": "Chuck venison",
-                  "isCollapsed": true
-                }
               ],
               "nodeName": "H3",
+              "headingLevel": 3,
               "textContent": "Spare ribs",
               "isCollapsed": true
             }
           ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Cow pancetta",
           "isCollapsed": true
         },
         {
           "id": "swine-venison-chicken",
-          "children": [],
+          "children": [
+
+          ],
           "nodeName": "H2",
+          "headingLevel": 2,
           "textContent": "Swine venison chicken",
           "isCollapsed": true
         }
       ],
       "nodeName": "H1",
+      "headingLevel": 1,
       "textContent": "Sirloin",
       "isCollapsed": true
     },
@@ -153,15 +170,19 @@ module.exports = function() {
       "children": [
         {
           "id": "kevin-capicola-shank",
-          "children": [],
+          "children": [
+
+          ],
           "nodeName": "H3",
+          "headingLevel": 3,
           "textContent": "Kevin capicola shank",
           "isCollapsed": true
         }
       ],
       "nodeName": "H1",
+      "headingLevel": 1,
       "textContent": "Landjaeger",
       "isCollapsed": true
     }
   ];
-}
+};

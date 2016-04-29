@@ -190,7 +190,7 @@ module.exports = function(options) {
    */
   function disableTocAnimation(event) {
     var target = event.target || event.srcElement;
-    if (!target.className.indexOf(options.linkClass) !== -1) {
+    if (target.className.indexOf(options.linkClass) === -1) {
       return;
     }
     // Bind to tocLink clicks to temporarily disable highlighting

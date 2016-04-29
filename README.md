@@ -166,9 +166,6 @@ tocbot.refresh()
 
 ## Changelog
 
-### Unreleased
-...
-
 ### v2.0
 
 #### Added
@@ -206,7 +203,9 @@ If you want to open a pull request just fork the repo but please make sure all t
 
 ### Running Tests
 
-`npm test`
+```bash
+npm test
+```
 
 
 ## License

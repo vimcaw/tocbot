@@ -1,6 +1,6 @@
 {
   "name": "tocbot",
-  "version": "1.0.6",
+  "version": "2.0.0",
   "description": "Generate a table of contents based on the heading structure of a html document.",
   "main": "src/js/index.js",
   "scripts": {
@@ -65,10 +65,10 @@
     "mocha": "^2.3.4",
     "node-sass": "^3.4.2",
     "onchange": "^2.2.0",
-    "optimizely-oui": "^9.0.8",
+    "optimizely-oui": "^11.3.0",
     "parallelshell": "^2.0.0",
-    "react": "^0.14.8",
-    "react-dom": "^0.14.8",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
     "uglify-js": "^2.6.2",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"

@@ -8,6 +8,8 @@ Tocbot builds a table of contents (TOC) from headings in an HTML document. This 
 
 You can use npm to install it or include the script on the page with HTML.
 
+[**Download it here**](https://github.com/tscanlin/tocbot/releases/)
+
 
 ### Include JS
 
@@ -65,7 +67,9 @@ tocbot.refresh();
 
 ## Requirements
 
-This library uses **vanilla javascript** and is only about 500 lines unminified. The only dependency this script has is [**Smooth Scroll**](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies). This script works in **all modern browsers and IE 8+**. To get support for older versions of IE use polyfills.
+This library uses **vanilla javascript** and is only about 500 lines of JavaScript and less than 80 lines of CSS unminified. The only dependency this script has is [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies).
+
+This script works in **all modern browsers and IE 7+**.
 
 Make sure rendered headings have id attributes, some markdown libraries (like [marked](https://github.com/chjj/marked)) already do this.
 

@@ -45,7 +45,7 @@ module.exports = React.createClass({
           <div className="try-it-container push-triple--left transition--300">
             <label className="label" htmlFor="try-it-checkbox">
               <span className="button button--highlight is-closed">
-                Try it now!
+                Try it
               </span>
               <span className="button button--highlight is-open">
                 Hide

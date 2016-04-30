@@ -96,20 +96,19 @@ module.exports = function(options) {
    */
   function updateFixedSidebarClass() {
     var top = document.documentElement.scrollTop || body.scrollTop;
-    var tocEl = document.querySelector(options.tocSelector);
+    var posFixedEl = document.querySelector(options.positionFixedSelector);
 
     if (options.fixedSidebarOffset === 'auto') {
       options.fixedSidebarOffset = document.querySelector(options.tocSelector).offsetTop;
     }
 
     if (top > options.fixedSidebarOffset) {
-      if (tocEl.className.indexOf(options.positionFixedClass) === -1) {
-        tocEl.className += SPACE_CHAR + options.positionFixedClass;
+      if (posFixedEl.className.indexOf(options.positionFixedClass) === -1) {
+        posFixedEl.className += SPACE_CHAR + options.positionFixedClass;
       }
     } else {
-      tocEl.className = tocEl.className.split(SPACE_CHAR + options.positionFixedClass).join('');
+      posFixedEl.className = posFixedEl.className.split(SPACE_CHAR + options.positionFixedClass).join('');
     }
-    return tocEl;
   }
 
   /**
@@ -119,7 +118,9 @@ module.exports = function(options) {
     var top = document.documentElement.scrollTop || body.scrollTop;
 
     // Add fixed class at offset;
-    updateFixedSidebarClass();
+    if (options.positionFixedSelector) {
+      updateFixedSidebarClass();
+    }
 
     // Get the top most heading currently visible on the page so we know what to highlight.
     var headings = headingsArray;
@@ -160,7 +161,10 @@ module.exports = function(options) {
 
       // Collapse the other collapsible lists.
       forEach.call(tocLists, function(list) {
-        list.className += SPACE_CHAR + options.isCollapsedClass;
+        var collapsedClass = SPACE_CHAR + options.isCollapsedClass;
+        if (list.className.indexOf(collapsedClass) === -1) {
+          list.className += SPACE_CHAR + options.isCollapsedClass;
+        }
       });
 
       // Expand the active link's collapsible list and its sibling if applicable.

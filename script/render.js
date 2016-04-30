@@ -64,9 +64,7 @@ function extend() {
   return target;
 }
 
-function processJSON(string) {
-  var json = JSON.parse(string);
-
+function processJSON(json) {
   if (pathMap) {
     json = extend(json, pathMap[json.filename]);
   }
@@ -98,7 +96,20 @@ function parseArguments(argv) {
   process.stdin.on('readable', function() {
     var chunk = process.stdin.read();
     if (chunk !== null) {
-      processJSON(chunk);
+      var json;
+      try {
+        json = JSON.parse(chunk);
+        processJSON(json);
+      } catch (e) {
+        console.log('Multiple files were chunked together.')
+        try {
+          var array = '[' + chunk.split('}{').join('},{') + ']';
+          json = JSON.parse(array);
+          json.forEach(function(item) {
+            processJSON(item);
+          })
+        } catch (e) {}
+      }
     }
   });
   process.stdin.on('end', function() {

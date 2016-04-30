@@ -41,10 +41,11 @@ CSS is used for expanding & collapsing groupings and some basic styling.
 
 OR
 
-If you installed it with npm and use sass / postcss you might try importing the styles from the folder in 'node_modules', [see the includePath docs for more info](https://github.com/sass/node-sass#includepaths)
+If you installed it with npm and use sass / postcss you might try importing the styles from 'node_modules', [see the includePath option documentation for more info](https://github.com/sass/node-sass#includepaths)
 
 ```scss
-@import 'tocbot/src/scss/tocbot';
+@import 'tocbot/src/scss/tocbot-core';
+@import 'tocbot/src/scss/tocbot-default-theme';
 ```
 
 
@@ -177,10 +178,13 @@ tocbot.refresh()
 
 ## Changelog
 
-### Unreleased
 
+### v2.1
+
+#### Added
 - [minor] add `positionFixedSelector` option to specify the element to add a fixed position class to
 - [dev] use travis-ci for builds
+
 
 ### v2.0
 
@@ -205,6 +209,7 @@ tocbot.refresh()
 - [dev] switched from gulp to npm scripts
 - [dev] switched from browserify to webpack
 - [dev] switched from swig to react for building the documentation
+
 
 ### v1.0
 - First published source code

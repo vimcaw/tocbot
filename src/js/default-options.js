@@ -49,6 +49,8 @@ module.exports = {
   // Timeout between events firing to make sure it's
   // not too rapid (for performance reasons).
   throttleTimeout: 50,
+  // Element to add the positionFixedClass to.
+  positionFixedSelector: null,
   // Fixed position class to add to make sidebar fixed after scrolling
   // down past the fixedSidebarOffset.
   positionFixedClass: 'is-position-fixed',

@@ -73,7 +73,7 @@ tocbot.refresh();
 
 ## Requirements
 
-This library uses **vanilla javascript** and is only about 500 lines of JavaScript and less than 80 lines of CSS unminified. The only dependency this script has is [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies).
+This library uses **vanilla JavaScript**. It is less than 400 bytes of CSS and about 4Kb of JavaScript (minified and gzipped). The only dependency this script has is [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll) (which has no dependencies).
 
 This script works in **all modern browsers and IE 7+**.
 
@@ -177,6 +177,13 @@ tocbot.refresh()
 
 
 ## Changelog
+
+
+### v2.1.1
+
+#### Changed
+- [patch] update file size estimates in the docs
+- [patch] switch from throwing errors to using console.warn
 
 
 ### v2.1

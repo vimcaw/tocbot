@@ -171,7 +171,6 @@ tocbot.refresh()
 ## Roadmap
 
 - More tests
-- Blog post to announce it
 - Option for changing the url hash on scroll
 - React.js support
 

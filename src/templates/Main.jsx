@@ -24,7 +24,7 @@ module.exports = React.createClass({
               Tocbot
             </h1>
             <h3 className="max-width--large anchor--middle line--tight skip-toc soft flush--top hard--top">
-              Generate a table of contents based on the heading structure for an html document.
+              Generate a table of contents based on the heading structure of an html document.
             </h3>
             <div className="soft-triple--left push-triple--left">
               <iframe src="https://ghbtns.com/github-btn.html?user=tscanlin&repo=tocbot&type=star&count=true&size=large" frameBorder="0" scrolling="0" width="160px" height="30px"></iframe>

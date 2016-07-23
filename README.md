@@ -180,6 +180,12 @@ tocbot.refresh()
 ## Changelog
 
 
+### v2.1.3
+
+#### Added
+- [patch] `listItemClass` option to set classes on list items (#12)
+
+
 ### v2.1.2
 
 #### Fixed

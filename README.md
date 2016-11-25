@@ -183,6 +183,12 @@ tocbot.refresh()
 ## Changelog
 
 
+### v2.2.0
+
+#### Added
+- [minor] Added bower.json to provide bower support.
+
+
 ### v2.1.5
 
 #### Added

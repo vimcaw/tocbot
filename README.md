@@ -183,6 +183,12 @@ tocbot.refresh()
 ## Changelog
 
 
+### v2.2.1
+
+#### Added
+- [patch] Made bower.json reference unminified file.
+
+
 ### v2.2.0
 
 #### Added

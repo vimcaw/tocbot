@@ -281,6 +281,15 @@ npm test
 ```
 
 
+## Steps to publish
+
+- Push a branch and open a pull request
+- run `npm version <patch|minor|major>`
+- Update readme.md with notes
+- Merge the pull request
+- run `npm publish`
+
+
 ## License
 
 [MIT]('http://opensource.org/licenses/MIT')

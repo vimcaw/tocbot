@@ -288,6 +288,7 @@ npm test
 - Update readme.md with notes
 - Merge the pull request
 - run `npm publish`
+- make release on github
 
 
 ## License

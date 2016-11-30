@@ -2,7 +2,7 @@
   "name": "tocbot",
   "description": "Generate a table of contents based on the heading structure of a html document.",
   "main": [
-    "dist/tocbot.min.js",
+    "dist/tocbot.js",
     "dist/tocbot.css"
   ],
   "authors": [

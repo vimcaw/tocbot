@@ -189,6 +189,12 @@ tocbot.refresh()
 ## Changelog
 
 
+### v2.2.2
+
+#### Changed
+- [patch] Removed updateUrl option from docs since it doesn't work, see: [smooth-scroll #283](https://github.com/cferdinandi/smooth-scroll/pull/283).
+
+
 ### v2.2.1
 
 #### Added

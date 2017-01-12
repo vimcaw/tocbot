@@ -130,8 +130,7 @@ collapseDepth: 0,
 smoothScrollOptions: {
   easing: 'easeInOutCubic',
   offset: 0,
-  speed: 300, // animation duration.
-  updateURL: true
+  speed: 300 // animation duration.
 },
 // Headings offset between the headings and the top of the document.
 headingsOffset: 0,
@@ -188,6 +187,12 @@ tocbot.refresh()
 
 
 ## Changelog
+
+
+### v2.2.2
+
+#### Changed
+- [patch] Removed updateUrl option from docs since it doesn't work, see: [smooth-scroll #283](https://github.com/cferdinandi/smooth-scroll/pull/283).
 
 
 ### v2.2.1

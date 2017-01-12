@@ -130,8 +130,7 @@ collapseDepth: 0,
 smoothScrollOptions: {
   easing: 'easeInOutCubic',
   offset: 0,
-  speed: 300, // animation duration.
-  updateURL: true
+  speed: 300 // animation duration.
 },
 // Headings offset between the headings and the top of the document.
 headingsOffset: 0,

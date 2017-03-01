@@ -190,6 +190,12 @@ tocbot.refresh()
 ## Changelog
 
 
+### v2.3.1
+
+#### Fixed
+- [patch] Fix for clicking svgs to not throw an exception. [#33](https://github.com/tscanlin/tocbot/issues/33)
+
+
 ### v2.3.0
 
 #### Changed

@@ -190,6 +190,13 @@ tocbot.refresh()
 ## Changelog
 
 
+### v2.3.0
+
+#### Changed
+- [patch] Fix for proper header not being selected due to sub-pixel rounding issues. [#31](https://github.com/tscanlin/tocbot/pull/31)
+- [dev] Updated test commands to be able to selectively run tests and debug them more easily. [#29](https://github.com/tscanlin/tocbot/pull/29)
+
+
 ### v2.2.2
 
 #### Changed

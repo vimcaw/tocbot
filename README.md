@@ -131,7 +131,8 @@ collapseDepth: 0,
 smoothScrollOptions: {
   easing: 'easeInOutCubic',
   offset: 0,
-  speed: 300 // animation duration.
+  speed: 300, // animation duration.
+  callback: function(anchor, toggle) { } // callback after link is scrolled to.
 },
 // Headings offset between the headings and the top of the document.
 headingsOffset: 0,
@@ -188,6 +189,13 @@ tocbot.refresh()
 
 
 ## Changelog
+
+
+### v2.3.2
+
+#### Fixed
+- [patch] Fix for smooth-scroll callback to work properly. [#36](https://github.com/tscanlin/tocbot/issues/36)
+- [patch] Fix for cdnjs to update properly. [#35](https://github.com/tscanlin/tocbot/issues/35)
 
 
 ### v2.3.1

@@ -17,7 +17,6 @@ function isNode() {
 
 // TODO: Fix this so it works well locally and in prod.
 function getPathPrefix(path) {
-  console.log(isNode());
   return path.indexOf('http') !== -1
     ? path
     : isLive() ? '/tocbot' + path : path

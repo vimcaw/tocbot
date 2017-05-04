@@ -1,10 +1,3 @@
-function isNode() {
-  return typeof window === 'undefined'
-}
-
-function getPathPrefix() {
-  return isNode() ? '/tocbot' : ''
-}
 
 export default {
   title: 'Tocbot',
@@ -12,17 +5,17 @@ export default {
   description: 'Tocbot - Generate a table of contents based on the heading structure of an html document',
   stylesheets: [
     'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css',
-    getPathPrefix() + '/static/css/tocbot.css',
-    getPathPrefix() + '/static/css/styles.css',
+    '/static/css/tocbot.css',
+    '/static/css/styles.css',
   ],
   topLinks: [
     {
       text: 'About',
-      href: getPathPrefix() + '/'
+      href: '/'
     },
     {
       text: 'Changelog',
-      href: getPathPrefix() + '/changelog'
+      href: '/changelog'
     },
     {
       text: 'Github',

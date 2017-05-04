@@ -12,13 +12,20 @@ function Hero(props) {
         <div className="absolute top-0 right-0">
           {props.topLinks && props.topLinks.length > 0 && (
             props.topLinks.map((link, i) => {
-              return (
-                <a className="dib f6 white no-underline pa1 ma1"
-                  href={props.getPathPrefix(link.href)} key={i}>
-                  {link.text}
-                  {/* <Link prefetch href={link.href} key={i}></Link> */}
-                </a>
-              )
+              return props.isLive()
+                ? (
+                  <a className="dib f6 white no-underline pa1 ma1"
+                    href={props.getPathPrefix(link.href)} key={i}>
+                    {link.text}
+                  </a>
+                ) : (
+                  <Link prefetch href={link.href} key={i}>
+                    <a className="dib f6 white no-underline pa1 ma1"
+                    href={link.href} key={i}>
+                    {link.text}
+                    </a>
+                  </Link>
+                )
             })
           )}
         </div>

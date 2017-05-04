@@ -6,13 +6,15 @@ import Hero from './Hero'
 import Tocbot from './Tocbot'
 import Tracking from './Tracking'
 
-function getPathPrefix(path) {
-  const isLive = typeof window !== 'undefined'
-    && window.location.hostname.indexOf('github.io') !== -1
-  return path.indexOf('http') !== -1 && isLive
-    ? '/tocbot' + path
-    : path
+export function isLive() {
+  return typeof window !== 'undefined'
+      && window.location.hostname.indexOf('github.io') !== -1
+}
 
+function getPathPrefix(path) {
+  return path.indexOf('http') !== -1
+    ? path
+    : isLive() ? '/tocbot' + path : path
 }
 
 function Template(props) {
@@ -33,6 +35,7 @@ function Template(props) {
           user={props.user}
           repo={props.repo}
           topLinks={props.topLinks}
+          isLive={isLive}
           getPathPrefix={getPathPrefix}
         />
 

@@ -6,16 +6,12 @@ import Hero from './Hero'
 import Tocbot from './Tocbot'
 import Tracking from './Tracking'
 
-function getPathPrefix() {
-  return typeof window !== 'undefined' && window.location.hostname.indexOf('github.io') !== -1
-    ? nextConfig.assetPrefix
-    : ''
-}
-
-function getStyleSheetPath(stylesheet) {
-  return stylesheet.indexOf('http') !== -1
-    ? stylesheet
-    : getPathPrefix() + stylesheet
+function getPathPrefix(path) {
+  return typeof window !== 'undefined'
+    && window.location.hostname.indexOf('github.io') !== -1
+    && path.indexOf('http') !== -1
+    ? nextConfig.assetPrefix + path
+    : path
 }
 
 function Template(props) {
@@ -26,7 +22,7 @@ function Template(props) {
         <meta name="description" content={props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
-          return <link key={i} rel="stylesheet" href={getStyleSheetPath(stylesheet)} />
+          return <link key={i} rel="stylesheet" href={getPathPrefix(stylesheet)} />
         })}
       </Head>
       <main>
@@ -36,6 +32,7 @@ function Template(props) {
           user={props.user}
           repo={props.repo}
           topLinks={props.topLinks}
+          getPathPrefix={getPathPrefix}
         />
 
         <div className="mw7 center dark-gray lh-copy">

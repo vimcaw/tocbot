@@ -1,5 +1,5 @@
 module.exports = {
-  assetPath: 'https://github.com/tscanlin/tocbot/',
+  assetPath: 'http://tscanlin.github.io/tocbot/',
   webpack: (webpackConfig) => {
     return Object.assign({}, webpackConfig)
   }

@@ -17,9 +17,10 @@ function isNode() {
 
 // TODO: Fix this so it works well locally and in prod.
 function getPathPrefix(path) {
+  console.log(isNode());
   return path.indexOf('http') !== -1
     ? path
-    : isNode() || isLive() ? '/tocbot' + path : path
+    : isLive() ? '/tocbot' + path : path
 }
 
 function Template(props) {
@@ -30,6 +31,7 @@ function Template(props) {
         <meta name="description" content={props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
+          console.log(getPathPrefix(stylesheet));
           return <link key={i} rel="stylesheet" href={getPathPrefix(stylesheet)} />
         })}
       </Head>

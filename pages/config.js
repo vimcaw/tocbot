@@ -1,4 +1,10 @@
-import nextConfig from '../next.config.js'
+function isNode() {
+  return typeof window === 'undefined'
+}
+
+function getPathPrefix() {
+  return isNode() ? '/tocbot' : ''
+}
 
 export default {
   title: 'Tocbot',
@@ -6,17 +12,17 @@ export default {
   description: 'Tocbot - Generate a table of contents based on the heading structure of an html document',
   stylesheets: [
     'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css',
-    '/static/css/tocbot.css',
-    '/static/css/styles.css',
+    getPathPrefix() + '/static/css/tocbot.css',
+    getPathPrefix() + '/static/css/styles.css',
   ],
   topLinks: [
     {
       text: 'About',
-      href: '/'
+      href: getPathPrefix() + '/'
     },
     {
       text: 'Changelog',
-      href: '/changelog'
+      href: getPathPrefix() + '/changelog'
     },
     {
       text: 'Github',

@@ -10,7 +10,7 @@ function getPathPrefix(path) {
   return typeof window !== 'undefined'
     && window.location.hostname.indexOf('github.io') !== -1
     && path.indexOf('http') !== -1
-    ? nextConfig.assetPrefix + path
+    ? '/tocbot' + path
     : path
 }
 

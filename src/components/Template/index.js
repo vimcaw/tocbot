@@ -12,6 +12,12 @@ function getPathPrefix() {
     : ''
 }
 
+function getStyleSheetPath(stylesheet) {
+  return stylesheet.indexOf('http') !== -1
+    ? stylesheet
+    : getPathPrefix() + stylesheet
+}
+
 function Template(props) {
   return (
     <div>
@@ -20,7 +26,7 @@ function Template(props) {
         <meta name="description" content={props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
-          return <link key={i} rel="stylesheet" href={getPathPrefix() + stylesheet} />
+          return <link key={i} rel="stylesheet" href={getStyleSheetPath(stylesheet)} />
         })}
       </Head>
       <main>

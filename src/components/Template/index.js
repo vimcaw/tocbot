@@ -6,15 +6,20 @@ import Hero from './Hero'
 import Tocbot from './Tocbot'
 import Tracking from './Tracking'
 
-export function isLive() {
-  return typeof window !== 'undefined'
+function isLive() {
+  return !isNode()
       && window.location.hostname.indexOf('github.io') !== -1
 }
 
+function isNode() {
+  return typeof window === 'undefined'
+}
+
+// TODO: Fix this so it works well locally and in prod.
 function getPathPrefix(path) {
   return path.indexOf('http') !== -1
     ? path
-    : isLive() ? '/tocbot' + path : path
+    : isNode() || isLive() ? '/tocbot' + path : path
 }
 
 function Template(props) {

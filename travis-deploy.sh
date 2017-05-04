@@ -40,7 +40,7 @@ git commit -am "Adding dist files: $COMMIT_MESSAGE"
 git push --quiet "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPO}.git" HEAD:master > /dev/null 2>&1
 
 # Deploy.
-cd build
+cd site
 git init
 git add .
 git commit -m "Deploy: $COMMIT_MESSAGE"

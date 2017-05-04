@@ -1,3 +1,5 @@
+import nextConfig from '../next.config.js'
+
 export default {
   title: 'Tocbot',
   subtitle: 'Generate a table of contents based on the heading structure of an html document',

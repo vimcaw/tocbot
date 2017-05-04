@@ -1,9 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Head from 'next/head'
+import nextConfig from '../../../next.config.js'
 import Hero from './Hero'
 import Tocbot from './Tocbot'
 import Tracking from './Tracking'
+
+function getPathPrefix() {
+  return typeof window !== 'undefined' && window.location.hostname.indexOf('github.io') !== -1
+    ? nextConfig.assetPrefix
+    : ''
+}
 
 function Template(props) {
   return (
@@ -13,7 +20,7 @@ function Template(props) {
         <meta name="description" content={props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
-          return <link key={i} rel="stylesheet" href={stylesheet} />
+          return <link key={i} rel="stylesheet" href={getPathPrefix() + stylesheet} />
         })}
       </Head>
       <main>

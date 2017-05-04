@@ -13,11 +13,10 @@ function Hero(props) {
           {props.topLinks && props.topLinks.length > 0 && (
             props.topLinks.map((link, i) => {
               return (
-                <Link prefetch href={link.href} key={i}>
-                  <a className="dib f6 white no-underline pa1 ma1">
-                    {link.text}
-                  </a>
-                </Link>
+                <a className="dib f6 white no-underline pa1 ma1">
+                  {link.text}
+                  {/* <Link prefetch href={link.href} key={i}></Link> */}
+                </a>
               )
             })
           )}

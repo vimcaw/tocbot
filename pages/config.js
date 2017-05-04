@@ -16,7 +16,7 @@ export default {
     },
     {
       text: 'Changelog',
-      href: '/changelog'
+      href: '/changelog/'
     },
     {
       text: 'Github',

@@ -7,11 +7,12 @@ import Tocbot from './Tocbot'
 import Tracking from './Tracking'
 
 function getPathPrefix(path) {
-  return typeof window !== 'undefined'
+  const isLive = typeof window !== 'undefined'
     && window.location.hostname.indexOf('github.io') !== -1
-    && path.indexOf('http') !== -1
+  return path.indexOf('http') !== -1 && isLive
     ? '/tocbot' + path
     : path
+
 }
 
 function Template(props) {

@@ -26,7 +26,7 @@
     "test:debug": "node-debug _mocha --timeout 0 test/index.js",
     "test:watch": "mocha --watch test/index.js",
     "next": "next",
-    "next-build": "next build",
+    "next-build": "next build ",
     "next-export": "next export",
     "next-start": "next start"
   },

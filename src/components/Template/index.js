@@ -30,7 +30,6 @@ function Template(props) {
         <meta name="description" content={props.description} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
-          console.log(getPathPrefix(stylesheet));
           return <link key={i} rel="stylesheet" href={getPathPrefix(stylesheet)} />
         })}
       </Head>

@@ -47,7 +47,7 @@ function Template(props) {
 
         <div className="mw7 center dark-gray lh-copy">
           <input id="toc" type="checkbox" className="dn" />
-          <label className="toc-icon relative z-2 f6 lh-solid bg-near-white b--silver pa1 ma1 ba br1" htmlFor="toc">
+          <label className="toc-icon relative pointer z-2 f6 lh-solid bg-near-white b--silver pa1 ma1 ba br1" htmlFor="toc">
             Menu
           </label>
           <nav className="toc toc-right js-toc relative z-1 transition--300 absolute pa4"></nav>

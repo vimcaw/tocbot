@@ -24,7 +24,7 @@ function getPathPrefix(path) {
 
 function Template(props) {
   return (
-    <div>
+    <div className="page-content">
       <Head>
         <title>{props.title}</title>
         <meta name="description" content={props.description} />
@@ -32,6 +32,7 @@ function Template(props) {
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
           return <link key={i} rel="stylesheet" href={getPathPrefix(stylesheet)} />
         })}
+        <style>{`.page-content {display:none}`}</style>
       </Head>
       <main>
         <Hero

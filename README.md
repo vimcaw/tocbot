@@ -48,12 +48,6 @@ If you installed it with npm and use sass / postcss you might try importing the 
 @import 'tocbot/src/scss/tocbot-default-theme';
 ```
 
-**NOTE:** With version 3.X.X+ the following CSS is included in tocbot.css which uses native browser smooth-scrolling when available (currently available in Firefox 36+ and Chrome 49+):
-
-```css
-body, .smooth-container { scroll-behavior: smooth }
-```
-
 
 ### Usage
 

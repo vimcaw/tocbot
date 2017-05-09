@@ -1,9 +1,3 @@
-/**
- * Tocbot default options should all live in this file.
- *
- * @author Tim Scanlin
- */
-
 module.exports = {
   // Where to render the table of contents.
   tocSelector: '.js-toc',
@@ -11,7 +5,6 @@ module.exports = {
   contentSelector: '.js-toc-content',
   // Which headings to grab inside of the contentSelector element.
   headingSelector: 'h1, h2, h3',
-
   // Headings that match the ignoreSelector will be skipped.
   ignoreSelector: '.js-toc-ignore',
   // Main class to add to links.
@@ -38,14 +31,12 @@ module.exports = {
   // The sections that are hidden will open
   // and close as you scroll to headings within them.
   collapseDepth: 0,
-  // smooth-scroll options object, see docs at:
-  // https://github.com/cferdinandi/smooth-scroll
-  smoothScrollOptions: {
-    easing: 'easeInOutCubic',
-    offset: 0,
-    speed: 300, // animation duration.
-    callback: function(anchor, toggle) { } // callback after link is scrolled to.
-  },
+  // Smooth scrolling enabled.
+  smoothScroll: true,
+  // Smooth scroll duration.
+  smoothScrollDuration: 420,
+  // Callback for scroll end (requires: smoothScroll).
+  scrollEndCallback: function (e) {},
   // Headings offset between the headings and the top of the document.
   headingsOffset: 0,
   // Timeout between events firing to make sure it's
@@ -63,4 +54,4 @@ module.exports = {
   // includeHtml can be set to true to include the HTML markup from the
   // heading node instead of just including the textContent.
   includeHtml: false
-};
+}

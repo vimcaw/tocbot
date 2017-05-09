@@ -2,6 +2,17 @@
 
 
 
+### 3.X.X
+
+#### 3.0.0
+
+##### **BREAKING CHANGE**
+- Switched from using smooth-scroll to [zenzcroll](https://github.com/zengabor/zenscroll) for reasons.. [40](https://github.com/tscanlin/tocbot/issues/40)
+
+##### Added
+- Using [standard](https://github.com/feross/standard) for code styling now.
+
+
 ### 2.X.X
 
 #### 2.4.0

@@ -11,20 +11,20 @@ export default class MyDocument extends Document {
   //   return { html, head, styles }
   // }
 
-  render () {
-    return (
-    //  <html>
-    //    <Head>
-    //      <style>{`body { margin: 0 } /* custom! */`}</style>
-    //    </Head>
-    //    <body className="custom_class">
-    //      {this.props.customValue}
-    //      <Main />
-    //      <NextScript />
-    //    </body>
-    //  </html>
-    )
-  }
+  // render () {
+  //   return (
+  //   //  <html>
+  //   //    <Head>
+  //   //      <style>{`body { margin: 0 } /* custom! */`}</style>
+  //   //    </Head>
+  //   //    <body className="custom_class">
+  //   //      {this.props.customValue}
+  //   //      <Main />
+  //   //      <NextScript />
+  //   //    </body>
+  //   //  </html>
+  //   )
+  // }
 }
 
 //

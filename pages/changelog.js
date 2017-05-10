@@ -2,7 +2,7 @@ import React from 'react'
 import Template from '../src/components/Template'
 import TryIt from '../src/components/Template/TryIt'
 
-import CONFIG from './config.js'
+import CONFIG from './_config.js'
 import PAGE_JSON from './_CHANGELOG.json'
 
 const Index = (props) => {

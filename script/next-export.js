@@ -2,10 +2,9 @@
 const { resolve, join } = require('path')
 const { existsSync } = require('fs')
 const parseArgs = require('minimist')
-const Build = require('next/dist/server/build')
+const Build = require('next/dist/server/build/index').default
 const Export = require('./export')
 const { printAndExit } = require('next/dist/lib/utils')
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'production'
 
 const argv = parseArgs(process.argv.slice(2), {

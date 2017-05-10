@@ -67,6 +67,7 @@
     "babel-runtime": "^6.23.0",
     "chai": "^3.5.0",
     "eslint": "^3.19.0",
+    "fs-promise": "^2.0.3",
     "gh-pages": "^0.12.0",
     "globby": "^6.1.0",
     "js-yaml": "^3.8.3",

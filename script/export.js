@@ -8,6 +8,7 @@ const glob = require('glob-promise')
 const mkdir = require('mkdirp-then')
 const App = require('next/dist/lib/app').default
 const fs = require('fs-promise')
+const nextConfig = require('../next.config.js')
 
 
 /**
@@ -22,6 +23,8 @@ module.exports = function Export () {
   const nextPath = join(dir, '.next')
   const pageDir = join(nextPath, 'dist', 'pages')
   const exportPath = join(dir, out)
+  const buildId = Date.now()
+  const buildStats = {}
 
   glob(join(pageDir, '**', '*.js')).then((pages) => {
     let errorPage
@@ -38,7 +41,8 @@ module.exports = function Export () {
     const Document = require(join(nextPath, 'dist', 'pages', '_document.js')).default
     mkdir(exportPath, (err, d) => {
       fs.copy(join(nextPath, 'app.js'), join(exportPath, 'app.js')) // await
-      fs.copy(join(nextPath, 'bundles'), join(exportPath, 'bundles')) // await
+      // fs.copy(join(nextPath, 'bundles'), join(exportPath, 'bundles')) // await
+      fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')) // await
     })
 
     // build all the pages
@@ -72,19 +76,24 @@ module.exports = function Export () {
           return { html, head, errorHtml }
         }
 
+        console.log(pageName);
+        // buildStats[pageName] = {
+        //   hash: buildId
+        // }
 
         loadGetStaticInitialProps(Document, Object.assign(ctx, { renderPage })).then((docProps) => {
           const doc = createElement(Document, Object.assign({
             __NEXT_DATA__: {
+              assetPrefix: nextConfig.assetPrefix,
               component: app,
               errorComponent: createElement(errorComponent),
               props: componentProps,
               pathname,
               query,
 
-              // buildId,
+              buildId,
               // buildStats,
-              // exported: true,
+              exported: true,
               // err: (err && dev) ? err : null
             },
             dev,

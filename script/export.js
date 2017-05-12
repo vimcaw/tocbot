@@ -1,19 +1,18 @@
 const { join, basename, dirname, extname, relative, resolve } = require('path')
 const { renderToString, renderToStaticMarkup } = require('react-dom/server')
-const Head = require('next/dist/lib/head') // , { defaultHead }
+const Head = require('next/dist/lib/head').default
+const defaultHead = require('next/dist/lib/head').defaultHead
 const { Router } = require('next/dist/lib/router')
 const { createElement } = require('react')
-// replace
 const glob = require('glob-promise')
 const mkdir = require('mkdirp-then')
-const App = require('next/dist/lib/app')
+const App = require('next/dist/lib/app').default
 const fs = require('fs-promise')
 
 
 /**
  * Export to Static HTML
  */
-
 
 module.exports = function Export () {
   const staticMarkup = false
@@ -25,93 +24,84 @@ module.exports = function Export () {
   const exportPath = join(dir, out)
 
   glob(join(pageDir, '**', '*.js')).then((pages) => {
-    pages = pages.filter(page => basename(page)[0] !== '_')
+    const filteredPages = pages.filter(page => {
+      return basename(page)[0] !== '_' || basename(page) === '_error.js'
+    })
 
     // load the top-level document
     const Document = require(join(nextPath, 'dist', 'pages', '_document.js')).default
     mkdir(exportPath, (err, d) => {
-      // copy over the common bundle
       fs.copy(join(nextPath, 'app.js'), join(exportPath, 'app.js')) // await
-    }) // await
+      fs.copy(join(nextPath, 'bundles'), join(exportPath, 'bundles')) // await
+    })
 
     // build all the pages
-    Promise.all(pages.map((page) => {
+    Promise.all(filteredPages.map((page) => {
       const pathname = toRoute(pageDir, page)
       const pageName = getPageName(pageDir, page)
       const Component = require(page).default
       const query = {}
       const ctx = { pathname, query }
       const bundlePath = join(nextPath, 'bundles', 'pages', pageName)
-      console.log(bundlePath);
 
-      Promise.all([
-        loadGetStaticInitialProps(Component, ctx),
-        // readPage(bundlePath),
-        // readPage(join(nextPath, 'bundles', 'pages', '_error'))
-      ]).then((data) => {
-        // const = [
-        //   props,
-        //   component,
-        //   errorComponent
-        // ] = data
-        console.log(data);
-      })
+      loadGetStaticInitialProps(Component, ctx).then((componentProps) => {
+        const renderPage = () => {
+          const app = createElement(App, {
+            Component: Component,
+            props: componentProps,
+            err: dev ? err : null,
+            router: new Router(pathname, query)
+          })
+          // console.log(app);
+          let html
+          let head
+          try {
+            html = renderToString(app)
+          } finally {
 
-      const renderPage = () => {
-        const app = createElement(App, {
-          Component,
-          props,
-          // TODO: figure out if err is relevant with `next build`
-          // err: dev ? err : null,
-          router: new Router(pathname, query)
-        })
+            head = Head.rewind() || defaultHead()
+          }
+          console.log(html, head);
 
-        const render = staticMarkup ? renderToStaticMarkup : renderToString
-
-        let html
-        let head
-        try {
-          html = render(app)
-        } finally {
-          head = Head.rewind() || defaultHead()
+          return { html, head }
         }
-        return { html, head }
-      }
 
-      loadGetStaticInitialProps(Document, Object.assign(ctx, { renderPage })).then((docProps) => {
-        const doc = createElement(Document, Object.assign({
-          __NEXT_DATA__: {
-            component: component,
-            errorComponent,
-            props,
-            pathname,
-            query,
-            // TODO: figure out if we need/want build stats when we export
-            // buildId,
-            // buildStats,
-            exported: true
-            // TODO: needed for static builds?
-            // err: (err && dev) ? errorToJSON(err) : null
-          },
-          dev,
-          staticMarkup
-        }, docProps))
+        renderPage()
 
-        const html = '<!DOCTYPE html>' + renderToStaticMarkup(doc)
-        // write files
-        const htmlPath = join(exportPath, pathname)
-        mkdir(htmlPath, (err, d) => {
-          fs.writeFile(join(htmlPath, 'index.html'), html)
+
+        loadGetStaticInitialProps(Document, Object.assign(ctx, { renderPage })).then((docProps) => {
+          const doc = createElement(Document, Object.assign({
+            __NEXT_DATA__: {
+              // component: component,
+              // errorComponent,
+              // props,
+              // pathname,
+              // query,
+              // // TODO: figure out if we need/want build stats when we export
+              // // buildId,
+              // // buildStats,
+              // exported: true
+              // TODO: needed for static builds?
+              // err: (err && dev) ? errorToJSON(err) : null
+            },
+            dev,
+            staticMarkup
+          }, docProps))
+
+          const html = '<!DOCTYPE html>' + renderToString(doc)
+
+          // console.log(html);
+          // write files
+          const htmlPath = join(exportPath, pathname)
+          mkdir(htmlPath, (err, d) => {
+            fs.writeFile(join(htmlPath, 'index.html'), html)
+          })
         })
+
       })
-
-
-      // copy component bundle over
-      // await fs.copy(bundlePath, join(htmlPath, 'index.json'))
     }))
 
   })
-
 
    // copy over the static/
   // await fs.copy(join(dir, 'static'), join(exportPath, 'static'))

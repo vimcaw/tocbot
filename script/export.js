@@ -24,9 +24,15 @@ module.exports = function Export () {
   const exportPath = join(dir, out)
 
   glob(join(pageDir, '**', '*.js')).then((pages) => {
+    let errorPage
     const filteredPages = pages.filter(page => {
-      return basename(page)[0] !== '_' || basename(page) === '_error.js'
+      if (basename(page) === '_error.js') {
+        errorPage = page
+        return true
+      }
+      return basename(page)[0] !== '_'
     })
+    const errorComponent = require(errorPage).default
 
     // load the top-level document
     const Document = require(join(nextPath, 'dist', 'pages', '_document.js')).default
@@ -45,44 +51,41 @@ module.exports = function Export () {
       const bundlePath = join(nextPath, 'bundles', 'pages', pageName)
 
       loadGetStaticInitialProps(Component, ctx).then((componentProps) => {
+        const app = createElement(App, {
+          Component,
+          props: componentProps,
+          err: dev ? err : null,
+          router: new Router(pathname, query)
+        })
+
         const renderPage = () => {
-          const app = createElement(App, {
-            Component: Component,
-            props: componentProps,
-            err: dev ? err : null,
-            router: new Router(pathname, query)
-          })
-          // console.log(app);
           let html
+          let errorHtml
           let head
           try {
             html = renderToString(app)
+            errorHtml = renderToString(createElement(errorComponent))
           } finally {
-
             head = Head.rewind() || defaultHead()
           }
-          console.log(html, head);
 
-          return { html, head }
+          return { html, head, errorHtml }
         }
-
-        renderPage()
 
 
         loadGetStaticInitialProps(Document, Object.assign(ctx, { renderPage })).then((docProps) => {
           const doc = createElement(Document, Object.assign({
             __NEXT_DATA__: {
-              // component: component,
-              // errorComponent,
-              // props,
-              // pathname,
-              // query,
-              // // TODO: figure out if we need/want build stats when we export
-              // // buildId,
-              // // buildStats,
-              // exported: true
-              // TODO: needed for static builds?
-              // err: (err && dev) ? errorToJSON(err) : null
+              component: app,
+              errorComponent: createElement(errorComponent),
+              props: componentProps,
+              pathname,
+              query,
+
+              // buildId,
+              // buildStats,
+              // exported: true,
+              // err: (err && dev) ? err : null
             },
             dev,
             staticMarkup
@@ -104,7 +107,7 @@ module.exports = function Export () {
   })
 
    // copy over the static/
-  // await fs.copy(join(dir, 'static'), join(exportPath, 'static'))
+  fs.copy(join(dir, 'static'), join(exportPath, 'static'))
 }
 
 // Turn the path into a route

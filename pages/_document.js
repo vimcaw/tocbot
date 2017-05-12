@@ -6,6 +6,11 @@ import flush from 'styled-jsx/server'
 import Document, { Head, Main, NextScript } from 'next/document'
 
 export default class MyDocument extends Document {
+  static getStaticInitialProps () {
+    return Promise.resolve(
+      Document.getInitialProps.apply(Document, arguments)
+    )
+  }
   // static getInitialProps ({ renderPage }) {
   //   const {html, head} = renderPage()
   //   return { html, head, styles }

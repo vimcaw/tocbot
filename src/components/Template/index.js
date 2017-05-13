@@ -4,6 +4,8 @@ import Head from 'next/head'
 import Hero from './Hero'
 import Tocbot from './Tocbot'
 import Tracking from './Tracking'
+import RouteController from './RouteController'
+import { getPathPrefix } from '../../utils/path.js'
 
 function isLive () {
   return !isNode() &&
@@ -12,13 +14,6 @@ function isLive () {
 
 function isNode () {
   return typeof window === 'undefined'
-}
-
-// TODO: Fix this so it works well locally and in prod.
-function getPathPrefix (path) {
-  return path.indexOf('http') !== -1 || path.indexOf('/tocbot') === 0
-    ? path
-    : isLive() ? '/tocbot' + path : path
 }
 
 function Template (props) {
@@ -40,8 +35,6 @@ function Template (props) {
           user={props.user}
           repo={props.repo}
           topLinks={props.topLinks}
-          isLive={isLive}
-          getPathPrefix={getPathPrefix}
         />
 
         <div className='mw7 center dark-gray lh-copy'>
@@ -58,6 +51,7 @@ function Template (props) {
         {props.extraElements}
 
         <Tracking siteId={props.siteId} />
+        <RouteController />
       </main>
     </div>
   )

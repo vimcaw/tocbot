@@ -3,7 +3,12 @@ import PropTypes from 'prop-types'
 import htmlescape from 'htmlescape'
 import flush from 'styled-jsx/server'
 
+
 import Document, { Head as BaseHead, Main, NextScript as BaseNextScript } from 'next/document'
+
+
+
+
 
 export default class MyDocument extends Document {
   static getStaticInitialProps () {
@@ -14,42 +19,44 @@ export default class MyDocument extends Document {
 
 
 
+
+
   // static getInitialProps ({ renderPage }) {
   //   const {html, head} = renderPage()
   //   return { html, head, styles }
   // }
 
-  // render () {
-  //   return (
-  //   //  <html>
-  //   //    <Head>
-  //   //      <style>{`body { margin: 0 } /* custom! */`}</style>
-  //   //    </Head>
-  //   //    <body className="custom_class">
-  //   //      {this.props.customValue}
-  //   //      <Main />
-  //   //      <NextScript />
-  //   //    </body>
-  //   //  </html>
-  //   )
-  // }
+  render () {
+    return (
+     <html>
+       <Head>
+         <style>{`body { margin: 0 } /* custom! */`}</style>
+       </Head>
+       <body>
+         {this.props.customValue}
+         <Main />
+         <NextScript />
+       </body>
+     </html>
+    )
+  }
 }
 
 export class Head extends BaseHead {
-  static contextTypes = {
-    _documentProps: PropTypes.any
-  }
+  // static contextTypes = {
+  //   _documentProps: PropTypes.any
+  // }
 
   getChunkPreloadLink (filename) {
     const { __NEXT_DATA__ } = this.context._documentProps
-    let { buildStats, assetPrefix } = __NEXT_DATA__
+    let { buildStats, assetPrefix, exported } = __NEXT_DATA__
     const hash = buildStats ? buildStats[filename].hash : '-'
 
     return (
       <link
         key={filename}
         rel='preload'
-        href={`${assetPrefix}/_next/${hash}/${filename}`}
+        href={exported ? `${assetPrefix}/${filename}` : `${assetPrefix}/_next/${hash}/${filename}`}
         as='script'
       />
     )
@@ -73,11 +80,11 @@ export class Head extends BaseHead {
 
   render () {
     const { head, styles, __NEXT_DATA__ } = this.context._documentProps
-    const { pathname, buildId, assetPrefix } = __NEXT_DATA__
+    const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
 
     return <head>
-      <link rel='preload' href={`${assetPrefix}/_next/${buildId}/page${pathname}`} as='script' />
-      <link rel='preload' href={`${assetPrefix}/_next/${buildId}/page/_error`} as='script' />
+      <link rel='preload' href={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} as='script' />
+      <link rel='preload' href={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} as='script' />
       {this.getPreloadMainLinks()}
       {(head || []).map((h, i) => React.cloneElement(h, { key: i }))}
       {styles || null}
@@ -123,7 +130,7 @@ export class NextScript extends BaseNextScript {
 
   render () {
     const { staticMarkup, __NEXT_DATA__ } = this.context._documentProps
-    const { pathname, buildId, assetPrefix } = __NEXT_DATA__
+    const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
 
     return <div>
       {staticMarkup ? null : <script dangerouslySetInnerHTML={{
@@ -136,8 +143,8 @@ export class NextScript extends BaseNextScript {
           }
         `
       }} />}
-      <script async type='text/javascript' src={`${assetPrefix}/_next/${buildId}/page${pathname}`} />
-      <script async type='text/javascript' src={`${assetPrefix}/_next/${buildId}/page/_error`} />
+      <script async type='text/javascript' src={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} />
+      <script async type='text/javascript' src={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} />
       {staticMarkup ? null : this.getScripts()}
     </div>
   }

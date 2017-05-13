@@ -18,6 +18,10 @@ export default {
       href: '/changelog'
     },
     {
+      text: 'Test',
+      href: '/test/a'
+    },
+    {
       text: 'Github',
       href: 'https://github.com/tscanlin/tocbot'
     }

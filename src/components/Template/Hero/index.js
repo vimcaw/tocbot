@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { getPathPrefix, getIndex } from '../../../utils/path.js'
 
 function makeGithubCounter ({ user, repo }) {
   return <iframe src={`https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=star&count=true&size=large`} frameBorder='0' scrolling='0' width='160px' height='30px' />
@@ -12,16 +13,17 @@ function Hero (props) {
         <div className='absolute top-0 right-0'>
           {props.topLinks && props.topLinks.length > 0 && (
             props.topLinks.map((link, i) => {
-              return props.isLive()
+              const href = getPathPrefix(link.href)
+              return link.href.indexOf('http') === 0
                 ? (
                   <a className='dib f6 white no-underline pa1 ma1'
-                    href={props.getPathPrefix(link.href)} key={i}>
+                    href={href} key={i}>
                     {link.text}
                   </a>
                 ) : (
                   <Link prefetch href={link.href} key={i}>
                     <a className='dib f6 white no-underline pa1 ma1'
-                      href={link.href} key={i}>
+                      href={href} key={i}>
                       {link.text}
                     </a>
                   </Link>

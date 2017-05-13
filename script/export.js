@@ -40,13 +40,14 @@ module.exports = function Export () {
     // load the top-level document
     const Document = require(join(nextPath, 'dist', 'pages', '_document.js')).default
     mkdir(exportPath, (err, d) => {
-      fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, 'app.js')) // await
+      // fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, 'app.js')) // await
+      fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, '_next', '-', 'app.js')) // await
       fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, 'page')) // await
-      // App js path
 
-      const appJsPath = join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')
-      fs.copy(join(nextPath, 'bundles', 'pages'), appJsPath, (err, data) => {
-        return glob(join(appJsPath, '**', '*.js')).then((files) => {
+      // App js path
+      const bundlePath = join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')
+      fs.copy(join(nextPath, 'bundles', 'pages'), bundlePath, (err, data) => {
+        return glob(join(bundlePath, '**', '*.js')).then((files) => {
           return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join(''))))
 
         })

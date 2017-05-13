@@ -26,20 +26,20 @@ export default class MyDocument extends Document {
   //   return { html, head, styles }
   // }
 
-  render () {
-    return (
-     <html>
-       <Head>
-         <style>{`body { margin: 0 } /* custom! */`}</style>
-       </Head>
-       <body>
-         {this.props.customValue}
-         <Main />
-         <NextScript />
-       </body>
-     </html>
-    )
-  }
+  // render () {
+  //   return (
+  //    <html>
+  //      <Head>
+  //        <style>{`body { margin: 0 } /* custom! */`}</style>
+  //      </Head>
+  //      <body>
+  //        {this.props.customValue}
+  //        <Main />
+  //        <NextScript />
+  //      </body>
+  //    </html>
+  //   )
+  // }
 }
 
 export class Head extends BaseHead {
@@ -47,50 +47,50 @@ export class Head extends BaseHead {
   //   _documentProps: PropTypes.any
   // }
 
-  getChunkPreloadLink (filename) {
-    const { __NEXT_DATA__ } = this.context._documentProps
-    let { buildStats, assetPrefix, exported } = __NEXT_DATA__
-    const hash = buildStats ? buildStats[filename].hash : '-'
-
-    return (
-      <link
-        key={filename}
-        rel='preload'
-        href={exported ? `${assetPrefix}/${filename}` : `${assetPrefix}/_next/${hash}/${filename}`}
-        as='script'
-      />
-    )
-  }
-
-  getPreloadMainLinks () {
-    const { dev } = this.context._documentProps
-    if (dev) {
-      return [
-        this.getChunkPreloadLink('manifest.js'),
-        this.getChunkPreloadLink('commons.js'),
-        this.getChunkPreloadLink('main.js')
-      ]
-    }
-
-    // In the production mode, we have a single asset with all the JS content.
-    return [
-      this.getChunkPreloadLink('app.js')
-    ]
-  }
-
-  render () {
-    const { head, styles, __NEXT_DATA__ } = this.context._documentProps
-    const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
-
-    return <head>
-      <link rel='preload' href={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} as='script' />
-      <link rel='preload' href={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} as='script' />
-      {this.getPreloadMainLinks()}
-      {(head || []).map((h, i) => React.cloneElement(h, { key: i }))}
-      {styles || null}
-      {this.props.children}
-    </head>
-  }
+  // getChunkPreloadLink (filename) {
+  //   const { __NEXT_DATA__ } = this.context._documentProps
+  //   let { buildStats, assetPrefix, exported } = __NEXT_DATA__
+  //   const hash = buildStats ? buildStats[filename].hash : '-'
+  //
+  //   return (
+  //     <link
+  //       key={filename}
+  //       rel='preload'
+  //       href={exported ? `${assetPrefix}/${filename}` : `${assetPrefix}/_next/${hash}/${filename}`}
+  //       as='script'
+  //     />
+  //   )
+  // }
+  //
+  // getPreloadMainLinks () {
+  //   const { dev } = this.context._documentProps
+  //   if (dev) {
+  //     return [
+  //       this.getChunkPreloadLink('manifest.js'),
+  //       this.getChunkPreloadLink('commons.js'),
+  //       this.getChunkPreloadLink('main.js')
+  //     ]
+  //   }
+  //
+  //   // In the production mode, we have a single asset with all the JS content.
+  //   return [
+  //     this.getChunkPreloadLink('app.js')
+  //   ]
+  // }
+  //
+  // render () {
+  //   const { head, styles, __NEXT_DATA__ } = this.context._documentProps
+  //   const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
+  //
+  //   return <head>
+  //     <link rel='preload' href={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} as='script' />
+  //     <link rel='preload' href={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} as='script' />
+  //     {this.getPreloadMainLinks()}
+  //     {(head || []).map((h, i) => React.cloneElement(h, { key: i }))}
+  //     {styles || null}
+  //     {this.props.children}
+  //   </head>
+  // }
 }
 
 export class NextScript extends BaseNextScript {
@@ -98,56 +98,56 @@ export class NextScript extends BaseNextScript {
   //   _documentProps: PropTypes.any
   // }
 
-  getChunkScript (filename, additionalProps = {}) {
-    const { __NEXT_DATA__ } = this.context._documentProps
-    let { buildStats, assetPrefix, exported } = __NEXT_DATA__
-    const hash = buildStats ? buildStats[filename].hash : '-'
-
-    return (
-      <script
-        key={filename}
-        type='text/javascript'
-        src={exported ? `${assetPrefix}/${filename}` : `${assetPrefix}/_next/${hash}/${filename}`}
-        {...additionalProps}
-      />
-    )
-  }
-
-  getScripts () {
-    const { dev } = this.context._documentProps
-    if (dev) {
-      return [
-        this.getChunkScript('manifest.js'),
-        this.getChunkScript('commons.js'),
-        this.getChunkScript('main.js')
-      ]
-    }
-
-    // In the production mode, we have a single asset with all the JS content.
-    // So, we can load the script with async
-    return [this.getChunkScript('app.js', { async: true })]
-  }
-
-  render () {
-    const { staticMarkup, __NEXT_DATA__ } = this.context._documentProps
-    const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
-
-    return <div>
-      {staticMarkup ? null : <script dangerouslySetInnerHTML={{
-        __html: `
-          __NEXT_DATA__ = ${htmlescape(__NEXT_DATA__)}
-          module={}
-          __NEXT_LOADED_PAGES__ = []
-          __NEXT_REGISTER_PAGE = function (route, fn) {
-            __NEXT_LOADED_PAGES__.push({ route: route, fn: fn })
-          }
-        `
-      }} />}
-      <script async type='text/javascript' src={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} />
-      <script async type='text/javascript' src={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} />
-      {staticMarkup ? null : this.getScripts()}
-    </div>
-  }
+  // getChunkScript (filename, additionalProps = {}) {
+  //   const { __NEXT_DATA__ } = this.context._documentProps
+  //   let { buildStats, assetPrefix, exported } = __NEXT_DATA__
+  //   const hash = buildStats ? buildStats[filename].hash : '-'
+  //
+  //   return (
+  //     <script
+  //       key={filename}
+  //       type='text/javascript'
+  //       src={exported ? `${assetPrefix}/${filename}` : `${assetPrefix}/_next/${hash}/${filename}`}
+  //       {...additionalProps}
+  //     />
+  //   )
+  // }
+  //
+  // getScripts () {
+  //   const { dev } = this.context._documentProps
+  //   if (dev) {
+  //     return [
+  //       this.getChunkScript('manifest.js'),
+  //       this.getChunkScript('commons.js'),
+  //       this.getChunkScript('main.js')
+  //     ]
+  //   }
+  //
+  //   // In the production mode, we have a single asset with all the JS content.
+  //   // So, we can load the script with async
+  //   return [this.getChunkScript('app.js', { async: true })]
+  // }
+  //
+  // render () {
+  //   const { staticMarkup, __NEXT_DATA__ } = this.context._documentProps
+  //   const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
+  //
+  //   return <div>
+  //     {staticMarkup ? null : <script dangerouslySetInnerHTML={{
+  //       __html: `
+  //         __NEXT_DATA__ = ${htmlescape(__NEXT_DATA__)}
+  //         module={}
+  //         __NEXT_LOADED_PAGES__ = []
+  //         __NEXT_REGISTER_PAGE = function (route, fn) {
+  //           __NEXT_LOADED_PAGES__.push({ route: route, fn: fn })
+  //         }
+  //       `
+  //     }} />}
+  //     <script async type='text/javascript' src={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} />
+  //     <script async type='text/javascript' src={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} />
+  //     {staticMarkup ? null : this.getScripts()}
+  //   </div>
+  // }
 }
 
 //

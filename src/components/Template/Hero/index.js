@@ -1,6 +1,10 @@
 import React from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { getIndex } from '../../../utils/path.js'
+
+class Link extends NextLink {
+  
+}
 
 function makeGithubCounter ({ user, repo }) {
   return <iframe src={`https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=star&count=true&size=large`} frameBorder='0' scrolling='0' width='160px' height='30px' />
@@ -20,7 +24,7 @@ function Hero (props) {
                     {link.text}
                   </a>
                 ) : (
-                  <Link prefetch href={link.href} key={i}>
+                  <Link href={link.href} key={i}>
                     <a className='dib f6 white no-underline pa1 ma1'
                       href={link.href} key={i}>
                       {link.text}

@@ -119,6 +119,8 @@ module.exports = function Export () {
 
    // copy over the static/
   fs.copy(join(dir, 'static'), join(exportPath, nextConfig.assetPrefix, 'static'))
+
+  console.log('> Export done.')
 }
 
 // Turn the path into a route

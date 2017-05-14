@@ -48,16 +48,7 @@ module.exports = function Export () {
       const bundlePath = join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')
       fs.copy(join(nextPath, 'bundles', 'pages'), bundlePath, (err, data) => {
         return glob(join(bundlePath, '**', '*.js')).then((files) => {
-          return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join('')))).then((arr) => {
-            // Copy files to make sure asset Prefix works properly.
-            if (nextConfig.assetPrefix) {
-              const assetPrefixDest = join(nextConfig.assetPrefix, '_next', ''+buildId, nextConfig.assetPrefix)
-              fs.copy(bundlePath, assetPrefixDest, (err) => {
-                fs.renameSync(assetPrefixDest, join(bundlePath, nextConfig.assetPrefix))
-              })
-            }
-            return arr
-          })
+          return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join(''))))
         })
       }) // await
 

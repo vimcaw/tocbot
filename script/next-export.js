@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 const { resolve, join } = require('path')
 const { existsSync } = require('fs')
 const parseArgs = require('minimist')

@@ -48,9 +48,22 @@ module.exports = function Export () {
       const bundlePath = join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')
       fs.copy(join(nextPath, 'bundles', 'pages'), bundlePath, (err, data) => {
         return glob(join(bundlePath, '**', '*.js')).then((files) => {
-          return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join(''))))
+          return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join('')))).then((arr) => {
+            // Copy files to make sure asset Prefix works properly.
+            if (nextConfig.assetPrefix) {
+              const assetPrefixDest = join(nextConfig.assetPrefix, '_next', ''+buildId, nextConfig.assetPrefix)
+              fs.copy(bundlePath, assetPrefixDest, (err) => {
+                fs.renameSync(assetPrefixDest, join(bundlePath, nextConfig.assetPrefix))
+              })
+            }
+            return arr
+          })
         })
       }) // await
+
+      // Hande prefixed paths by copying files to both places.
+
+
       // fs.copy(join(nextPath, 'bundles'), join(exportPath, 'bundles')) // await
       // fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')) // await
     })
@@ -117,11 +130,11 @@ module.exports = function Export () {
 
           // console.log(html);
           // write files
-          // if (pathname === '/index') {
-          //   mkdir(join(exportPath, nextConfig.assetPrefix), (err, d) => {
-          //     fs.writeFile(join(join(exportPath, nextConfig.assetPrefix), 'index.html'), html)
-          //   })
-          // }
+          if (pathname === '/index') {
+            mkdir(join(exportPath, nextConfig.assetPrefix), (err, d) => {
+              fs.writeFile(join(join(exportPath, nextConfig.assetPrefix), 'index.html'), html)
+            })
+          }
           mkdir(join(exportPath, nextConfig.assetPrefix, pathname), (err, d) => {
             fs.writeFile(join(join(exportPath, nextConfig.assetPrefix, pathname), 'index.html'), html)
           })

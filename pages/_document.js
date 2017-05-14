@@ -13,6 +13,12 @@ function fixIndex(pathname) {
   return pathname === '/' ? '/index' : pathname
 }
 
+// function patchRegisterPage() {
+//   return `
+//
+//   `
+// }
+
 
 export default class MyDocument extends Document {
   // constructor() {
@@ -29,7 +35,11 @@ export default class MyDocument extends Document {
     )
   }
 
-  componentWillMount() {
+  componentDidMount() {
+    // if (typeof window !== 'undefined') {
+    //   console.log(window.__NEXT_REGISTER_PAGE);
+    //
+    // }
     // if (Router.router && Router.router.pageLoader) {
     //   Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
     //     // debugger;

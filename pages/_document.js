@@ -15,10 +15,10 @@ function fixIndex(pathname) {
 
 
 export default class MyDocument extends Document {
-  constructor() {
-    super()
-    // console.log(Router)
-  }
+  // constructor() {
+  //   super()
+  //   // console.log(Router)
+  // }
 
   static getStaticInitialProps () {
     // if (Router.router && Router.router.pageLoader) {
@@ -30,22 +30,22 @@ export default class MyDocument extends Document {
   }
 
   componentWillMount() {
-    if (Router.router && Router.router.pageLoader) {
-      Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
-        // debugger;
-        // console.log(route);
-        if (route[0] !== '/') {
-          throw new Error('Route name should start with a "/"')
-        }
-
-        // if (nextConfig.assetPrefix) {
-        //   route += nextConfig.assetPrefix
-        // }
-
-        if (route === '/') return '/index' // route
-        return route.replace(/\/$/, '')
-      }
-    }
+    // if (Router.router && Router.router.pageLoader) {
+    //   Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
+    //     // debugger;
+    //     // console.log(route);
+    //     if (route[0] !== '/') {
+    //       throw new Error('Route name should start with a "/"')
+    //     }
+    //
+    //     // if (nextConfig.assetPrefix) {
+    //     //   route += nextConfig.assetPrefix
+    //     // }
+    //
+    //     if (route === '/') return '/index' // route
+    //     return route.replace(/\/$/, '')
+    //   }
+    // }
   }
 
 

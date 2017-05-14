@@ -117,9 +117,13 @@ module.exports = function Export () {
 
           // console.log(html);
           // write files
-          const htmlPath = join(exportPath, nextConfig.assetPrefix, pathname) // pathname)
-          mkdir(htmlPath, (err, d) => {
-            fs.writeFile(join(htmlPath, 'index.html'), html)
+          // if (pathname === '/index') {
+          //   mkdir(join(exportPath, nextConfig.assetPrefix), (err, d) => {
+          //     fs.writeFile(join(join(exportPath, nextConfig.assetPrefix), 'index.html'), html)
+          //   })
+          // }
+          mkdir(join(exportPath, nextConfig.assetPrefix, pathname), (err, d) => {
+            fs.writeFile(join(join(exportPath, nextConfig.assetPrefix, pathname), 'index.html'), html)
           })
         })
 
@@ -147,7 +151,7 @@ function toRoute (pageDir, entry) {
   // console.log(page, base, entry,pageDir);
   if (base === 'index') {
     const dir = dirname(page)
-    console.log(base, dir);
+    // console.log(base, dir);
     return dir + base
   } else {
     return '/' + base
@@ -169,7 +173,7 @@ function getPageName (pageDir, entry) {
   // console.log(page, base, entry);
   if (base === 'index') {
     const dir = basename(dirname(page))
-    console.log(base, dir);
+    // console.log(base, dir);
     return dir === '' ? 'index' : dir
   } else {
     return base

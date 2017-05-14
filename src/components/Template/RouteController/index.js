@@ -16,24 +16,24 @@ export default class RouteController extends React.Component {
       console.log(url);
     }
     //
-    console.log(Router.router);
+    // console.log(Router.router);
 
-    if (Router.router && Router.router.pageLoader) {
-      Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
-        debugger;
-        console.log(route);
-        if (route[0] !== '/') {
-          throw new Error('Route name should start with a "/"')
-        }
-
-        // if (nextConfig.assetPrefix) {
-        //   route += nextConfig.assetPrefix
-        // }
-
-        if (route === '/') return '/index' // route
-        return route.replace(/\/$/, '')
-      }
-    }
+    // if (Router.router && Router.router.pageLoader) {
+    //   Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
+    //     // debugger;
+    //     // console.log(route);
+    //     if (route[0] !== '/') {
+    //       throw new Error('Route name should start with a "/"')
+    //     }
+    //
+    //     // if (nextConfig.assetPrefix) {
+    //     //   route += nextConfig.assetPrefix
+    //     // }
+    //
+    //     if (route === '/') return '/index' // route
+    //     return route.replace(/\/$/, '')
+    //   }
+    // }
 
     // if (Router.router && Router.router.pageLoader) {
     //   Router.router.pageLoader.__proto__.normalizeRoute = function(route) {

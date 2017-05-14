@@ -24,7 +24,7 @@ function Template (props) {
         <meta name='description' content={props.description} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
-          return <link key={i} rel='stylesheet' href={getPathPrefix(stylesheet)} />
+          return <link key={i} rel='stylesheet' href={stylesheet} />
         })}
         <style>{`.page-content {display:none}`}</style>
       </Head>

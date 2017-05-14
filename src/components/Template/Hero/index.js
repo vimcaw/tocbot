@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 import { getIndex } from '../../../utils/path.js'
 
 class Link extends NextLink {
-  
+
 }
 
 function makeGithubCounter ({ user, repo }) {
@@ -24,7 +24,7 @@ function Hero (props) {
                     {link.text}
                   </a>
                 ) : (
-                  <Link href={link.href} key={i}>
+                  <Link prefetch href={link.href} key={i}>
                     <a className='dib f6 white no-underline pa1 ma1'
                       href={link.href} key={i}>
                       {link.text}

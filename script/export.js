@@ -42,14 +42,13 @@ module.exports = function Export () {
     mkdir(exportPath, (err, d) => {
       // fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, 'app.js')) // await
       fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, '_next', '-', 'app.js')) // await
-      fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, 'page')) // await
+      // fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, 'page')) // await
 
       // App js path
       const bundlePath = join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')
       fs.copy(join(nextPath, 'bundles', 'pages'), bundlePath, (err, data) => {
         return glob(join(bundlePath, '**', '*.js')).then((files) => {
           return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join(''))))
-
         })
       }) // await
       // fs.copy(join(nextPath, 'bundles'), join(exportPath, 'bundles')) // await
@@ -89,7 +88,7 @@ module.exports = function Export () {
           return { html, head, errorHtml }
         }
 
-        console.log(pathname, pageName);
+        // console.log(pathname, pageName);
         // console.log(pa);
         // buildStats[pageName] = {
         //   hash: buildId
@@ -140,15 +139,16 @@ module.exports = function Export () {
 //  - about.js        => /about
 //  - movies/index.js => /movies
 function toRoute (pageDir, entry) {
-  const page = '/' + fixWindowsPaths(relative(pageDir, entry))
+  const page = '/' + relative(pageDir, entry)
   let base = page.split(extname(page)).join('')
   if (base[0] === '/') {
     base = base.substring(1)
   }
-  console.log(page, base, entry,pageDir);
+  // console.log(page, base, entry,pageDir);
   if (base === 'index') {
     const dir = dirname(page)
-    return dir === '/' ? '/' : dir
+    console.log(base, dir);
+    return dir + base
   } else {
     return '/' + base
   }
@@ -161,14 +161,15 @@ function toRoute (pageDir, entry) {
 //  - about.js        => about
 //  - movies/index.js => movies
 function getPageName (pageDir, entry) {
-  const page = '/' + fixWindowsPaths(relative(pageDir, entry))
+  const page = '/' + relative(pageDir, entry)
   let base = page.split(extname(page)).join('')
   if (base[0] === '/') {
     base = base.substring(1)
   }
-  console.log(page, base, entry);
+  // console.log(page, base, entry);
   if (base === 'index') {
     const dir = basename(dirname(page))
+    console.log(base, dir);
     return dir === '' ? 'index' : dir
   } else {
     return base

@@ -1,5 +1,5 @@
 module.exports = {
-  assetPrefix: '/tocbot',
+  assetPrefix: '',
   // pathPrefix: '/tocbot/',
   webpack: (webpackConfig) => {
     const newConfig = Object.assign({}, webpackConfig)

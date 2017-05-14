@@ -3,29 +3,44 @@ import PropTypes from 'prop-types'
 import htmlescape from 'htmlescape'
 import flush from 'styled-jsx/server'
 import Router from 'next/router'
+import nextConfig from '../next.config.js'
 
 import Document, { Head as BaseHead, Main, NextScript as BaseNextScript } from 'next/document'
 
 
 function fixIndex(pathname) {
+  console.log(pathname);
   return pathname === '/' ? '/index' : pathname
 }
 
 
 export default class MyDocument extends Document {
+  constructor() {
+    super()
+    // console.log(Router)
+  }
+
   static getStaticInitialProps () {
+    // if (Router.router && Router.router.pageLoader) {
+    //   console.log(Router);
+    // }
     return Promise.resolve(
       Document.getInitialProps.apply(Document, arguments)
     )
   }
 
-  componentDidMount() {
+  componentWillMount() {
     if (Router.router && Router.router.pageLoader) {
       Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
-        console.log(route);
+        // debugger;
+        // console.log(route);
         if (route[0] !== '/') {
           throw new Error('Route name should start with a "/"')
         }
+
+        // if (nextConfig.assetPrefix) {
+        //   route += nextConfig.assetPrefix
+        // }
 
         if (route === '/') return '/index' // route
         return route.replace(/\/$/, '')

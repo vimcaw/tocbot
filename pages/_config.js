@@ -1,3 +1,4 @@
+import nextConfig from '../next.config.js'
 
 export default {
   title: 'Tocbot',
@@ -11,15 +12,11 @@ export default {
   topLinks: [
     {
       text: 'About',
-      href: '/'
+      href: nextConfig.assetPrefix + '/'
     },
     {
       text: 'Changelog',
-      href: '/changelog'
-    },
-    {
-      text: 'Test',
-      href: '/test/a'
+      href: nextConfig.assetPrefix + '/changelog'
     },
     {
       text: 'Github',

@@ -40,9 +40,7 @@ module.exports = function Export () {
     // load the top-level document
     const Document = require(join(nextPath, 'dist', 'pages', '_document.js')).default
     mkdir(exportPath, (err, d) => {
-      // fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, 'app.js')) // await
       fs.copy(join(nextPath, 'app.js'), join(exportPath, nextConfig.assetPrefix, '_next', '-', 'app.js')) // await
-      // fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, 'page')) // await
 
       // App js path
       const bundlePath = join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')
@@ -51,12 +49,6 @@ module.exports = function Export () {
           return Promise.all(files.map((f) => fs.renameSync(f, f.split('.js').join(''))))
         })
       }) // await
-
-      // Hande prefixed paths by copying files to both places.
-
-
-      // fs.copy(join(nextPath, 'bundles'), join(exportPath, 'bundles')) // await
-      // fs.copy(join(nextPath, 'bundles', 'pages'), join(exportPath, nextConfig.assetPrefix, '_next', ''+buildId, 'page')) // await
     })
 
     // build all the pages
@@ -65,12 +57,10 @@ module.exports = function Export () {
       const pageName = getPageName(pageDir, page)
       const Component = require(page).default
       const query = {}
-      const fixedPathname = fixWindowsPaths(pathname)
       const ctx = { pathname, query }
       const bundlePath = join(nextPath, 'bundles', 'pages', pageName)
 
       const newPathname = pathname === '/' ? '/index' : pathname
-      // console.log(pathname,pageName, page);
       loadGetStaticInitialProps(Component, ctx).then((componentProps) => {
         const app = createElement(App, {
           Component,
@@ -92,13 +82,6 @@ module.exports = function Export () {
           return { html, head, errorHtml }
         }
 
-        // console.log(pathname, pageName);
-        // console.log(pa);
-        // buildStats[pageName] = {
-        //   hash: buildId
-        // }
-
-
         loadGetStaticInitialProps(Document, Object.assign(ctx, { renderPage })).then((docProps) => {
           const doc = createElement(Document, Object.assign({
             __NEXT_DATA__: {
@@ -110,7 +93,6 @@ module.exports = function Export () {
               query,
 
               buildId,
-              // buildStats,
               exported: true,
             },
             dev,
@@ -119,7 +101,6 @@ module.exports = function Export () {
 
           const html = '<!DOCTYPE html>' + renderToString(doc)
 
-          // console.log(html);
           // write files
           if (pathname === '/index') {
             mkdir(join(exportPath, nextConfig.assetPrefix), (err, d) => {
@@ -152,10 +133,8 @@ function toRoute (pageDir, entry) {
   if (base[0] === '/') {
     base = base.substring(1)
   }
-  // console.log(page, base, entry,pageDir);
   if (base === 'index') {
     const dir = dirname(page)
-    // console.log(base, dir);
     return dir + base
   } else {
     return '/' + base
@@ -174,10 +153,8 @@ function getPageName (pageDir, entry) {
   if (base[0] === '/') {
     base = base.substring(1)
   }
-  // console.log(page, base, entry);
   if (base === 'index') {
     const dir = basename(dirname(page))
-    // console.log(base, dir);
     return dir === '' ? 'index' : dir
   } else {
     return base
@@ -194,8 +171,4 @@ function loadGetStaticInitialProps (Component, ctx) {
     }
     return props
   })
-}
-
-function fixWindowsPaths(path) {
-  return path.split('\\').join('/')
 }

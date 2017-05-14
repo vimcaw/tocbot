@@ -1,10 +1,5 @@
 import React from 'react'
-import NextLink from 'next/link'
-import { getIndex } from '../../../utils/path.js'
-
-class Link extends NextLink {
-
-}
+import Link from 'next/link'
 
 function makeGithubCounter ({ user, repo }) {
   return <iframe src={`https://ghbtns.com/github-btn.html?user=${user}&repo=${repo}&type=star&count=true&size=large`} frameBorder='0' scrolling='0' width='160px' height='30px' />

@@ -4,8 +4,6 @@ import Head from 'next/head'
 import Hero from './Hero'
 import Tocbot from './Tocbot'
 import Tracking from './Tracking'
-import RouteController from './RouteController'
-import { getPathPrefix } from '../../utils/path.js'
 
 function isLive () {
   return !isNode() &&
@@ -29,7 +27,6 @@ function Template (props) {
         <style>{`.page-content {display:none}`}</style>
       </Head>
       <main>
-        <RouteController />
         <Hero
           title={props.title}
           subtitle={props.subtitle}

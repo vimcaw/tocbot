@@ -53,23 +53,3 @@ Build(dir)
   console.error(err)
   process.exit(1)
 })
-
-// const fs = require('fs')
-// const react = require('react')
-// const server = require('react-dom/server')
-//
-// const App = require('../build/' + manifest['main.js'])
-// const app = global.appToRender
-//
-// const markup = server.renderToString(react.createElement(app));
-//
-// // const html = fs.readFileSync(HTML_FILE)
-// // const newHtml = html.toString().split('<div id="root"></div>').join(
-// //   '<div id="root">' + markup + '</div>'
-// // )
-//
-// fs.writeFile(HTML_FILE, newHtml, 'utf8', function(err, d) {
-//   if (!err) {
-//     console.log('HTML built successfully.\n')
-//   }
-// })

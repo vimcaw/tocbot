@@ -5,9 +5,9 @@ const defaultHead = require('next/dist/lib/head').defaultHead
 const { Router } = require('next/dist/lib/router')
 const { createElement } = require('react')
 const glob = require('glob-promise')
-const mkdir = require('mkdirp-then')
+const mkdir = require('mkdirp')
 const App = require('next/dist/lib/app').default
-const fs = require('fs-promise')
+const fs = require('fs-extra')
 const nextConfig = require('../next.config.js')
 
 
@@ -82,34 +82,35 @@ module.exports = function Export () {
           return { html, head, errorHtml }
         }
 
-        loadGetStaticInitialProps(Document, Object.assign(ctx, { renderPage })).then((docProps) => {
-          const doc = createElement(Document, Object.assign({
-            __NEXT_DATA__: {
-              assetPrefix: nextConfig.assetPrefix,
-              component: app,
-              errorComponent: createElement(errorComponent),
-              props: componentProps,
-              pathname: pathname,
-              query,
+        // Always run get Initial props for the document so it renders the page.
+        const docProps = Document.getInitialProps(Object.assign(ctx, { renderPage }))
 
-              buildId,
-              exported: true,
-            },
-            dev,
-            staticMarkup
-          }, docProps))
+        const doc = createElement(Document, Object.assign({
+          __NEXT_DATA__: {
+            assetPrefix: nextConfig.assetPrefix,
+            component: app,
+            errorComponent: createElement(errorComponent),
+            props: componentProps,
+            pathname: pathname,
+            query,
 
-          const html = '<!DOCTYPE html>' + renderToString(doc)
+            buildId,
+            exported: true,
+          },
+          dev,
+          staticMarkup
+        }, docProps))
 
-          // write files
-          if (pathname === '/index') {
-            mkdir(join(exportPath, nextConfig.assetPrefix), (err, d) => {
-              fs.writeFile(join(join(exportPath, nextConfig.assetPrefix), 'index.html'), html)
-            })
-          }
-          mkdir(join(exportPath, nextConfig.assetPrefix, pathname), (err, d) => {
-            fs.writeFile(join(join(exportPath, nextConfig.assetPrefix, pathname), 'index.html'), html)
+        const html = '<!DOCTYPE html>' + renderToString(doc)
+
+        // write files
+        if (pathname === '/index') {
+          mkdir(join(exportPath, nextConfig.assetPrefix), (err, d) => {
+            fs.writeFile(join(join(exportPath, nextConfig.assetPrefix), 'index.html'), html)
           })
+        }
+        mkdir(join(exportPath, nextConfig.assetPrefix, pathname), (err, d) => {
+          fs.writeFile(join(join(exportPath, nextConfig.assetPrefix, pathname), 'index.html'), html)
         })
 
       })

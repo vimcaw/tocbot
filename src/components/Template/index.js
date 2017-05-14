@@ -29,6 +29,7 @@ function Template (props) {
         <style>{`.page-content {display:none}`}</style>
       </Head>
       <main>
+        <RouteController />
         <Hero
           title={props.title}
           subtitle={props.subtitle}
@@ -51,7 +52,6 @@ function Template (props) {
         {props.extraElements}
 
         <Tracking siteId={props.siteId} />
-        <RouteController />
       </main>
     </div>
   )

@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import htmlescape from 'htmlescape'
 import flush from 'styled-jsx/server'
-
+import Router from 'next/router'
 
 import Document, { Head as BaseHead, Main, NextScript as BaseNextScript } from 'next/document'
 
 
-
+function fixIndex(pathname) {
+  return pathname === '/' ? '/index' : pathname
+}
 
 
 export default class MyDocument extends Document {
@@ -17,7 +19,19 @@ export default class MyDocument extends Document {
     )
   }
 
+  componentDidMount() {
+    if (Router.router && Router.router.pageLoader) {
+      Router.router.pageLoader.__proto__.normalizeRoute = function(route) {
+        console.log(route);
+        if (route[0] !== '/') {
+          throw new Error('Route name should start with a "/"')
+        }
 
+        if (route === '/') return '/index' // route
+        return route.replace(/\/$/, '')
+      }
+    }
+  }
 
 
 
@@ -26,20 +40,20 @@ export default class MyDocument extends Document {
   //   return { html, head, styles }
   // }
 
-  // render () {
-  //   return (
-  //    <html>
-  //      <Head>
-  //        <style>{`body { margin: 0 } /* custom! */`}</style>
-  //      </Head>
-  //      <body>
-  //        {this.props.customValue}
-  //        <Main />
-  //        <NextScript />
-  //      </body>
-  //    </html>
-  //   )
-  // }
+  render () {
+    return (
+     <html>
+       <Head>
+         <style>{`body { margin: 0 } /* custom! */`}</style>
+       </Head>
+       <body>
+         {this.props.customValue}
+         <Main />
+         <NextScript />
+       </body>
+     </html>
+    )
+  }
 }
 
 export class Head extends BaseHead {
@@ -78,19 +92,19 @@ export class Head extends BaseHead {
   //   ]
   // }
   //
-  // render () {
-  //   const { head, styles, __NEXT_DATA__ } = this.context._documentProps
-  //   const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
-  //
-  //   return <head>
-  //     <link rel='preload' href={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} as='script' />
-  //     <link rel='preload' href={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} as='script' />
-  //     {this.getPreloadMainLinks()}
-  //     {(head || []).map((h, i) => React.cloneElement(h, { key: i }))}
-  //     {styles || null}
-  //     {this.props.children}
-  //   </head>
-  // }
+  render () {
+    const { head, styles, __NEXT_DATA__ } = this.context._documentProps
+    const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
+
+    return <head>
+      <link rel='preload' href={`${assetPrefix}/_next/${buildId}/page${fixIndex(pathname)}`} as='script' />
+      <link rel='preload' href={`${assetPrefix}/_next/${buildId}/page/_error`} as='script' />
+      {this.getPreloadMainLinks()}
+      {(head || []).map((h, i) => React.cloneElement(h, { key: i }))}
+      {styles || null}
+      {this.props.children}
+    </head>
+  }
 }
 
 export class NextScript extends BaseNextScript {
@@ -128,26 +142,26 @@ export class NextScript extends BaseNextScript {
   //   return [this.getChunkScript('app.js', { async: true })]
   // }
   //
-  // render () {
-  //   const { staticMarkup, __NEXT_DATA__ } = this.context._documentProps
-  //   const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
-  //
-  //   return <div>
-  //     {staticMarkup ? null : <script dangerouslySetInnerHTML={{
-  //       __html: `
-  //         __NEXT_DATA__ = ${htmlescape(__NEXT_DATA__)}
-  //         module={}
-  //         __NEXT_LOADED_PAGES__ = []
-  //         __NEXT_REGISTER_PAGE = function (route, fn) {
-  //           __NEXT_LOADED_PAGES__.push({ route: route, fn: fn })
-  //         }
-  //       `
-  //     }} />}
-  //     <script async type='text/javascript' src={exported ? `${assetPrefix}/page${pathname}.js` : `${assetPrefix}/_next/${buildId}/page${pathname}`} />
-  //     <script async type='text/javascript' src={exported ? `${assetPrefix}/page/_error.js` : `${assetPrefix}/_next/${buildId}/page/_error`} />
-  //     {staticMarkup ? null : this.getScripts()}
-  //   </div>
-  // }
+  render () {
+    const { staticMarkup, __NEXT_DATA__ } = this.context._documentProps
+    const { pathname, buildId, assetPrefix, exported } = __NEXT_DATA__
+
+    return <div>
+      {staticMarkup ? null : <script dangerouslySetInnerHTML={{
+        __html: `
+          __NEXT_DATA__ = ${htmlescape(__NEXT_DATA__)}
+          module={}
+          __NEXT_LOADED_PAGES__ = []
+          __NEXT_REGISTER_PAGE = function (route, fn) {
+            __NEXT_LOADED_PAGES__.push({ route: route, fn: fn })
+          }
+        `
+      }} />}
+      <script async type='text/javascript' src={`${assetPrefix}/_next/${buildId}/page${fixIndex(pathname)}`} />
+      <script async type='text/javascript' src={`${assetPrefix}/_next/${buildId}/page/_error`} />
+      {staticMarkup ? null : this.getScripts()}
+    </div>
+  }
 }
 
 //

@@ -4,10 +4,16 @@
 
 ### 3.X.X
 
+#### 3.0.1
+
+##### Changed
+- Using [next-export](https://github.com/tscanlin/next-export) for deployments now.
+
+
 #### 3.0.0
 
 ##### **BREAKING CHANGE**
-- Switched from using smooth-scroll to [zenzcroll](https://github.com/zengabor/zenscroll) for reasons.. [40](https://github.com/tscanlin/tocbot/issues/40)
+- Switched from using smooth-scroll to [zenzcroll](https://github.com/zengabor/zenscroll) for reasons.. [#40](https://github.com/tscanlin/tocbot/issues/40)
 
 ##### Added
 - Using [standard](https://github.com/feross/standard) for code styling now.

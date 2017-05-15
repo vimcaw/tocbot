@@ -35,7 +35,7 @@ COMMIT_MESSAGE=$(git log -1 --pretty=%B)
 
 
 # Deploy.
-cd site
+cd site/tocbot
 git init
 git add .
 git commit -m "Deploy: $COMMIT_MESSAGE"

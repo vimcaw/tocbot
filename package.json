@@ -21,7 +21,7 @@
     "lint": "standard --fix",
     "dev": "npm run build-css && parallelshell \"npm run next\" \"npm run build-js-watch\" \"npm run build-css-watch\" \"npm run build-content-watch\"",
     "start": "npm run dev",
-    "deploy": "npm run build && gh-pages -d site/tocbot/",
+    "deploy": "npm run build && cd site && gh-pages -d tocbot", =
     "test": "npm run lint && mocha test/index.js",
     "test:debug": "node-debug _mocha --timeout 0 test/index.js",
     "test:watch": "mocha --watch test/index.js",

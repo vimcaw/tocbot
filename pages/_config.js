@@ -1,3 +1,4 @@
+import nextConfig from '../next.config.js'
 
 export default {
   title: 'Tocbot',
@@ -5,17 +6,17 @@ export default {
   description: 'Tocbot - Generate a table of contents based on the heading structure of an html document',
   stylesheets: [
     'https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css',
-    '/static/css/tocbot.css',
-    '/static/css/styles.css'
+    nextConfig.assetPrefix + '/static/css/tocbot.css',
+    nextConfig.assetPrefix + '/static/css/styles.css'
   ],
   topLinks: [
     {
       text: 'About',
-      href: '/'
+      href: nextConfig.assetPrefix + '/'
     },
     {
       text: 'Changelog',
-      href: '/changelog'
+      href: nextConfig.assetPrefix + '/changelog'
     },
     {
       text: 'Github',

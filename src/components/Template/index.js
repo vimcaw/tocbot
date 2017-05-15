@@ -14,13 +14,6 @@ function isNode () {
   return typeof window === 'undefined'
 }
 
-// TODO: Fix this so it works well locally and in prod.
-function getPathPrefix (path) {
-  return path.indexOf('http') !== -1 || path.indexOf('/tocbot') === 0
-    ? path
-    : isLive() ? '/tocbot' + path : path
-}
-
 function Template (props) {
   return (
     <div className='page-content'>
@@ -29,7 +22,7 @@ function Template (props) {
         <meta name='description' content={props.description} />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         {props.stylesheets && props.stylesheets.length > 0 && props.stylesheets.map((stylesheet, i) => {
-          return <link key={i} rel='stylesheet' href={getPathPrefix(stylesheet)} />
+          return <link key={i} rel='stylesheet' href={stylesheet} />
         })}
         <style>{`.page-content {display:none}`}</style>
       </Head>
@@ -40,8 +33,6 @@ function Template (props) {
           user={props.user}
           repo={props.repo}
           topLinks={props.topLinks}
-          isLive={isLive}
-          getPathPrefix={getPathPrefix}
         />
 
         <div className='mw7 center dark-gray lh-copy'>

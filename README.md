@@ -64,6 +64,8 @@ tocbot.init({
 });
 ```
 
+**NOTE:** Make sure headings have id attributes, tocbot and your browser needs these to make hashes jump to the proper heading, some markdown libraries (like [marked](https://github.com/chjj/marked)) already do this for you.
+
 If content in the div has changed then trigger a refresh (optionally with new options).
 
 ```javascript
@@ -84,8 +86,6 @@ If you'd like to add your page to this list open a pull request.
 This library uses **vanilla JavaScript**. It is less than 350 bytes of CSS and about 3.6Kb of JavaScript (minified and gzipped). The only dependency this script has is [zenscroll](https://github.com/zengabor/zenscroll) (which is small and has no dependencies).
 
 This script works in **all modern browsers and IE 9+**.
-
-Make sure rendered headings have id attributes, some markdown libraries (like [marked](https://github.com/chjj/marked)) already do this.
 
 
 ## API

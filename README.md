@@ -222,6 +222,7 @@ npm run test:debug
 - run `npm version <patch|minor|major>`
 - Update readme.md with notes
 - Merge the pull request
+- commit dist/
 - run `npm publish`
 - make release on github
 

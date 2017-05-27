@@ -4,6 +4,12 @@
 
 ### 3.X.X
 
+#### 3.0.2
+
+##### Changed
+- Added dist files to address [#55](https://github.com/tscanlin/tocbot/issues/55)
+
+
 #### 3.0.1
 
 ##### Changed

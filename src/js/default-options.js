@@ -37,7 +37,7 @@ module.exports = {
   smoothScrollDuration: 420,
   // Callback for scroll end (requires: smoothScroll).
   scrollEndCallback: function (e) {},
-  // Headings offset between the headings and the top of the document.
+  // Headings offset between the headings and the top of the document (this is meant for minor adjustments).
   headingsOffset: 0,
   // Timeout between events firing to make sure it's
   // not too rapid (for performance reasons).

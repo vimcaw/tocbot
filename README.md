@@ -87,6 +87,24 @@ This library uses **vanilla JavaScript**. It is less than 350 bytes of CSS and a
 
 This script works in **all modern browsers and IE 9+**.
 
+Make sure rendered headings have id attributes, some markdown libraries (like [marked](https://github.com/chjj/marked)) already do this.
+
+### Fixed headers
+
+To handle anchor links properly when you have a fixed header, I recommend using CSS similar to the following:
+
+```css
+h1::before, h2::before, h3::before, h4::before, h5::before, h6::before {
+    display: block;
+    content: " ";
+    height: 60px;
+    margin-top: -60px;
+    visibility: hidden;
+}
+```
+
+This is better than javascript solutions since it will work when javascript is disabled.
+
 
 ## API
 
@@ -131,7 +149,7 @@ smoothScroll: true,
 smoothScrollDuration: 420,
 // Callback for scroll end (requires: smoothScroll).
 scrollEndCallback: function (e) {},
-// Headings offset between the headings and the top of the document.
+// Headings offset between the headings and the top of the document (this is meant for minor adjustments).
 headingsOffset: 0,
 // Timeout between events firing to make sure it's
 // not too rapid (for performance reasons).

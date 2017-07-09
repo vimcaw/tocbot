@@ -4,6 +4,10 @@
 
 ### 3.X.X
 
+##### Added
+- Updated readme to explain how to handle fixed headers [#58](https://github.com/tscanlin/tocbot/issues/58)
+
+
 #### 3.0.2
 
 ##### Changed

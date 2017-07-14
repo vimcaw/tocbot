@@ -83,7 +83,7 @@ If you'd like to add your page to this list open a pull request.
 
 ## Requirements
 
-This library uses **vanilla JavaScript**. It is less than 350 bytes of CSS and about 3.6Kb of JavaScript (minified and gzipped). The only dependency this script has is [zenscroll](https://github.com/zengabor/zenscroll) (which is small and has no dependencies).
+This library uses **vanilla JavaScript**. It is less than 350 bytes of CSS and about 3.6Kb of JavaScript (minified and gzipped). The only dependency this script has is [zenscroll](https://github.com/zengabor/zenscroll) (which is small and has no dependencies). **NOTE:** to exclude anchor elements from smooth scrolling, add the class `noZensmooth` ([source](https://github.com/zengabor/zenscroll#16-exclude-a-link-from-the-automatic-smooth-scrolling)).
 
 This script works in **all modern browsers and IE 9+**.
 

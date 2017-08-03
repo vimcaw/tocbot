@@ -2,8 +2,7 @@
 .publish
 .next
 .DS_Store
-_site/
-site/
+out/
 static/js/*
 static/css/*
 node_modules/

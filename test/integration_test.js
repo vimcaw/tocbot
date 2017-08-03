@@ -9,5 +9,7 @@ Scenario('test something', (I) => {
   // I.checkOption('Active')
   // I.checkOption('Male');
   // I.click('Create User')
+  I.wait(1)
   I.see('Tocbot')
+  I.saveScreenshot('tocbot.png', true)
 });

@@ -1,4 +1,4 @@
-const assetPrefix = '/tocbot/'
+const assetPrefix = '/tocbot'
 
 module.exports = {
   assetPrefix: assetPrefix,

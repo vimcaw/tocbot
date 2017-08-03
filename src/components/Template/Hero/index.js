@@ -12,7 +12,7 @@ function Hero (props) {
         <div className='absolute top-0 right-0'>
           {props.topLinks && props.topLinks.length > 0 && (
             props.topLinks.map((link, i) => {
-              return link.href.indexOf('http') === 0
+              return true // link.href.indexOf('http') === 0
                 ? (
                   <a className='dib f6 white no-underline pa1 ma1'
                     href={link.href} key={i}>

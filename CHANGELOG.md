@@ -2,10 +2,14 @@
 
 
 
-### 3.X.X
+### 3.0.3
+
+##### Changed
+- Get next.js v3 working for exporting the project page
 
 ##### Added
 - Updated readme to explain how to handle fixed headers [#58](https://github.com/tscanlin/tocbot/issues/58)
+- Add note about excluding smooth scroll from certain elements
 
 
 #### 3.0.2

@@ -1,16 +1,9 @@
 
 Feature('Index');
 
-Scenario('test something', (I) => {
-  // console.log(I);
+Scenario('test page load', (I) => {
   I.amOnPage('/')
-  // I.fillField('Email', 'hello@world.com')
-  // I.fillField('Password', '123456')
-  // I.checkOption('Active')
-  // I.checkOption('Male');
-  // I.click('Create User')
-  I.wait(1)
-  // I.setFullsize()
   I.see('Tocbot')
+  I.seeElement('.is-active-link')
   I.saveScreenshot('tocbot.png', true)
 });

@@ -27,6 +27,7 @@
     "test": "npm run lint && mocha test/index.js",
     "test:debug": "node-debug _mocha --timeout 0 test/index.js",
     "test:watch": "mocha --watch test/index.js",
+    "test:integration": "codeceptjs run --steps",
     "next": "node ./server.js",
     "next-build": "next build",
     "next-export": "next export",

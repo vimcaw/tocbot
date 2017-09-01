@@ -2,7 +2,7 @@
 Feature('Index');
 
 Scenario('test something', (I) => {
-  console.log(I);
+  // console.log(I);
   I.amOnPage('/')
   // I.fillField('Email', 'hello@world.com')
   // I.fillField('Password', '123456')
@@ -10,6 +10,7 @@ Scenario('test something', (I) => {
   // I.checkOption('Male');
   // I.click('Create User')
   I.wait(1)
+  // I.setFullsize()
   I.see('Tocbot')
   I.saveScreenshot('tocbot.png', true)
 });

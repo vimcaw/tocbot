@@ -28,6 +28,7 @@
     "test:debug": "node-debug _mocha --timeout 0 test/index.js",
     "test:watch": "mocha --watch test/index.js",
     "test:integration": "codeceptjs run --steps",
+    "test:update-screenshots": "cp -R -v test-output/* test/__screenshots__",
     "next": "node ./server.js",
     "next-build": "next build",
     "next-export": "next export",

@@ -1,7 +1,7 @@
 {
   "tests": "./test/*_test.js",
   "timeout": 10000,
-  "output": "./test-output",
+  "output": "./test/__screenshots-new__",
   "helpers": {
     "Nightmare": {
       "url": "http://localhost:3001",

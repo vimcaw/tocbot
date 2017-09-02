@@ -7,5 +7,6 @@ static/js/*
 static/css/*
 node_modules/
 test-output/
+test/__screenshots-new__
 npm-debug.*
 pages/_*.json

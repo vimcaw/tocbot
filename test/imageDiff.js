@@ -14,19 +14,24 @@ function removePattern(str) {
 }
 
 globby(srcImgs).then((files) => {
-  files.forEach((file) => {
+  files.forEach((file1) => {
     // Read source
-    fs.readFile(file, (err, data) => {
+    fs.readFile(file1, (err, data) => {
       // Read new
       const srcPng = PNG.sync.read(data)
-      const file2 = file.replace(removePattern(srcImgs), removePattern(compareImgs))
-      const diffFile = file.replace(removePattern(srcImgs), diffDir)
+      const file2 = file1.replace(removePattern(srcImgs), removePattern(compareImgs))
+      const diffFile = file1.replace(removePattern(srcImgs), diffDir)
       console.log(diffFile);
       fs.readFile(file2, (err2, data2) => {
 
-        resemble(file).compareTo(file2).onComplete(function(data) {
-          console.log(data);
-          const diffImg = data.getDiffImage().pack().pipe(fs.createWriteStream(diffFile));
+        resemble(file1).compareTo(file2).onComplete(function(diffData) {
+          console.log(diffData);
+          if (diffData.misMatchPercentage === '0.00') {
+            console.log(`PASS: ${file1} matched ${file2}`)
+          } else {
+            console.log(`FAIL: ${file1} did not match ${file2}`)
+            const diffImg = data.getDiffImage().pack().pipe(fs.createWriteStream(diffFile));
+          }
         });
         // var diff = new PNG({width: srcPng.width, height: srcPng.height});
         // pixelmatch(data, data2, diff.data, srcPng.width, srcPng.height)

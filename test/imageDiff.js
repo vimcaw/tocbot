@@ -4,7 +4,7 @@ const resemble = require('node-resemble-js')
 const fs = require('fs')
 const PNG = require('pngjs').PNG
 const pargs = process.argv
-const diffDir = './test/__screenshots-diff__/'
+const diffDir = './test/screenshots-diff/'
 
 const srcImgs = pargs[2]
 const compareImgs = pargs[3]

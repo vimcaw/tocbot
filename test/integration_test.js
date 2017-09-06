@@ -6,4 +6,5 @@ Scenario('test page load', (I) => {
   I.see('Tocbot')
   I.seeElement('.is-active-link')
   I.saveScreenshot('tocbot.png', true)
+  // I.diffScreenshots('tocbot.png')
 });

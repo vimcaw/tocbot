@@ -1,16 +1,19 @@
 {
   "tests": "./test/*_test.js",
   "timeout": 10000,
-  "output": "./test/__screenshots-new__",
+  "output": "./test/screenshots-new",
   "helpers": {
     "Nightmare": {
       "url": "http://localhost:3001",
-      "show": false,
-      "restart": false
+      "show": true,
+      "restart": false,
+      "openDevTools": {
+        "mode": "detach"
+      }
+    },
+    "DiffUtil": {
+      "require": "./test/diffUtil.js"
     }
-  },
-  "include": {
-    "I": "./test/steps_file.js"
   },
   "bootstrap": false,
   "mocha": {},

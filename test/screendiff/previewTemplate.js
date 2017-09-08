@@ -1,16 +1,16 @@
 const path = require('path')
 
-function getSrc(str) {
+function getSrc (str) {
   return str.split('screenshots-diff').join('screenshots-src')
 }
-function getNew(str) {
+function getNew (str) {
   return str.split('screenshots-diff').join('screenshots-new')
 }
 
-exports.diffPreviewTemplate = function diffPreviewTemplate(props) {
-  console.log(props);
+exports.diffPreviewTemplate = function diffPreviewTemplate (props) {
+  console.log(props)
 
-  function makeRow(props) {
+  function makeRow (props) {
     return `
   <div class="">
     <img class="screenshot src" src="file://${getSrc(path.join(props.pwd, props.file))}" />

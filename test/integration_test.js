@@ -1,5 +1,5 @@
 
-Feature('Index');
+Feature('Index')
 
 Scenario('test page load', (I) => {
   I.amOnPage('/')
@@ -7,4 +7,4 @@ Scenario('test page load', (I) => {
   I.seeElement('.is-active-link')
   I.saveScreenshot('tocbot.png', true)
   I.diffScreenshot('tocbot.png')
-});
+})

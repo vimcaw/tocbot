@@ -7,7 +7,7 @@ const pargs = process.argv
 const diffDir = './test/screenshots-diff/'
 const PWD = process.env.PWD
 
-const diffPreviewTemplate = require('./screendiff/diffPreviewTemplate.js').diffPreviewTemplate
+const previewTemplate = require('./screendiff/previewTemplate.js').previewTemplate
 
 // const srcImgs = pargs[2]
 // const compareImgs = pargs[3]
@@ -17,17 +17,16 @@ const diffPreviewTemplate = require('./screendiff/diffPreviewTemplate.js').diffP
 // }
 
 globby(`${diffDir}*.png`).then((files) => {
-  console.log(process.env.PWD);
-  console.log(files);
-  const html = diffPreviewTemplate({
+  console.log(process.env.PWD)
+  console.log(files)
+  const html = previewTemplate({
     files,
     pwd: PWD
   })
 
   fs.writeFile('test/screendiff/diff.html', html, 'utf-8', (err, data) => {
-    console.log(err, data);
+    console.log(err, data)
   })
-
 
   // files.forEach((file1) => {
     // Read source
@@ -55,9 +54,8 @@ globby(`${diffDir}*.png`).then((files) => {
     //   })
     // })
   // })
-
 }).catch((e) => {
-  console.log(e);
+  console.log(e)
 })
 
 // pixelmatch(img1, img2, diff, 800, 600, {threshold: 0.1})

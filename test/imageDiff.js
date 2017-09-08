@@ -9,8 +9,12 @@ const diffDir = './test/screenshots-diff/'
 const srcImgs = pargs[2]
 const compareImgs = pargs[3]
 
-function removePattern(str) {
+function removePattern (str) {
   return str.split('*.png').join('')
+}
+
+function renameExt (str, ext1, ext2) {
+  return str.split(ext1).join(ext2)
 }
 
 globby(srcImgs).then((files) => {
@@ -21,18 +25,28 @@ globby(srcImgs).then((files) => {
       const srcPng = PNG.sync.read(data)
       const file2 = file1.replace(removePattern(srcImgs), removePattern(compareImgs))
       const diffFile = file1.replace(removePattern(srcImgs), diffDir)
-      console.log(diffFile);
+      console.log(diffFile)
       fs.readFile(file2, (err2, data2) => {
-
-        resemble(file1).compareTo(file2).onComplete(function(diffData) {
-          console.log(diffData);
+        resemble(file1).compareTo(file2).onComplete(function (diffData) {
+          console.log(diffData)
           if (diffData.misMatchPercentage === '0.00') {
-            console.log(`PASS: ${file1} matched ${file2}`)
+            // console.log(`PASS: ${file1} matched ${file2}`)
           } else {
-            console.log(`FAIL: ${file1} did not match ${file2}`)
-            const diffImg = data.getDiffImage().pack().pipe(fs.createWriteStream(diffFile));
+            // console.log(`FAIL: ${file1} did not match ${file2}`)
+            const diffImg = diffData.getDiffImage().pack().pipe(fs.createWriteStream(diffFile))
+
+            // Write summary file.
+            fs.writeFile(renameExt(diffFile, '.png', '.json'), JSON.stringify({
+              diffFile: diffFile,
+              isSameDimensions: diffData.isSameDimensions,
+              dimensionDifference: diffData.dimensionDifference,
+              misMatchPercentage: diffData.misMatchPercentage,
+              analysisTime: diffData.analysisTime
+            }), 'utf-8', (err, data) => {
+              console.log(err, data)
+            })
           }
-        });
+        })
         // var diff = new PNG({width: srcPng.width, height: srcPng.height});
         // pixelmatch(data, data2, diff.data, srcPng.width, srcPng.height)
         // console.log(diff.data);
@@ -40,9 +54,8 @@ globby(srcImgs).then((files) => {
       })
     })
   })
-
 }).catch((e) => {
-  console.log(e);
+  console.log(e)
 })
 
 // pixelmatch(img1, img2, diff, 800, 600, {threshold: 0.1})

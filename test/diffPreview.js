@@ -5,8 +5,9 @@ const fs = require('fs')
 const PNG = require('pngjs').PNG
 const pargs = process.argv
 const diffDir = './test/screenshots-diff/'
+const PWD = process.env.PWD
 
-
+const diffPreviewTemplate = require('./screendiff/diffPreviewTemplate.js').diffPreviewTemplate
 
 // const srcImgs = pargs[2]
 // const compareImgs = pargs[3]
@@ -16,8 +17,19 @@ const diffDir = './test/screenshots-diff/'
 // }
 
 globby(`${diffDir}*.png`).then((files) => {
+  console.log(process.env.PWD);
   console.log(files);
-  files.forEach((file1) => {
+  const html = diffPreviewTemplate({
+    files,
+    pwd: PWD
+  })
+
+  fs.writeFile('test/screendiff/diff.html', html, 'utf-8', (err, data) => {
+    console.log(err, data);
+  })
+
+
+  // files.forEach((file1) => {
     // Read source
     // fs.readFile(file1, (err, data) => {
     //   // Read new
@@ -42,7 +54,7 @@ globby(`${diffDir}*.png`).then((files) => {
     //     // diff.pack().pipe(fs.createWriteStream(diffFile));
     //   })
     // })
-  })
+  // })
 
 }).catch((e) => {
   console.log(e);

@@ -5,7 +5,7 @@
   "helpers": {
     "Nightmare": {
       "url": "http://localhost:3001",
-      "show": true,
+      "show": false,
       "restart": false,
       "openDevTools": {
         "mode": "detach"

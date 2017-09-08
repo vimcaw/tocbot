@@ -1,25 +1,27 @@
-const yargs = require('yargs').argv
+'use strict';
 
-const isCli = yargs['$0'] !== ''
+// let Helper = codecept_helper;
 
-console.log(isCli, yargs);
-// exports.generateDiffs = function() {
+// class MyHelper extends Helper {
+//
+//   // before/after hooks
+//   _before() {
+//     // remove if not used
+//   }
+//
+//   _after() {
+//     // remove if not used
+//   }
+//
+//   diffScreenshot(name) {
+//     console.log(name);
+//     console.log(this.helpers['Nightmare']);
+//   }
+//
+//   // add custom methods here
+//   // If you need to access other helpers
+//   // use: this.helpers['helperName']
 //
 // }
-// // json / pngs
 //
-// exports.testDiffs = function() {
-//
-// }
-//
-// exports.generateHtmlPreview = function() {
-//
-// }
-
-function generateDiffs() {
-
-}
-
-module.exports = () => {
-  console.log('a');
-}
+// module.exports = MyHelper;

@@ -1,8 +1,7 @@
 var fs = require('fs')
 var chai = require('chai')
 var expect = chai.expect
-// Count all of the links from the io.js build page
-var jsdom = require('jsdom')
+var jsdom = require('jsdom/lib/old-api')
 var TEST_DATA = require('./data/json-data.js')()
 var TEST_HTML = fs.readFileSync('./test/data/rendered.html').toString()
 

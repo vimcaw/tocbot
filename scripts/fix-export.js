@@ -1,5 +1,4 @@
 const globby = require('globby')
-const spawn = require('child_process').spawnSync
 const config = require('../next.config.js')
 
 const fs = require('fs-extra')
@@ -25,10 +24,10 @@ globby(`out/**/page`).then((files) => {
 
         let result = data
         if (data.indexOf(newString) === -1 && data.indexOf(rootPathString) === -1) {
-          result = data.replace(/window.__NEXT_REGISTER_PAGE\(\'/g, newString)
+          result = data.replace(/window.__NEXT_REGISTER_PAGE\(\'/g, newString) // eslint-disable-line
         } else if (data.indexOf(rootPathString) > -1) {
           // If it's the index page then don't leave the trailing slash.
-          result = data.replace(/window.__NEXT_REGISTER_PAGE\(\'\/\'/g, newString + "'")
+          result = data.replace(/window.__NEXT_REGISTER_PAGE\(\'\/\'/g, newString + "'") // eslint-disable-line
         }
 
         fs.writeFile(file, result, 'utf8', function (err) {

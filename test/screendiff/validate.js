@@ -3,9 +3,9 @@ const diffDir = './test/screenshots-diff/'
 
 exports.validate = validate
 
-function validate() {
+function validate () {
   globby(`${diffDir}*.json`).then((files) => {
-    console.log(files);
+    console.log(files)
     let failCount = 0
     let passCount = 0
     let failureArr = []
@@ -18,7 +18,7 @@ function validate() {
       } else {
         passCount++
       }
-      console.log(json);
+      console.log(json)
     })
 
     throw new Error(`

@@ -10,7 +10,7 @@ Scenario('test page load', (I) => {
 })
 
 Scenario('test clicking scrolls', (I) => {
-  I.refresh()
+  I.refresh ? I.refresh() : I.amOnPage('/')
   I.see('Tocbot')
   I.seeElement('.is-active-link')
   I.click('a[href="#examples"]')

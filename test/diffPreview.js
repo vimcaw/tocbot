@@ -7,7 +7,7 @@ const pargs = process.argv
 const diffDir = './test/screenshots-diff/'
 const PWD = process.env.PWD
 
-const previewTemplate = require('./screendiff/previewTemplate.js').previewTemplate
+const previewTemplate = require('./picdiff/previewTemplate.js').previewTemplate
 
 // const srcImgs = pargs[2]
 // const compareImgs = pargs[3]
@@ -24,7 +24,7 @@ globby(`${diffDir}*.png`).then((files) => {
     pwd: PWD
   })
 
-  fs.writeFile('test/screendiff/diff.html', html, 'utf-8', (err, data) => {
+  fs.writeFile('test/picdiff/diff.html', html, 'utf-8', (err, data) => {
     console.log(err, data)
   })
 

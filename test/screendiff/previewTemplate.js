@@ -23,7 +23,7 @@ exports.diffPreviewTemplate = function diffPreviewTemplate (props) {
   return `
 <html>
   <head>
-    <title>screendiff preview</title>
+    <title>picdiff preview</title>
     <style>
       .screenshot {
         width: 300px;
@@ -36,7 +36,7 @@ exports.diffPreviewTemplate = function diffPreviewTemplate (props) {
     </style>
   </head>
   <body>
-    <h1>screendiff preview page</h1>
+    <h1>picdiff preview page</h1>
     <div>
       ${props.files.map((file) => {
         return {

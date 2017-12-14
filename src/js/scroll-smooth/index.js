@@ -5,9 +5,9 @@ exports.initSmoothScrolling = initSmoothScrolling
 function initSmoothScrolling (options) {
   if (isCssSmoothSCrollSupported()) { }
 
-  const duration = options.duration
+  var duration = options.duration
 
-  const pageUrl = location.hash
+  var pageUrl = location.hash
     ? stripHash(location.href)
     : location.href
 
@@ -47,7 +47,7 @@ function initSmoothScrolling (options) {
   // Adapted from:
   // https://www.nczonline.net/blog/2013/01/15/fixing-skip-to-content-links/
   function setFocus (hash) {
-    const element = document.getElementById(hash.substring(1))
+    var element = document.getElementById(hash.substring(1))
 
     if (element) {
       if (!/^(?:a|select|input|button|textarea)$/i.test(element.tagName)) {

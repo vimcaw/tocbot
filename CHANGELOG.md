@@ -1,6 +1,10 @@
 ## Changelog
 
 
+### 4.0.1
+
+##### Fixed
+- Switch const declarations to var to fix IE 10 for new scroll smooth util.
 
 ### 4.0.0
 

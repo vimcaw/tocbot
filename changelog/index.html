@@ -1,0 +1,208 @@
+<!DOCTYPE html><html><head><link rel="preload" href="/tocbot/_next/eac1cca4-b0d3-43f9-bc16-62a69ec1700f/page/changelog/index.js" as="script"/><link rel="preload" href="/tocbot/_next/eac1cca4-b0d3-43f9-bc16-62a69ec1700f/page/_error/index.js" as="script"/><link rel="preload" href="/tocbot/_next/cf951b57dff22e4de038c7dab41f6edf/app.js" as="script"/><meta charset="utf-8" class="next-head"/><title class="next-head">Tocbot</title><meta name="description" content="Tocbot - Generate a table of contents based on the heading structure of an html document" class="next-head"/><meta name="viewport" content="width=device-width, initial-scale=1" class="next-head"/><link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css" class="next-head"/><link rel="stylesheet" href="/tocbot/static/css/tocbot.css" class="next-head"/><link rel="stylesheet" href="/tocbot/static/css/styles.css" class="next-head"/><style class="next-head">.page-content {display:none}</style></head><body><div><div id="__next"><div data-reactroot="" data-reactid="1" data-react-checksum="-464086359"><div class="page-content" data-reactid="2"><!-- react-empty: 3 --><main data-reactid="4"><div class="hero relative overflow-hidden tc z-3" style="background-color:#54BC4B;" data-reactid="5"><div class="hero-inner relative mw7 center white pv4" data-reactid="6"><div class="absolute top-0 right-0" data-reactid="7"><a class="dib f6 white no-underline pa1 ma1" href="/tocbot/" data-reactid="8">About</a><a class="dib f6 white no-underline pa1 ma1" href="/tocbot/changelog" data-reactid="9">Changelog</a><a class="dib f6 white no-underline pa1 ma1" href="https://github.com/tscanlin/tocbot" data-reactid="10">Github</a></div><div class="pv4" data-reactid="11"><h1 class="title normal ma0 pa0" data-reactid="12">Tocbot</h1><h4 class="subtitle normal o-90 ma0 pa3" data-reactid="13">Changelog</h4><div class="mv2 ml4" data-reactid="14"><iframe src="https://ghbtns.com/github-btn.html?user=tscanlin&amp;repo=tocbot&amp;type=star&amp;count=true&amp;size=large" frameborder="0" scrolling="0" width="160px" height="30px" data-reactid="15"></iframe></div></div></div></div><div class="mw7 center dark-gray lh-copy" data-reactid="16"><input type="checkbox" id="toc" class="dn" data-reactid="17"/><label class="toc-icon relative pointer z-2 f6 lh-solid bg-near-white b--silver pa1 ma1 ba br1" for="toc" data-reactid="18">Menu</label><nav class="toc toc-right js-toc relative z-1 transition--300 absolute pa4" data-reactid="19"></nav><div class="content js-toc-content pa4" data-reactid="20"><h2 id="changelog">Changelog</h2>
+<h3 id="4-0-1">4.0.1</h3>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>Switch const declarations to var to fix IE 10 for new scroll smooth util.</li>
+</ul>
+<h3 id="4-0-0">4.0.0</h3>
+<h5 id="-breaking-change-"><strong>BREAKING CHANGE</strong></h5>
+<ul>
+<li>replaced zenscroll with custom implementation (see <a href="https://github.com/tscanlin/tocbot/issues/67">#67</a>)</li>
+<li><code>smoothScroll</code> option is now <code>scrollSmooth</code>, still accepting a boolean</li>
+<li><code>smoothScrollDuration</code> option is now <code>scrollSmoothDuration</code>, still accepting a number</li>
+</ul>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>Works better with next.js and maybe other SPAs now (see <a href="https://github.com/tscanlin/tocbot/issues/67">#67</a>)</li>
+</ul>
+<h3 id="3-x-x">3.X.X</h3>
+<h4 id="3-0-6">3.0.6</h4>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>Republished build</li>
+</ul>
+<h4 id="3-0-6">3.0.6</h4>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>Edge / IE 11 should work better now</li>
+</ul>
+<h4 id="3-0-5">3.0.5</h4>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>Readme updates</li>
+<li>Add onclick handler option</li>
+</ul>
+<h4 id="3-0-4">3.0.4</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>Worked on improving testing, no user facing changes</li>
+</ul>
+<h4 id="3-0-3">3.0.3</h4>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>Get next.js v3 working for exporting the project page</li>
+</ul>
+<h5 id="added">Added</h5>
+<ul>
+<li>Updated readme to explain how to handle fixed headers <a href="https://github.com/tscanlin/tocbot/issues/58">#58</a></li>
+<li>Add note about excluding smooth scroll from certain elements</li>
+</ul>
+<h4 id="3-0-2">3.0.2</h4>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>Added dist files to address <a href="https://github.com/tscanlin/tocbot/issues/55">#55</a></li>
+</ul>
+<h4 id="3-0-1">3.0.1</h4>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>Using <a href="https://github.com/tscanlin/next-export">next-export</a> for deployments now.</li>
+</ul>
+<h4 id="3-0-0">3.0.0</h4>
+<h5 id="-breaking-change-"><strong>BREAKING CHANGE</strong></h5>
+<ul>
+<li>Switched from using smooth-scroll to <a href="https://github.com/zengabor/zenscroll">zenzcroll</a> for reasons.. <a href="https://github.com/tscanlin/tocbot/issues/40">#40</a></li>
+</ul>
+<h5 id="added">Added</h5>
+<ul>
+<li>Using <a href="https://github.com/feross/standard">standard</a> for code styling now.</li>
+</ul>
+<h3 id="2-x-x">2.X.X</h3>
+<h4 id="2-4-0">2.4.0</h4>
+<h5 id="docs">Docs</h5>
+<ul>
+<li>Moved toc on the project page to the right side to emphasize content more. Added <code>.toc-right</code> class for this.</li>
+<li>Switched to using <a href="https://github.com/zeit/next.js">next.js</a> with <a href="https://github.com/tscanlin/processmd">processmd</a> for the website and removed old build scripts.</li>
+<li>Removed optimizely/oui and added tachyons.</li>
+<li>Moved changelog into it&#39;s own markdown file.</li>
+<li>Build to <code>\static</code> instead of <code>\build</code>.</li>
+</ul>
+<h5 id="added">Added</h5>
+<ul>
+<li>Added <code>src/components</code> with the template used for the website. This can now be more easily reused by other projects.</li>
+</ul>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>Fix test commands to work better</li>
+</ul>
+<h4 id="2-3-2">2.3.2</h4>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>[patch] Fix for smooth-scroll callback to work properly. <a href="https://github.com/tscanlin/tocbot/issues/36">#36</a></li>
+<li>[patch] Fix for cdnjs to update properly. <a href="https://github.com/tscanlin/tocbot/issues/35">#35</a></li>
+</ul>
+<h4 id="2-3-1">2.3.1</h4>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>[patch] Fix for clicking svgs to not throw an exception. <a href="https://github.com/tscanlin/tocbot/issues/33">#33</a></li>
+</ul>
+<h4 id="2-3-0">2.3.0</h4>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>[patch] Fix for proper header not being selected due to sub-pixel rounding issues. <a href="https://github.com/tscanlin/tocbot/pull/31">#31</a></li>
+<li>[dev] Updated test commands to be able to selectively run tests and debug them more easily. <a href="https://github.com/tscanlin/tocbot/pull/29">#29</a></li>
+</ul>
+<h4 id="2-2-2">2.2.2</h4>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>[patch] Removed updateUrl option from docs since it doesn&#39;t work, see: <a href="https://github.com/cferdinandi/smooth-scroll/pull/283">smooth-scroll #283</a>.</li>
+</ul>
+<h4 id="2-2-1">2.2.1</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[patch] Made bower.json reference unminified file.</li>
+</ul>
+<h4 id="2-2-0">2.2.0</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[minor] Added bower.json to provide bower support.</li>
+</ul>
+<h4 id="2-1-5">2.1.5</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[patch] Added <code>overflow-y: auto</code> to the <code>.toc selector so that it scrolls</code> (#17).</li>
+<li>[dev] Added to deploy script to commit /dist files to master.</li>
+<li>[dev] Added to package.json for cdnjs.</li>
+</ul>
+<h4 id="2-1-4">2.1.4</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[patch] <code>includeHtml</code> option to mirror markup from the headings in the TOC (#14).</li>
+<li>[patch] <code>listItemClass</code> will be omitted if an empty string in passed.</li>
+<li>[dev] <code>test:watch</code> command.</li>
+<li>[dev] more tests.</li>
+</ul>
+<h4 id="2-1-3">2.1.3</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[patch] <code>listItemClass</code> option to set classes on list items (#12).</li>
+</ul>
+<h4 id="2-1-2">2.1.2</h4>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>[patch] prevent errors from being thrown when elements are not present and add tests.</li>
+</ul>
+<h4 id="2-1-1">2.1.1</h4>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>[patch] update file size estimates in the docs.</li>
+<li>[patch] switch from throwing errors to using console.warn.</li>
+</ul>
+<h4 id="2-1-0">2.1.0</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[minor] add <code>positionFixedSelector</code> option to specify the element to add a fixed position class to.</li>
+<li>[dev] use travis-ci for builds.</li>
+</ul>
+<h4 id="2-0-0">2.0.0</h4>
+<h5 id="added">Added</h5>
+<ul>
+<li>[major] smooth-scroll is included by default now.</li>
+<li>[patch] throttling support to improve performance, also the <code>throttleTimeout</code> option.</li>
+<li>[patch] new &quot;try it now&quot; option on documentation site.</li>
+</ul>
+<h5 id="changed">Changed</h5>
+<ul>
+<li>[minor] broke up scss files and separate tocbot styles better.</li>
+<li>[minor] default option for <code>contentSelector</code> to be <code>.js-toc-content</code>.</li>
+<li>[minor] default option for <code>ignoreSelector</code> to be <code>.js-toc-ignore</code>.</li>
+<li>[minor] default option for <code>collapsibleClass</code> to be <code>.is-collapsible</code>.</li>
+<li>[patch] reorder <code>default-options.js</code>.</li>
+<li>[patch] update documentation.</li>
+</ul>
+<h5 id="removed">Removed</h5>
+<ul>
+<li>[patch] dependency on classList to improve browser support.</li>
+</ul>
+<h5 id="fixed">Fixed</h5>
+<ul>
+<li>[minor] new and improved tests using jsdom.</li>
+<li>[dev] switched from gulp to npm scripts.</li>
+<li>[dev] switched from browserify to webpack.</li>
+<li>[dev] switched from swig to react for building the documentation.</li>
+</ul>
+<h3 id="1-x-x">1.X.X</h3>
+<h4 id="1-0-0">1.0.0</h4>
+<ul>
+<li>First published source code.</li>
+</ul>
+</div><!-- react-empty: 21 --></div><div class="try-it-container transition--300 fixed w-60 ma2 z-3 bottom-0 right-0 is-closed" data-reactid="22"><div class="cb pb2" data-reactid="23"><button class="button bn f6 link br1 ph3 pv2 mb2 dib white bg-dark-gray fr" data-reactid="24">Try it</button><a id="try-it-reset" href="javascript:void(0)" class="ph3 pv2 mb2 dib fr" data-reactid="25">Reset</a></div><p class="mb0 mt4" data-reactid="26">Paste markdown in the box below.</p><textarea id="try-it-markdown" class="textarea w-100 h4" data-reactid="27"></textarea></div><div data-reactid="28"><script data-reactid="29">
+  (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+  function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+  e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+  e.src='https://www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+  ga('create','UA-76620957-1','auto');ga('send','pageview');
+</script></div></main></div></div></div><div id="__next-error"></div></div><div><script>
+          __NEXT_DATA__ = {"props":{},"pathname":"/changelog","query":{},"buildId":"eac1cca4-b0d3-43f9-bc16-62a69ec1700f","buildStats":{"app.js":{"hash":"cf951b57dff22e4de038c7dab41f6edf"}},"assetPrefix":"/tocbot","nextExport":true,"err":null,"chunks":[]}
+          module={}
+          __NEXT_LOADED_PAGES__ = []
+          __NEXT_LOADED_CHUNKS__ = []
+
+          __NEXT_REGISTER_PAGE = function (route, fn) {
+            __NEXT_LOADED_PAGES__.push({ route: route, fn: fn })
+          }
+
+          __NEXT_REGISTER_CHUNK = function (chunkName, fn) {
+            __NEXT_LOADED_CHUNKS__.push({ chunkName: chunkName, fn: fn })
+          }
+        </script><script async="" id="__NEXT_PAGE__/changelog" type="text/javascript" src="/tocbot/_next/eac1cca4-b0d3-43f9-bc16-62a69ec1700f/page/changelog/index.js"></script><script async="" id="__NEXT_PAGE__/_error" type="text/javascript" src="/tocbot/_next/eac1cca4-b0d3-43f9-bc16-62a69ec1700f/page/_error/index.js"></script><div></div><script type="text/javascript" src="/tocbot/_next/cf951b57dff22e4de038c7dab41f6edf/app.js" async=""></script></div></body></html>

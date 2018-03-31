@@ -21,11 +21,14 @@ function initSmoothScrolling (options) {
         !isInPageLink(e.target) ||
         e.target.className.indexOf('no-smooth-scroll') > -1 ||
         (e.target.href.charAt(e.target.href.length - 2) === '#' &&
-        e.target.href.charAt(e.target.href.length - 1) === '!')) {
+        e.target.href.charAt(e.target.href.length - 1) === '!') ||
+        (!options.globalScrollSmooth &&
+        e.target.className.indexOf(options.linkClass) === -1)) {
         return
       }
 
-      e.preventDefault()
+      // Don't prevent default or hash doesn't change.
+      // e.preventDefault()
 
       jump(e.target.hash, {
         duration: duration,

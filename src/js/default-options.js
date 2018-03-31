@@ -25,6 +25,8 @@ module.exports = {
   collapsibleClass: 'is-collapsible',
   // Class to add to list items.
   listItemClass: 'toc-list-item',
+  // Class to add to active list items.
+  activeListItemClass: 'is-active-li',
   // How many heading levels should not be collpased.
   // For example, number 6 will show everything since
   // there are only 6 heading levels and number 0 will collpase them all.
@@ -33,6 +35,8 @@ module.exports = {
   collapseDepth: 0,
   // Smooth scrolling enabled.
   scrollSmooth: true,
+  // If it is false, Smooth scrolling only work on itself.
+  globalScrollSmooth: false,
   // Smooth scroll duration.
   scrollSmoothDuration: 420,
   // Callback for scroll end.
